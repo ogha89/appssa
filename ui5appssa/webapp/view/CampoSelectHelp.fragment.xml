@@ -1,0 +1,55 @@
+<core:FragmentDefinition xmlns:tab="sap.ui.table" xmlns="sap.m" xmlns:m="sap.m" xmlns:layout="sap.ui.layout"
+  xmlns:core="sap.ui.core">
+  <Dialog id="Detalleanadir" title="Seleccionar Campo">
+  <content>
+  <tab:Table id="idTabla" selectionMode="Single" selectionBehavior="RowOnly" rowSelectionChange="onSelectionChange" sort="sortDeliveryDate" rows="{ path: 'myParam>/tblHelpCampo'}" visibleRowCount="5"
+              showNoData="No se hallaron materialess." width="100%" class="sapUiResponsiveMargin">
+              <tab:toolbar>
+                <Toolbar>
+                  <core:Icon src="sap-icon://activity-items" alt="Cart" size="1.25rem"/>
+                  <Title text="Detalle ({/tblHelpCampo/length})" titleStyle="H3"/>
+                </Toolbar>
+              </tab:toolbar>
+              <tab:noData>
+                <Link class="sapUiMediumMargin" text="No se hallaron los datos."/>
+              </tab:noData>
+              <tab:columns>
+                <tab:Column width="15%" hAlign="Center" sortProperty="CAMPO" filterProperty="CAMPO">
+                  <Text text="Campo"/>
+                  <tab:template>
+                    <Label text="{myParam>CAMPO}"/>
+                  </tab:template>
+                </tab:Column>
+                <tab:Column width="35%" hAlign="Center" sortProperty="POST1" filterProperty="POST1">
+                  <Text text="POST1"/>
+                  <tab:template>
+                    <Label text="{myParam>POST1}"/>
+                  </tab:template>
+                </tab:Column>
+                <tab:Column width="15%" hAlign="Center" sortProperty="TIPCAMPO" filterProperty="TIPCAMPO">
+                  <Text text="Tipo Campo" textAlign="Center"/>
+                  <tab:template>
+                    <Label text="{myParam>TIPCAMPO}"/>
+                  </tab:template>
+                </tab:Column>
+                <tab:Column width="15%" hAlign="Center" sortProperty="QUIEBRE" filterProperty="QUIEBRE">
+                  <Text text="QUIEBRE"/>
+                  <tab:template>
+                    <Label text="{myParam>QUIEBRE}"/>
+                  </tab:template>
+                </tab:Column>
+                <tab:Column width="20%" hAlign="Center" sortProperty="POSID" filterProperty="POSID">
+                  <Text text="POSID"/>
+                  <tab:template>
+                    <Label text="{myParam>POSID}"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>
+            </tab:Table>
+
+    </content>
+    <endButton>
+      <Button text="Cerrar" type="" press="onClose"/>
+    </endButton>
+  </Dialog>
+</core:FragmentDefinition>

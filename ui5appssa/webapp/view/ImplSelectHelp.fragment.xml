@@ -1,0 +1,68 @@
+<core:FragmentDefinition xmlns:tab="sap.ui.table" xmlns="sap.m" xmlns:m="sap.m" xmlns:layout="sap.ui.layout"
+  xmlns:core="sap.ui.core">
+  <Dialog id="DetalleImplementos" title="Seleccionar Implementos">
+
+  <tab:Table id="idTablaImplementos" selectionMode="MultiToggle" selectionBehavior="RowSelector"  sort="sortDeliveryDate" rows="{ path: 'myParam>/tblHelpImplementos'}" visibleRowCount="5"
+              showNoData="No se hallaron Vehículos." width="80rem" class="sapUiResponsiveMargin">
+              <tab:toolbar>
+                <Toolbar>
+                  <core:Icon src="sap-icon://activity-items" alt="Cart" size="1.25rem"/>
+                  <Title text="Detalle ({/tblHelpImplementos/length})" titleStyle="H3"/>
+                </Toolbar>
+              </tab:toolbar>
+              <tab:noData>
+                <Link class="sapUiMediumMargin" text="No se hallaron los datos."/>
+              </tab:noData>
+              <tab:columns>
+                <tab:Column width="6rem" hAlign="Center">
+                  <Text text="Cod. Prog."/>
+                  <tab:template>
+                    <Label text="{myParam>ZNRO_PROG}"/>
+                  </tab:template>
+                </tab:Column>
+                <tab:Column width="6rem" hAlign="Center">
+                  <Text text="Pos. PCP"/>
+                  <tab:template>
+                    <Label text="{myParam>ZPOS}"/>
+                  </tab:template>
+                </tab:Column>
+                <tab:Column width="10rem" hAlign="Center">
+                  <Text text="Pos. PCP"/>
+                  <tab:template>
+                    <Label text=""/>
+                  </tab:template>
+                </tab:Column>
+                <tab:Column width="5rem" hAlign="Center">
+                  <Text text="Pos.Mod.Im"/>
+                  <tab:template>
+                    <Label text="{myParam>ZPOSIMP}"/>
+                  </tab:template>
+                </tab:Column>
+                <tab:Column width="5rem" hAlign="Center">
+                  <Text text="Cod.Mod"/>
+                  <tab:template>
+                    <Label text="{myParam>ZMODIMP}"/>
+                  </tab:template>
+                </tab:Column>
+                <tab:Column width="5rem" hAlign="Center">
+                  <Text text="Ce."/>
+                  <tab:template>
+                    <Label text="{myParam>WERKS}"/>
+                  </tab:template>
+                </tab:Column>
+                <tab:Column width="9rem" hAlign="Center">
+                  <Text text="Pt.Tbj.Imp"/>
+                  <tab:template>
+                    <Label text="{myParam>ZPTOIMP}"/>
+                  </tab:template>
+                </tab:Column>
+                 </tab:columns>
+            </tab:Table>
+            <beginButton>
+            <Button text="Guardar"  press="onSaveImplementos"/>
+            </beginButton>
+    <endButton>
+      <Button text="Cerrar"  press="onCloseImplementos"/>
+    </endButton>
+  </Dialog>
+</core:FragmentDefinition>

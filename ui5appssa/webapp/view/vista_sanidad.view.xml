@@ -1,0 +1,211 @@
+<mvc:View controllerName="nsa.ui5appssa.controller.vista_sanidad" xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+  xmlns="sap.m" xmlns:m="sap.m" xmlns:micro="sap.suite.ui.microchart" xmlns:vbm="sap.ui.vbm" xmlns:tnt="sap.tnt" xmlns:layout="sap.ui.layout"
+  xmlns:core="sap.ui.core" xmlns:tab="sap.ui.table" xmlns:commons="sap.ui.commons" xmlns:ux="sap.uxap" xmlns:f="sap.f"
+  xmlns:card="sap.f.cards">
+  <!--<Shell id="shell">-->
+  <Image id="image_bg" src="./img/background_11.png"/>
+  <!--<Page  showHeader="false" title="{i18n>title}">-->
+  <!--  <content>-->
+  <ux:ObjectPageLayout id="ObjectPageLayout2" class="MenuPrin miPagina miVistaMenuCabecera miVistaMenuFondo">
+    <ux:headerTitle>
+      <ux:ObjectPageHeader id="headerForTest">
+        <ux:navigationBar>
+          <m:Bar>
+            <m:contentLeft>
+              <m:Button class="sagBtnMenu" icon="sap-icon://nav-back" press="btnRegresarMenu"/>
+              <!--<m:Image src="./img/sap_50x26.png"/>-->
+              <m:Image src="./img/unnamed.png" height="25px"/>
+            </m:contentLeft>
+            <m:contentMiddle>
+              <m:Button class="sagBtnMenu" text="Reportes" press="pressReportes"/>
+              <!--<m:Button class="sagBtnMenu" text="Planif. y Control" press="pressPlan"/>
+              <m:Button class="sagBtnMenu" text="Riego y Fertirriego" press="pressRiego"/>
+              <m:Button class="sagBtnMenu" text="Control de Sanidad" press="pressSanidad"/>
+              <m:Button class="sagBtnMenu" text="Administraci�n" press="pressAdministracion"/>-->
+            </m:contentMiddle>
+            <m:contentRight>
+              <m:Toolbar height="auto">
+                <m:Button id="idSetuser" class="sagBtnMenu" icon="sap-icon://custonfont/user" text="P0001" press="pressSeleccionarCentro"/>
+                <!--<m:Button id="idSetConfig1" class="IconBotonMenuCabecera" icon="sap-icon://log" press="logUserOut"></m:Button>-->
+              </m:Toolbar>
+            </m:contentRight>
+          </m:Bar>
+        </ux:navigationBar>
+      </ux:ObjectPageHeader>
+    </ux:headerTitle>
+    <ux:sections>
+      <ux:ObjectPageSection id="idpartediario2" title="PARTE DIARIO" showTitle="false" titleUppercase="false">
+        <ux:subSections>
+          <ux:ObjectPageSubSection id="subsecpartediario">
+            <layout:HorizontalLayout allowWrapping="true">
+              <layout:VerticalLayout class="sapUiTinyMargin">
+                <f:Card class="sapUiMediumMargin" width="346px" height="590px">
+                  <f:content width="325px" height="590px">
+                    <VBox class="sapUiLargeMargin sapUiSmallMarginTop" alignItems="Center">
+                      <VBox alignItems="Center" renderType="Bare">
+                        <f:Avatar id="logo" src="./img/paramong.png" displaySize="XL" imageFitType="Contain" displayShape="Square" showBorder="true" press="onPress"/>
+                      </VBox>
+                      <HBox alignContent="Center" alignItems="Inherit">
+                        <Label id="lblEst236" text="" design="Bold" textAlign="Center"
+                          class="sapUiTinyMarginTop sapUiLargeMarginBegin sapUiSmallMarginBottom sapUiLargeMarginEnd"/>
+                      </HBox>
+                      <Label id="id1" text="Proyecto - Administración:" design="Bold" class="nuevo3"/>
+                      <ComboBox  id="cboproy" items="{ path: 'myParam>/tblsociedades'}" class="sapUiNoLargeMarginBegin sapUiTinyMarginBottom"
+                        placeholder="- Seleccione proyecto-" required="true" width="245px" change="changeRucEvt">
+                        <core:Item key="{myParam>PROY}" text="{myParam>PROY} - {myParam>ZDES}"/>
+                      </ComboBox>
+                      <Label id="lblEst2" text="Zona:" design="Bold" labelFor="idEst3"/>
+                      <ComboBox id="labelfundo" class="sapUiNoLargeMarginBegin sapUiTinyMarginBottom" width="245px"  change="changezona" placeholder="Zona"
+                        selectedKey="01" items="{ path: 'myParam>/tblfundo', sorter: { path: 'ZFUN' }}">
+                        <core:Item key="{myParam>ZFUN}" text="{myParam>ZFUN} - {myParam>ZDES}"/>
+                      </ComboBox>
+                      <Label id="lblEst3" text="Campo - Quiebre:" design="Bold" labelFor="idEst2"/>
+                      <ComboBox id="labellote" class="sapUiNoLargeMarginBegin sapUiTinyMarginBottom" change="changecampo" width="245px" placeholder="Lote"
+                        items="{ path: 'myParam>/tblturno', sorter: { path: 'ZTURNO' } }">
+                        <core:Item key="{myParam>ZTURNO}" text="{myParam>ZTURNO} - {myParam>ZDES}"/>
+                      </ComboBox>
+                      <Label id="lblEst4" text="Cultivo:" design="Bold" labelFor="idEst4"/>
+                      <ComboBox id="labelcultivo" class="sapUiNoLargeMarginBegin sapUiTinyMarginBottom" change="changecultivo" width="245px" placeholder="Cultivo" selectedKey="PA"
+                        items="{ path: 'myParam>/CULTIVO', sorter: { path: 'ZCUL' } }">
+                        <core:Item key="{myParam>ZCUL}" text="{myParam>ZCUL} - {myParam>ZDES}"/>
+                      </ComboBox>
+                      <Label id="lblEst5" text="Campaña:" design="Bold" labelFor="idEst5"/>
+                      <ComboBox id="labelcampana" class="sapUiNoLargeMarginBegin sapUiTinyMarginBottom" width="245px" placeholder="Campaña" selectedKey="202008"
+                        items="{ path: 'myParam>/CAMPANA', sorter: { path: 'ZCAMP' } }">
+                        <core:Item key="{myParam>ZCAMP}" text="{myParam>ZCAMP} - {myParam>ZDES}"/>
+                      </ComboBox>
+                      <VBox alignItems="End" renderType="Bare" class="boton1">
+                        <Button width="130px" text="Buscar" press=".onBookPress" type="Emphasized"/>
+                      </VBox>
+                    </VBox>
+                  </f:content>
+                </f:Card>
+              </layout:VerticalLayout>
+              <layout:VerticalLayout class="sapUiTinyMargin">
+                <GenericTile id="card1" header="Costos por Campaña" subheader="Por elemento de Costo (Soles)" frameType="TwoByOne" press="press"
+                  class="sagGTile">
+                  <tileContent>
+                    <TileContent footer="Costos Fijos">
+                      <content>
+                        <micro:ComparisonMicroChart scale="M" size="auto" view="Normal" class="sapUiNoMargin" press="press" data="{path: 'myParam>/tblcosto'}">
+                          <micro:data>
+                            <micro:ComparisonMicroChartData title="{myParam>tittle}" value="{myParam>value}" color="Good"/>
+                            <!-- <micro:ComparisonMicroChartData id="char2" title="Depr/Mtto"  value="{myParam>DEPR}" color="Good"/>
+                            <micro:ComparisonMicroChartData id="char3" title="CF Otros"  value="{myParam>CFOTROS}" color="Good"/> -->
+                          </micro:data>
+                        </micro:ComparisonMicroChart>
+                      </content>
+                    </TileContent>
+                    <TileContent footer="Costos Variables">
+                      <content>
+                        <micro:ComparisonMicroChart scale="M" size="auto" view="Normal" class="sapUiNoMargin" press="press" data="{path: 'myParam>/tblcosto2'}" >
+                          <micro:data>
+                           <micro:ComparisonMicroChartData title="{myParam>tittle}" value="{myParam>value}" color="Good"/>
+                            <!-- <micro:ComparisonMicroChartData id="char4" title="Mat" value="{myParam>MAT}" color="Good" />
+                            <micro:ComparisonMicroChartData id="char5" title="MOD" value="{myParam>MOD}" color="Good" />
+                            <micro:ComparisonMicroChartData id="char6" title="CV Otros" value="{myParam>CVOTROS}" color="Good" /> -->
+                          </micro:data>
+                        </micro:ComparisonMicroChart>
+                      </content>
+                    </TileContent>
+                  </tileContent>
+                </GenericTile>
+                <m:GenericTile header="Fertilización" subheader="Elemento nutriente por Hectárea" frameType="TwoByOne" press="pressFerti" class="sagGTile">
+                  <m:tileContent>
+                    <m:TileContent footer="{i18n>tFertiPie}" frameType="TwoByOne">
+                      <m:content>
+                        <micro:ColumnMicroChart id="columnChart" class="sapUiSmallMarginBegin" size="Responsive" columns="{path: 'myParam>/tblnpk'}">
+                          <micro:leftTopLabel>
+                            <micro:ColumnMicroChartLabel label="0M"/>
+                          </micro:leftTopLabel>
+                          <micro:rightTopLabel>
+                            <micro:ColumnMicroChartLabel label="80M"/>
+                          </micro:rightTopLabel>
+                          <!--  <micro:leftBottomLabel>
+                            <micro:ColumnMicroChartLabel label="N"/>
+                          </micro:leftBottomLabel>
+                          <micro:rightBottomLabel>
+                            <micro:ColumnMicroChartLabel label="June 30"/>
+                          </micro:rightBottomLabel>-->
+                          <micro:columns>
+                            <micro:ColumnMicroChartData label="{myParam>tittle}" value="{myParam>value}" color="Good"/>
+                            <!-- <micro:ColumnMicroChartData id="data2" value="60" label="F" color="Good"/>
+                            <micro:ColumnMicroChartData id="data3" value="70" label="K" color="Good"/>
+                            <micro:ColumnMicroChartData id="data4" value="80" label="Mg" color="Good"/>
+                            <micro:ColumnMicroChartData id="data5" value="60" label="Ca" color="Good"/>
+                            <micro:ColumnMicroChartData id="data6" value="30" label="Fe" color="Good"/> -->
+                          </micro:columns>
+                        </micro:ColumnMicroChart>
+                      </m:content>
+                    </m:TileContent>
+                  </m:tileContent>
+                </m:GenericTile>
+                <f:Card class="sapUiMediumMarginTop" width="400px" height="175px">
+                  <f:header>
+                    <card:Header title="Sanidad(Plagas)"/>
+                  </f:header>
+                  <f:content>
+                    <vbm:AnalyticMap id="vbi2" width="100%" xmlns:l="sap.ui.layout" height="100%" initialPosition="-98;38.5;0" initialZoom="3"
+                      regionClick="onRegionClick" regionContextMenu="onRegionContextMenu" regions="{/Regions}">
+                      <vbm:regions>
+                        <vbm:Region code="{code}" color="{color}" tooltip="{county}"/>
+                      </vbm:regions>
+                      <vbm:legend>
+                        <vbm:Legend id="legend2" caption="Plagas" items="{/Legend}">
+                          <vbm:LegendItem text="{text}" color="{color}"/>
+                        </vbm:Legend>
+                      </vbm:legend>
+                    </vbm:AnalyticMap>
+                  </f:content>
+                </f:Card>
+              </layout:VerticalLayout>
+              <layout:VerticalLayout class="sapUiTinyMargin">
+                <GenericTile class="sapUiMediumMarginTop sapUiMediumMarginBegin sapUiNoMarginEnd tileLayout" header="Cantidad Producida"
+                  subheader="Por Campaña" press="onpressDiag">
+                  <TileContent unit="" footer="KG {myParam>/date}">
+                    <NumericContent scale="Mil" id="content1" value="0" valueColor="Error" indicator="Up" withMargin="true"/>
+                  </TileContent>
+                </GenericTile>
+                <GenericTile class="sapUiMediumMarginTop sapUiMediumMarginBegin sapUiNoMarginEnd tileLayout" header="Consumo de Agua"
+                  subheader="Por Campaña" press="pressFerti">
+                  <TileContent unit="" footer="Litros {myParam>/date}">
+                    <NumericContent scale="Mil" id="content2" value="0" valueColor="Neutral" indicator="Up" withMargin="true"/>
+                  </TileContent>
+                </GenericTile>
+                <GenericTile class="sapUiMediumMarginTop sapUiMediumMarginBegin sapUiNoMarginEnd tileLayout" header="Número de Aplicaciones "
+                  subheader="Por Campaña" press="pressSanidadrep">
+                  <TileContent unit="" footer="Aplicaciones {myParam>/date}">
+                    <NumericContent scale="UN" id="content3" value="0" valueColor="Good" indicator="Up" withMargin="true"/>
+                  </TileContent>
+                </GenericTile>
+              </layout:VerticalLayout>
+              <layout:VerticalLayout class="sapUiTinyMargin">
+                <GenericTile class="sapUiMediumMarginTop sapUiMediumMarginBegin sapUiNoMarginEnd tileLayout" header="Costo por Kilogramo"
+                  subheader="Por Campaña" press="onpressDiag">
+                  <TileContent unit="" footer="Soles {myParam>/date}">
+                    <NumericContent scale="PEN" id="content4" value="0" valueColor="Good" indicator="Up" withMargin="true"/>
+                  </TileContent>
+                </GenericTile>
+                <GenericTile class="sapUiMediumMarginTop sapUiMediumMarginBegin sapUiNoMarginEnd tileLayout" header="Consumo de Agua (Ha)"
+                  subheader="Por Hectárea" press="pressFerti">
+                  <TileContent unit="" footer="Litros por Hectárea {myParam>/date}">
+                    <NumericContent scale="Mil" id="content5" value="0" valueColor="Critical" indicator="Up" withMargin="true"/>
+                  </TileContent>
+                </GenericTile>
+                <GenericTile class="sapUiMediumMarginTop sapUiMediumMarginBegin sapUiNoMarginEnd tileLayout" header="Costos de Aplicaciones"
+                  subheader="Por Campaña" press="pressSanidadrep">
+                  <TileContent unit="" footer="Soles {myParam>/date}">
+                    <NumericContent scale="Mil" id="content6" value="0" valueColor="Good" indicator="Up" withMargin="true"/>
+                  </TileContent>
+                </GenericTile>
+              </layout:VerticalLayout>
+            </layout:HorizontalLayout>
+          </ux:ObjectPageSubSection>
+        </ux:subSections>
+      </ux:ObjectPageSection>
+    </ux:sections>
+  </ux:ObjectPageLayout>
+  <!--  </content>-->
+  <!--</Page>-->
+  <!--</Shell>-->
+</mvc:View>

@@ -1,0 +1,1375 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:m="sap.m" xmlns:ux="sap.uxap" xmlns:tab="sap.ui.table"
+    xmlns:c="nsa.ui5appssa.control"
+  xmlns:f="sap.ui.layout.form" xmlns:u="sap.ui.unified" xmlns:layout="sap.ui.layout"
+  controllerName="nsa.ui5appssa.controller.vista_programacion"
+  xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" xmlns:html="http://www.w3.org/1999/xhtml"
+  xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+  <App>
+    <SplitApp id="Splitadministrar" initialMaster="master" initialDetail="detail" class="SplitApp_estilo1">
+      <masterPages>
+        <m:Page id="master1" title="Programación de labores" class="sapUiStdPage Columna_izq"  showFooter="true">
+          <m:customHeader>
+            <m:Bar class="class_IconBlanco">
+              <m:contentLeft>
+                <m:Button icon="sap-icon://nav-back" press="btnRegresarMenu"/>
+              </m:contentLeft>
+              <m:contentMiddle>
+                <m:Title class="clTitle" text="Número de Parte" titleStyle="H5"/>
+              </m:contentMiddle>
+              <m:contentRight>
+                <m:Button icon="sap-icon://filter" press="btnFiltro"/>
+              </m:contentRight>
+            </m:Bar>
+          </m:customHeader>
+          <!--<m:Image src="imagenes/Imagen4.jpg"/>-->
+          <subHeader>
+            <Toolbar>
+              <SearchField liveChange="handleSearch" placeholder="N° Parte" width="100%"/>
+            </Toolbar>
+          </subHeader>
+          <m:Panel id="panel1" width="100%">
+            <List items="{myParam>/listTablaPartes}" id="idListlabor">
+              <items>
+                <ObjectListItem id="idListItemlabor" class="sapUiNoMargin" intro="N° Parte:" title="{ZNUMERO}"
+                  icon="sap-icon://clinical-tast-tracker" app:key="{ZNUMERO}" app:to="Pag_LaborCampo" type="Active" press="onListItemPress">
+                  <ObjectAttribute text="Centro: {ZZONA}"/> 
+                  <ObjectAttribute text="Estado: {ZESTADO}"/>
+               
+                </ObjectListItem>
+              </items>
+            </List>
+          </m:Panel>
+          <!--<m:footer>-->
+          <!--  <m:Bar>-->
+          <!--    <m:contentRight></m:contentRight>-->
+          <!--  </m:Bar>-->
+          <!--</m:footer>-->
+        </m:Page>
+      </masterPages>
+      <detailPages>
+        <Page id="Pag_LaborCampo" class="Background_blanco Labor_Agregar SplitApp_detail_estilo1">
+          <m:customHeader>
+            <m:Bar class="">
+              <m:contentLeft></m:contentLeft>
+              <m:contentMiddle>
+                <m:Title class="" text="Vista Parte Diario" titleStyle="H5"/>
+              </m:contentMiddle>
+              <m:contentRight>
+                <Button icon="sap-icon://sys-add" tooltip="Agregar" class="class_btn_estilo1" press="fnaddmaterial"></Button>
+              </m:contentRight>
+            </m:Bar>
+          </m:customHeader>
+          <ObjectHeader id="Cabecera1" title="" icon="sap-icon://clinical-tast-tracker" intro="Campaña: {path: 'oModel>/VProg_Detalle/DES_CAMPANA'}"
+            backgroundDesign="Solid" responsive="true" class="sapUiResponsivePadding--header estilo_header_1" fullScreenOptimized="true">
+            <ObjectAttribute text="Etapa: {oModel>/VProg_Detalle/DES_ETAPA}"/>
+            <ObjectAttribute text="Cultivo/Variedad: {oModel>/VProg_Detalle/DES_CULTIVO} / {oModel>/VProg_Detalle/DES_VARIEDAD}"/>
+            <ObjectAttribute text="Módulo: {oModel>/VProg_Detalle/DES_MODULO}"/>
+            <ObjectAttribute text="Turno: {oModel>/VProg_Detalle/DES_TURNO}"/>
+            <ObjectAttribute text="Fecha inicio: {oModel>/VProg_Detalle/FEC_INI}"/>
+            <ObjectAttribute text="Fecha fin: {oModel>/VProg_Detalle/FEC_FIN}"/>
+            <!--<ObjectAttribute text="{oModel>/VProg_Detalle/DES_TURNO}"/>-->
+            <ObjectAttribute text="Avance: {oModel>/VProg_Detalle/AVANCE}"/>
+          </ObjectHeader>
+          <content>
+            <tab:Table id="idTablaMaterial" selectionMode="MultiToggle" sort="sortDeliveryDate" rows="{ path: 'myParam>/tblDetalleParte/0/T_ITEMS'}" visibleRowCount="12"
+              showNoData="No se hallaron materialess." width="100%" class="class_TextBlanco">
+              <tab:toolbar>
+                <Toolbar>
+                  <core:Icon src="sap-icon://activity-items" alt="Cart" size="1.25rem"/>
+                  <Title text="Detalle ({/tblDetalleParte/0/T_ITEMS/length})" titleStyle="H3"/>
+                  <ToolbarSpacer/>
+                  <Button text="Añadir Item" class="class_btn_estilo1" icon="sap-icon://sys-add" press="fnadditem"/>
+                  <Button id="btnEliminarProg" tooltip="Eliminar Item" class="class_btn_estilo1" icon="sap-icon://delete" press="handleDelete"></Button>
+
+                </Toolbar>
+              </tab:toolbar>
+              <tab:noData>
+                <Link class="sapUiMediumMargin" text="No se hallaron los datos."/>
+              </tab:noData>
+              <tab:columns>
+                <!--<tab:Column id="idColumOrdenes9" width="4rem" hAlign="Center">
+                  <m:Text id="idTextColumOrdenes9" text=""/>
+                  <tab:template>
+                    <Button text="" id="idEditar" icon="sap-icon://edit" width="100%" press="fnaddmaterial" tooltip="Editar" type="Emphasized"/>
+                  </tab:template>
+                </tab:Column>
+                <tab:Column id="idColumOrdenes10" width="4rem" hAlign="Center">
+                  <m:Text id="idTextColumOrdenes10" text=""/>
+                  <tab:template>
+                    <Button text="" id="idEliminar" icon="sap-icon://show" width="100%" press="btnEliminar" tooltip="Visualizar" type="Emphasized"/>
+                  </tab:template>
+                </tab:Column>*/
+                <tab:Column id="idColumOrdenes11" width="4rem" hAlign="Center">
+                  <m:Text id="idTextColumOrdenes11" text=""/>
+                  <tab:template>
+                    <Button text="" id="idEliminar11" icon="sap-icon://delete" width="100%" press="btnEliminar" tooltip="Eliminar" type="Emphasized"/>
+                  </tab:template>
+                </tab:Column>-->
+                <tab:Column width="5%" hAlign="Center">
+                  <Text text="Item"/>
+                  <tab:template>
+                    <Label text="{myParam>ZNRO_ITEM}"/>
+                  </tab:template>
+                </tab:Column>
+                <tab:Column  width="10rem" autoResizable="true"  hAlign="Center">
+                  <Text text="Cod. Programación"/>
+                  <tab:template>
+                    <Label text="{myParam>ZNRO_PROG}"/>
+                  </tab:template>
+                </tab:Column>
+                <tab:Column width="14rem" autoResizable="true" hAlign="Center">
+                  <Text text="Descripción"/>
+                  <tab:template>
+                    <Label text="{myParam>ZDESCRIP}"/>
+                  </tab:template>
+                </tab:Column>
+                <tab:Column width="6rem" autoResizable="true" hAlign="Center">
+                  <Text text="Cantidad"/>
+                  <tab:template>
+                    <Label text="{myParam>ZCANT_NOT}"/>
+                  </tab:template>
+                </tab:Column>
+                <tab:Column  width="10rem" autoResizable="true" hAlign="Center">
+                  <Text text="Puesto de Trabajo"/>
+                  <tab:template>
+                    <Label text="{myParam>ZPT_TRABAJO}"/>
+                  </tab:template>
+                </tab:Column>
+                <tab:Column width="6rem" autoResizable="true" hAlign="Center">
+                  <Text text="Ind.Notificación"/>
+                  <tab:template>
+                    <core:Icon src="{myParam>ZIND_NOT}"/>
+                  </tab:template>
+                </tab:Column>
+                <tab:Column width="10rem" autoResizable="true" hAlign="Center">
+                  <Text text="Reserva"/>
+                  <tab:template>
+                    <Label text="{myParam>RSNUM}"/>
+                  </tab:template>
+                </tab:Column>
+                <tab:Column  width="6rem" autoResizable="true"  hAlign="Center">
+                  <Text text="Pos.Reserva"/>
+                  <tab:template>
+                    <Label text="{myParam>RSPOS}"/>
+                  </tab:template>
+                </tab:Column>
+                <tab:Column width="6rem" autoResizable="true" hAlign="Center">
+                  <Text text="Material"/>
+                  <tab:template>
+                    <Label text="{myParam>MATNR}"/>
+                  </tab:template>
+                </tab:Column>
+                <tab:Column width="6rem" autoResizable="true" hAlign="Center">
+                  <Text text="Cant.Necesaria"/>
+                  <tab:template>
+                    <Label text="{myParam>BDMNG}"/>
+                  </tab:template>
+                </tab:Column>
+                <tab:Column width="9rem" autoResizable="true" hAlign="Center">
+                  <Text text="Elem. PEP"/>
+                  <tab:template>
+                    <Label text="{myParam>ZPSPNR}"/>
+                  </tab:template>
+                </tab:Column>       
+                <tab:Column   width="6rem" autoResizable="true" hAlign="Center">
+                  <Text text="Proyecto"/>
+                  <tab:template>
+                    <Label text="{myParam>ZPROYECTO}"/>
+                  </tab:template>
+                </tab:Column>        
+                <tab:Column  width="6rem" autoResizable="true" hAlign="Center">
+                  <Text text="Administración"/>
+                  <tab:template>
+                    <Label text="{myParam>ZADMIN}"/>
+                  </tab:template>
+                </tab:Column>     
+                <tab:Column  width="6rem" autoResizable="true" hAlign="Center">
+                  <Text text="Zona"/>
+                  <tab:template>
+                    <Label text="{myParam>ZZONA}"/>
+                  </tab:template>
+                </tab:Column>   
+                <tab:Column width="6rem" autoResizable="true" hAlign="Center">
+                  <Text text="Quiebre de campo"/>
+                  <tab:template>
+                    <Label text="{myParam>ZQUIEBRE}"/>
+                  </tab:template>
+                </tab:Column>        
+                 <tab:Column width="6rem" autoResizable="true" hAlign="Center">
+                  <Text text="Cultivo"/>
+                  <tab:template>
+                    <Label text="{myParam>ZCULCOD}"/>
+                  </tab:template>
+                </tab:Column>  
+                 <tab:Column  width="10rem" autoResizable="true" hAlign="Center">
+                  <Text text="Número de orden"/>
+                  <tab:template>
+                    <Label text="{myParam>ZAUFNR}"/>
+                  </tab:template>
+                </tab:Column>   
+                 <tab:Column width="6rem" autoResizable="true" hAlign="Center">
+                  <Text text="Cod. etapa"/>
+                  <tab:template>
+                    <Label text="{myParam>ZETAPA}"/>
+                  </tab:template>
+                </tab:Column>   
+                 <tab:Column  width="6rem" autoResizable="true" hAlign="Center">
+                  <Text text="Campaña"/>
+                  <tab:template>
+                    <Label text="{myParam>ZCAMPANA}"/>
+                  </tab:template>
+                </tab:Column>    
+                <tab:Column width="14rem" autoResizable="true" hAlign="Center">
+                  <Text text="Admin desc"/>
+                  <tab:template>
+                    <Label text="{myParam>ADMINDES}"/>
+                  </tab:template>
+                </tab:Column>   
+                <tab:Column  width="14rem" autoResizable="true"  hAlign="Center">
+                  <Text text="Zona desc"/>
+                  <tab:template>
+                    <Label text="{myParam>ZONADES}"/>
+                  </tab:template>
+                </tab:Column>     
+                <tab:Column  width="14rem" autoResizable="true"  hAlign="Center">
+                  <Text text="Campo desc"/>
+                  <tab:template>
+                    <Label text="{myParam>CAMPODES}"/>
+                  </tab:template>
+                </tab:Column>                                                                                                                                     
+                <!--<tab:Column width="40%" hAlign="Center">
+                        <Text text="Unidad"/>
+                        <tab:template>
+                          <Label text="UN"/>
+                        </tab:template>
+                      </tab:Column>
+                      <tab:Column width="40%" hAlign="Center">
+                        <Text text="Fecha inicio"/>
+                        <tab:template>
+
+                          <Label text="{oModel>FECHA_INICIO}"/>
+                        </tab:template>
+                      </tab:Column>
+                      <tab:Column width="40%" hAlign="Center">
+                        <Text text="Fecha fin"/>
+                        <tab:template>
+
+                          <Label text="{oModel>FECHA_FIN}"/>
+                        </tab:template>
+                      </tab:Column>
+                      <tab:Column width="20%" hAlign="Center">
+                        <Text text="Acci�n"/>
+                        <tab:template>
+                          <HBox>
+                            <Button icon="sap-icon://edit" type="Accept" press="pressEditarMaterial($event)"/>
+                            <Button icon="sap-icon://delete" type="Reject" press="pressEliminarMaterial($event)"/>
+                          </HBox>
+                        </tab:template>
+                      </tab:Column>-->
+              </tab:columns>
+            </tab:Table>
+          </content>
+        </Page>
+        <Page id="idnuevalabor" class="Background_blanco Labor_Agregar SplitApp_detail_estilo1">
+          <m:customHeader>
+            <m:Bar class="Background_blanco Labor_Agregar SplitApp_detail_estilo1">
+              <m:contentLeft></m:contentLeft>
+              <m:contentMiddle>
+                <m:Title class="" text="Añadir" titleStyle="H5"/>
+              </m:contentMiddle>
+              <!--<m:contentRight>
+                <Button text="Cancelar" type="Emphasized" class="class_btn_estilo1" press="onRetorno"></Button>
+                <Button text="Aceptar" class="class_btn_estilo1" type="Emphasized" press="onGuardarMaterial"></Button>
+              </m:contentRight>-->
+            </m:Bar>
+          </m:customHeader>
+          
+          <ux:ObjectPageLayout id="ObjectPageLayout23" >
+            <ux:sections>
+              <ux:ObjectPageSection titleUppercase="true" title="Detalle" >
+                <ux:ObjectPageSubSection titleUppercase="false"  >
+                  <VBox class="sapUiSmallMargin ObjectPageLayout23a " >
+                    <f:Form id="FormToolbar" editable="true" ariaLabelledBy="Title1">
+                      <!--  <f:toolbar>
+                        <Toolbar id="TB1">
+                          <Title id="Title1" text="Address"/>
+                          <ToolbarSpacer/>
+                          <Button icon="sap-icon://settings"/>
+                          <Button icon="sap-icon://drop-down-list"/>
+                        </Toolbar>
+                      </f:toolbar>-->
+                      <f:layout>
+                        <f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="3" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="4"
+                          emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="1" columnsM="1" singleContainerFullSize="false"/>
+                      </f:layout>
+                      <f:formContainers>
+                        <f:FormContainer ariaLabelledBy="Title2">
+                          <f:toolbar >
+                            <Toolbar>
+                              <Title id="Title2" level="H3" text="Detalle"/>
+                              <ToolbarSpacer/>
+                             <!--  <Button icon="sap-icon://settings"/> -->
+                            </Toolbar>
+                          </f:toolbar>
+                          <f:formElements>
+                            <f:FormElement label="Nro. de Parte">
+                              <f:fields>
+                                <Input editable="false" id="numeroparte">
+                                <layoutData>
+                                    <layout:GridData span="XL2 L2 M2 S4"/>
+                                  </layoutData>
+                                </Input>
+                              </f:fields>
+                              <f:fields>
+                                <m:Label text="Fecha:" class="sapUiResponsiveMargin"/>
+                                <DatePicker id="idfechageneral" editable="false" placeholder="-">
+                                <layoutData>
+                                    <layout:GridData span="XL2 L2 M2"/>
+                                  </layoutData>
+                                 </DatePicker>
+                              </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="Nro. Item">
+                              <f:fields>
+                                <Input  editable="false" id="numeroitem">
+                                  <layoutData>
+                                    <layout:GridData span="XL2 L2 M2 S4"/>
+                                  </layoutData>
+                                </Input>
+                              </f:fields>
+                              <f:fields>
+                              <m:Label text="Campo: " class="sapUiResponsiveMargin"/>
+                              <Input id="inputcampo" showValueHelp="true" valueHelpOnly="true" valueHelpRequest=".onValueHelpRequested">
+                                 <core:Item key="{myParam>CAMPO}" text="{myParam>POST1} ({myParam>CAMPO})"/>
+                                  <layoutData>
+                                    <layout:GridData span="XL2 L2 M2"/>
+                                  </layoutData>
+                                </Input>
+                              </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label=" Descrip. Campo">
+                              <f:fields>
+                              <Input  editable="false" id="inputcampo2">
+                                  <layoutData>
+                                    <layout:GridData span="XL2 L2 M2 S4"/>
+                                  </layoutData>
+                                </Input>
+                              </f:fields>
+                              <f:fields>
+                                <m:Label text="Quiebre:" class="sapUiResponsiveMargin"/>
+                                <Input  editable="false" id="inputQuiebre">
+                                  <layoutData>
+                                    <layout:GridData span="XL4 L1 M1 S1"/>
+                                  </layoutData>
+                                </Input>
+                                <Input  editable="false" id="inputTraCamp">
+                                  </Input>
+                              </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="Nro. de Program.">
+                              <f:fields>
+                                <Input  editable="false" id="inputNroProg"/>
+                              </f:fields>
+                              <f:fields>
+                                <m:Label text="Nro. Aplic" class="sapUiResponsiveMargin"/>
+                                <Input  editable="false" id="inputNroApl"/>
+                              </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="Labor">
+                            <f:fields>
+                                <Input id="inputlabor" showValueHelp="true" valueHelpOnly="true" valueHelpRequest=".onValueHelpLabor">
+                                  <layoutData>
+                                    <layout:GridData span="XL2 L2 M2"/>
+                                  </layoutData>
+                                </Input>
+                              </f:fields>
+                              <f:fields>
+                              <Input editable="false" id="inputDescripLabor"></Input>
+                              </f:fields>
+                              </f:FormElement>
+                            <f:FormElement label="Puesto Trabajo">
+                            <f:fields>
+                                <Input id="inputPueTrab" showValueHelp="true" valueHelpOnly="true" valueHelpRequest=".onValueHelpPueTrab">
+                                  <layoutData>
+                                    <layout:GridData span="XL2 L2 M2"/>
+                                  </layoutData>
+                                </Input>
+                              </f:fields>
+                              <f:fields>
+                              <Input editable="false" id="inputDescripPueTrab"></Input>
+                              </f:fields>
+                              </f:FormElement>
+                              <f:FormElement label="Cant. Not.">
+                                <f:fields>
+                                <Input  editable="false" id="inputCantNot">
+                                  <layoutData>
+                                    <layout:GridData span="XL2 L2 M2"/>
+                                  </layoutData>
+                                </Input>
+                              </f:fields>
+                              <f:fields>
+                                <m:Label text="UM: " class="sapUiResponsiveMargin"/>
+                                <Input editable="false" id="inputUM">
+                                <layoutData>
+                                    <layout:GridData span="XL2 L2 M2"/>
+                                  </layoutData>
+                                </Input>
+                              </f:fields>
+                              </f:FormElement>
+
+                            <f:FormElement label="Proveedor">
+                              <f:fields>
+                                <ComboBox width="100%" id="country"   items="{path: 'myParam>/tblHelpProveedor',sorter: { path: 'myParam>LIFNR' }}">
+                                  <items>
+                                    <core:Item text="{myParam>LIFNR} - {myParam>NAME1}" key="{myParam>LIFNR}"/>
+                                  </items>
+                                  </ComboBox>
+                              </f:fields>
+                            </f:FormElement>
+                          </f:formElements>
+                        </f:FormContainer>
+                        <f:FormContainer ariaLabelledBy="Title3">
+                          <f:toolbar>
+                            <Toolbar>
+                              <Title id="Title3" level="H3" text="Datos Adicionales"/>
+                              <ToolbarSpacer/>
+                              <Button icon="sap-icon://settings"/>
+                            </Toolbar>
+                          </f:toolbar>
+                          <f:formElements>
+                            <f:FormElement label="Conformidad">
+                              <f:fields>
+                                <Select width="100%" id="conformidad" selectedKey="-">
+                                  <items>
+                                    <core:Item text="BUENA" key="BUENA"/>
+                                    <core:Item text="NO CONFORME" key="NO CONFORME"/>
+                                    <core:Item text="-" key="-"/>
+                                  </items>
+                                </Select>
+                              </f:fields>
+                              <f:fields>
+                                <m:Label text="Estado:" class="sapUiResponsiveMargin"/>
+                                <Select width="100%" id="estado" selectedKey="-">
+                                  <items>
+                                    <core:Item text="ACTIVO" key="ACTIVO"/>
+                                    <core:Item text="CERRADO" key="CERRADO"/>
+                                    <core:Item text="-" key="-"/>
+                                  </items>
+                                  <layoutData>
+                                    <layout:GridData span="XL2 L2 M2"/>
+                                  </layoutData>
+                                </Select>
+                              </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="Observación">
+                              <f:fields>
+                                <Input id="observacion"/>
+                              </f:fields>
+                            </f:FormElement>
+                          </f:formElements>
+                        </f:FormContainer>
+                        <f:FormContainer ariaLabelledBy="Title5">
+                          <f:toolbar>
+                            <Toolbar>
+                              <Title id="Title5" level="H3" text="Adicionales Maquinaria"/>
+                              <ToolbarSpacer/>
+                              <Button icon="sap-icon://settings"/>
+                            </Toolbar>
+                          </f:toolbar>
+                          <f:formElements>
+                            <f:FormElement label="Vehículo">
+                              <f:fields>
+                                <Input id="inputvehiculo" showValueHelp="true" valueHelpOnly="true" valueHelpRequest=".onValueHelpVehiculo">
+                                  <layoutData>
+                                    <layout:GridData span="XL2 L2 M2"/>
+                                  </layoutData>
+                                </Input>
+                              </f:fields>
+                              <f:fields>
+                              <Input editable="false" id="inputDescripVehiculo"></Input>
+                              </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="">
+                              <f:fields>
+                              <SegmentedButton>
+                                <items>
+                                  <SegmentedButtonItem width="80%" icon="sap-icon://multiple-radar-chart" text="Implementos" press=".onValueHelpImplementos"/>
+                                  <SegmentedButtonItem  id="ContadorImplementos" text="0" enabled="false"/>
+                                </items>
+                              </SegmentedButton>
+                              </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="Hr/Km Inicial">
+                              <f:fields>
+                              <Input id="efectivo8787" change="onChangeFinal" editable="true"/>
+                              </f:fields>
+                              <f:fields>
+                                <m:Label text="Hr/Km Final:" class="sapUiResponsiveMargin"/>
+                                <Input  id="final" change="onChangeFinal" editable="true"/>
+                              </f:fields>
+                              <f:fields>
+                                <m:Label text="Hr/Km Efec.:" class="sapUiResponsiveMargin"/>
+                                <Input  id="efectivo" editable="false"/>
+                              </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="Hora Inicio">
+                              <f:fields>
+                                <TimePicker  id="iniciop" placeholder="00:00:00">
+                                  <layoutData>
+                                    <layout:GridData span="XL2 L2 M2 S4"/>
+                                  </layoutData>
+                                </TimePicker>
+                              </f:fields>
+                              <f:fields>
+                                <m:Label text="Hora Fin:" class="sapUiResponsiveMargin"/>
+                                <TimePicker id="finp" change="calculardiferencia" placeholder="00:00:00">
+                                  <layoutData>
+                                    <layout:GridData span="XL2 L2 M2 S4"/>
+                                  </layoutData>
+                                </TimePicker>
+                              </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="Cant.Labor">
+                              <f:fields>
+                                <Input  id="clabor" editable="true">
+                                  <layoutData>
+                                    <layout:GridData span="XL2 L2 M2 S4"/>
+                                  </layoutData>
+                                </Input>
+                              </f:fields>
+                              <f:fields>
+                                <m:Label text="Cant.Neta:" class="sapUiResponsiveMargin"/>
+                                <Input id="hfin2" editable="false">
+                                  <layoutData>
+                                    <layout:GridData span="XL2 L2 M2 S4"/>
+                                  </layoutData>
+                                </Input>
+                              </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="Cant.Avance" >
+                              <f:fields>
+                                <Input  id="cantavance" editable="true">
+                                  <layoutData>
+                                    <layout:GridData span="XL2 L2 M2 S4"/>
+                                  </layoutData>
+                                </Input>
+                              </f:fields>
+                              <f:fields>
+                                <m:Label text="Horas Inc.:" class="sapUiResponsiveMargin"/>
+                                <TimePicker placeholder="00:00:00" editable="false">
+                                  <layoutData>
+                                    <layout:GridData span="XL2 L2 M2 S4"/>
+                                  </layoutData>
+                                </TimePicker>
+                              </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="Av.Esp.">
+                              <f:fields>
+                              <Input id="avesperado" editable="false"/>
+                              </f:fields>
+                              <f:fields>
+                                <m:Label text="Av.Not.:" class="sapUiResponsiveMargin"/>
+                                <Input id="avnotificado"  editable="false"/>
+                              </f:fields>
+                              <f:fields>
+                                <m:Label text="Av.Pen.:" class="sapUiResponsiveMargin"/>
+                                <Input id="avpen" editable="false"/>
+                              </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="Hr.Ini.Elev.">
+                              <f:fields>
+                                <Input  id="hinielev" editable="true">
+                                  <layoutData>
+                                    <layout:GridData span="XL2 L2 M2 S4"/>
+                                  </layoutData>
+                                </Input>
+                              </f:fields>
+                              <f:fields>
+                                <m:Label text="Hr.Fin.Elev.:" class="sapUiResponsiveMargin"/>
+                                <Input  id="hfinelev" editable="true">
+                                  <layoutData>
+                                    <layout:GridData span="XL2 L2 M2 S4"/>
+                                  </layoutData>
+                                </Input>
+                              </f:fields>
+                            </f:FormElement>
+                          </f:formElements>
+                        </f:FormContainer>
+                      </f:formContainers>
+                    </f:Form>
+                  </VBox>
+                </ux:ObjectPageSubSection>
+              </ux:ObjectPageSection>
+              <ux:ObjectPageSection  class="menui" titleUppercase="false" id="Incidencia" title="Incidencia">
+                <ux:ObjectPageSubSection titleUppercase="false">
+                  <ux:ObjectPageSubSection titleUppercase="false"  class="ObjectPageLayout23a">                 
+
+                    <!--<c:CopyPasteTable id="tableId" items="{path: 'myParam>/Data'}"  class="sapUiSizeCompact">
+						<c:columns>
+							<Column><Label design="Bold" text="EmpID"/></Column>
+							<Column><Label design="Bold" text="EmpName"/></Column>
+							<Column><Label design="Bold" text="Designation"/></Column>
+							<Column><Label design="Bold" text="PhoneNumber"/></Column>
+						</c:columns>
+						<c:items>
+							<ColumnListItem>
+								<cells>
+									<Text text="{myParam>EmpName}"></Text> 
+									<Input value="{myParam>EmpID}"></Input>
+									<Input value="{myParam>Designation}"></Input>
+									<Input value="{myParam>PhNumber}"></Input>
+								</cells>
+							</ColumnListItem>
+						</c:items>
+					</c:CopyPasteTable>-->
+                    <tab:Table id="tableincidencia" rows="{path: 'myParam>/T_DETALLE_INCIDENCIA'}" selectionMode="MultiToggle" visibleRowCount="7"
+                      ariaLabelledBy="title" paste="handPastetableincidencia">
+                      <tab:extension>
+                        <m:OverflowToolbar>
+                          <m:ToolbarSpacer/>
+                               <u:FileUploader id="idFileCSV1" value="" width="70%" placeholder="Archivo xlsx" fileType="xlsx" style="Emphasized"
+                            icon="sap-icon://excel-attachment" class="clsFileUpload" change="handleValueChangeCSV1" buttonText="Seleccionar"/>
+                          <m:Button text="Agregar Incidencia" pressed="false" press="onagregarincidencia"/>
+                          <m:Button text="Eliminar" pressed="false" press="onEliminarIncidencia"/>                          
+                       
+                        </m:OverflowToolbar>
+                      </tab:extension>
+                      <tab:columns>
+                        <tab:Column>
+                          <m:Label text="Nro"/>
+                          <tab:template>
+                            <m:Text text="{myParam>ITEM}" wrapping="false"/>
+                          </tab:template>
+                        </tab:Column>
+                        <tab:Column>
+                          <m:Label text="Código Incidencia"/>
+                          <tab:template>
+                            <m:Text text="{myParam>CODIGO_INCI}" wrapping="false"/>
+                          </tab:template>
+                        </tab:Column>
+                        <tab:Column>
+                          <m:Label text="Descrip. Incid."/>
+                          <tab:template>
+                            <m:Text text="{myParam>DESCRIP_INCIDENCIA}" wrapping="false"/>
+                          </tab:template>
+                        </tab:Column>
+                        <tab:Column>
+                          <m:Label text="Fecha de Inicio"/>
+                          <tab:template>
+                            <m:Text text="{myParam>FECHA_INICIO}" wrapping="false"/>
+                          </tab:template>
+                        </tab:Column>
+                        <tab:Column>
+                          <m:Label text="Hora Inicio"/>
+                          <tab:template>
+                            <m:Text text="{myParam>HORA_INICIO}" wrapping="false"/>
+                          </tab:template>
+                        </tab:Column>
+                        <tab:Column>
+                          <m:Label text="Hora de Fin"/>
+                          <tab:template>
+                            <m:Text text="{myParam>HORA_FIN}" wrapping="false"/>
+                          </tab:template>
+                        </tab:Column>
+                        <tab:Column>
+                          <m:Label text="Fecha de Fin"/>
+                          <tab:template>
+                            <m:Text text="{myParam>FECHA_FIN}" wrapping="false"/>
+                          </tab:template>
+                        </tab:Column>
+                        <tab:Column>
+                          <m:Label text="Total Horas"/>
+                          <tab:template>
+                            <m:Text text="{myParam>TOTAL}" wrapping="false"/>
+                          </tab:template>
+                        </tab:Column>
+                      </tab:columns>
+                    </tab:Table>
+                    <!--<f:SimpleForm editable="true" layout="ColumnLayout" columnsM="2" columnsL="3" columnsXL="4">
+                      <f:content>
+                        <m:Label text="Name"/>
+                        <m:Input/>
+                        <m:Label text="Street/No."/>
+                        <m:Input/>
+                        <m:Input>
+                          <m:layoutData>
+                            <f:ColumnElementData cellsSmall="2" cellsLarge="1"/>
+                          </m:layoutData>
+                        </m:Input>
+                        <m:Label text="ZIP Code/City"/>
+                        <m:Input>
+                          <m:layoutData>
+                            <f:ColumnElementData cellsSmall="3" cellsLarge="2"/>
+                          </m:layoutData>
+                        </m:Input>
+                        <m:Input/>
+                        <m:Label text="Country"/>
+                        <m:Select id="country2">
+                          <m:items>
+                            <core:Item text="England" key="England"/>
+                            <core:Item text="Germany" key="Germany"/>
+                            <core:Item text="USA" key="USA"/>
+                          </m:items>
+                        </m:Select>
+                        <m:Label text="Web"/>
+                        <m:Input type="Url"/>
+                        <m:Label text="Twitter"/>
+                        <m:Input/>
+                        <m:Label text="Email"/>
+                        <m:Input type="Email"/>
+                        <m:Label text="Tel."/>
+                        <m:Input type="Tel"/>
+                        <m:Label text="SMS"/>
+                        <m:Input type="Tel"/>
+                        <m:Label text="Mobile"/>
+                        <m:Input type="Tel"/>
+                        <m:Label text="Pager"/>
+                        <m:Input type="Tel"/>
+                        <m:Label text="Fax"/>
+                        <m:Input type="Tel"/>
+                      </f:content>
+                    </f:SimpleForm>-->
+                  </ux:ObjectPageSubSection>
+                </ux:ObjectPageSubSection>
+              </ux:ObjectPageSection>
+              <ux:ObjectPageSection class="menui" titleUppercase="false" id="Trabajador" title="Trabajador">
+                <ux:ObjectPageSubSection titleUppercase="false">
+                  <ux:ObjectPageSubSection titleUppercase="false">
+                    <tab:Table id="tabletrabajador" rows="{path: 'myParam>/T_DETALLE_TRABAJA'}" selectionMode="MultiToggle" visibleRowCount="7" ariaLabelledBy="title" paste="handPastetabletrabaja">
+                      <tab:extension>
+                        <m:OverflowToolbar>
+                          <!--<m:Title id="titl3e" text="Products"/>-->
+                          <m:ToolbarSpacer/>
+                          <!--<Button id="editButton" text="Edit" type="Transparent" press="onEdit"/>-->
+                           <u:FileUploader id="idFileCSV2" value="" width="70%" placeholder="Archivo xlsx" fileType="xlsx" style="Emphasized"
+                            icon="sap-icon://excel-attachment" class="clsFileUpload" change="handleValueChangeCSV2" buttonText="Seleccionar"/>
+                          <m:Button text="Agregar Trabajador" pressed="false" press="onagregartrabajador"/>
+                          <m:Button text="Eliminar" pressed="false" press="onEliminarTrabajador"/>
+                        </m:OverflowToolbar>
+                      </tab:extension>
+                      <tab:columns>
+                        <tab:Column>
+                          <m:Label text="Item"/>
+                          <tab:template>
+                            <m:Text text="{myParam>ITEM}" wrapping="false"/>
+                          </tab:template>
+                        </tab:Column>
+                        <tab:Column>
+                          <m:Label text="Código Trabajador"/>
+                          <tab:template>
+                            <m:Text text="{myParam>COD_TRABAJADOR}" wrapping="false"/>
+                          </tab:template>
+                        </tab:Column>
+                        <tab:Column>
+                          <m:Label text="Nombre"/>
+                          <tab:template>
+                            <m:Text text="{myParam>NOMBRE}" wrapping="false"/>
+                          </tab:template>
+                        </tab:Column>
+                        <tab:Column>
+                          <m:Label text="Nro. Horas"/>
+                          <tab:template>
+                            <m:Text text="{myParam>NRO_HORAS}" wrapping="false"/>
+                          </tab:template>
+                        </tab:Column>
+                      </tab:columns>
+                    </tab:Table>
+                  </ux:ObjectPageSubSection>
+                </ux:ObjectPageSubSection>
+              </ux:ObjectPageSection>
+              <ux:ObjectPageSection class="menui" titleUppercase="false" id="Riego" title="Riego">
+                <ux:ObjectPageSubSection titleUppercase="false">
+                  <ux:ObjectPageSubSection titleUppercase="false">
+                  <VBox class="sapUiSmallMargin ObjectPageLayout23a" >
+                    <f:Form id="FormToolbar78" editable="true" ariaLabelledBy="Title1">
+                    <f:layout>
+                        <f:ResponsiveGridLayout labelSpanXL="4" labelSpanL="3" labelSpanM="4" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="0" emptySpanL="4"
+                          emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="1" columnsM="1" singleContainerFullSize="false"/>
+                      </f:layout>
+                      <f:formContainers>
+                        <f:FormContainer ariaLabelledBy="Title2">
+                          <f:formElements>
+                            <f:FormElement label="Item">
+                              <f:fields>
+                                <Input editable="false" value="{SupplierName}" id="item">
+                                <layoutData>
+                                    <layout:GridData span="XL2 L2 M2 S4"/>
+                                  </layoutData>
+                                </Input>
+                              </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="Forma">
+                              <f:fields>
+                                <Select width="100%" id="forma" forceSelection="false" items="{path: 'myParam>/tblHelpForma',sorter: { path: 'myParam>DOMVALUE_L' }}">
+                                  <items>
+                                    <core:Item text="{myParam>DOMVALUE_L}-{myParam>DDTEXT}" key="{myParam>DOMVALUE_L}"/>
+                                  </items>
+                                  </Select>
+                              </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="Fuente">
+                              <f:fields>
+                                <Select width="100%" id="fuente" forceSelection="false" items="{path: 'myParam>/tblHelpFuente',sorter: { path: 'myParam>DOMVALUE_L' }}">
+                                  <items>
+                                    <core:Item text="{myParam>DOMVALUE_L}-{myParam>DDTEXT}" key="{myParam>DOMVALUE_L}"/>
+                                  </items>
+                                  </Select>
+                              </f:fields>
+                            </f:FormElement>
+                            <f:FormElement label="Motob.">
+                              <f:fields>
+                                  <Input editable="true" id="motobombas">
+                                <layoutData>
+                                    <layout:GridData span="XL2 L2 M2 S4"/>
+                                  </layoutData>
+                                </Input>
+                              </f:fields>
+                              <f:fields>
+                                <m:Label text="Horas:" class="sapUiResponsiveMargin"/>
+                                <Input editable="true" id="horas">
+                                <layoutData>
+                                    <layout:GridData span="XL2 L2 M2 S4"/>
+                                  </layoutData>
+                                </Input>
+                              </f:fields>
+                            </f:FormElement>
+                          </f:formElements>
+                        </f:FormContainer>
+                      </f:formContainers>
+                    </f:Form>
+                  </VBox>
+                  </ux:ObjectPageSubSection>
+                </ux:ObjectPageSubSection>
+              </ux:ObjectPageSection>
+              <ux:ObjectPageSection class="menui" titleUppercase="false" id="Materiales" title="Materiales">
+                <ux:ObjectPageSubSection titleUppercase="false">
+                  <ux:ObjectPageSubSection titleUppercase="false">
+                    <tab:Table id="table1" rows="{path: 'myParam>/tblHelpMateriales'}" selectionMode="MultiToggle"  visibleRowCount="7" ariaLabelledBy="title">
+                      <tab:extension>
+                        <m:OverflowToolbar>
+                          <!--<m:Title id="title" text="Products"/>-->
+                          <m:ToolbarSpacer/>
+                          <!--<Button id="editButton" text="Edit" type="Transparent" press="onEdit"/>
+                          <m:ToggleButton text="Agregar Material" pressed="false" press="onagregarmaterial"/>
+                          <m:ToggleButton text="Eliminar" pressed="false" press="onNavIndicatorsToggle"/>-->
+                        </m:OverflowToolbar>
+                      </tab:extension>
+                      <tab:columns>
+                        <tab:Column>
+                          <m:Label text="Material"/>
+                          <tab:template>
+                            <m:Text text="{myParam>CODIGO MATERIAL}" wrapping="false"/>
+                          </tab:template>
+                        </tab:Column>
+                        <tab:Column>
+                          <m:Label text="Texto Breve Material"/>
+                          <tab:template>
+                            <m:Text text="{myParam>TEXTO_BREVE}" wrapping="false"/>
+                          </tab:template>
+                        </tab:Column>
+                        <tab:Column>
+                          <m:Label text="Cantidad"/>
+                          <tab:template>
+                            <m:Text text="{myParam>CANTIDAD}" wrapping="false"/>
+                          </tab:template>
+                        </tab:Column>
+                        <tab:Column>
+                          <m:Label text="UMB"/>
+                          <tab:template>
+                            <m:Text text="{myParam>UMB}" wrapping="false"/>
+                          </tab:template>
+                        </tab:Column>
+                        <tab:Column>
+                          <m:Label text="Reserva"/>
+                          <tab:template>
+                            <m:Text text="{myParam>RESERVA}" wrapping="false"/>
+                          </tab:template>
+                        </tab:Column>
+                        <tab:Column>
+                          <m:Label text="Pos"/>
+                          <tab:template>
+                            <m:Text text="{myParam>POS}" wrapping="false"/>
+                          </tab:template>
+                        </tab:Column>
+                        <tab:Column>
+                          <m:Label text="Lote"/>
+                          <tab:template>
+                            <m:Text text="{myParam>LOTE}" wrapping="false"/>
+                          </tab:template>
+                        </tab:Column>
+                      </tab:columns>
+                    </tab:Table>
+                  </ux:ObjectPageSubSection>
+                </ux:ObjectPageSubSection>
+              </ux:ObjectPageSection>
+              <ux:ObjectPageSection class="menui" titleUppercase="false" id="Perso.Tercero" title="Perso.Tercero">
+                <ux:ObjectPageSubSection titleUppercase="false">
+                  <ux:ObjectPageSubSection titleUppercase="false">
+                    <tab:Table id="tableterceros" rows="{path: 'myParam>/T_DETALLE_TERCEROS'}" selectionMode="MultiToggle" visibleRowCount="7"
+                      ariaLabelledBy="title" paste="handPastetableterceros">
+                      <tab:extension>
+                        <m:OverflowToolbar>
+                          <!--<m:Title id="title2" text="Products"/>-->
+                          <m:ToolbarSpacer/>
+                          <u:FileUploader id="idFile" value="" width="70%" placeholder="Archivo xlsx" fileType="xlsx" style="Emphasized"
+                            icon="sap-icon://excel-attachment" class="clsFileUpload" change="handleValueChangeCSVPERDS" buttonText="Seleccionar"/>
+                          <m:Button text="Agregar" pressed="false" press="onagregarpersona"/>
+                          <m:Button text="Eliminar" pressed="false" press="onEliminarPersona"/>
+                        </m:OverflowToolbar>
+                      </tab:extension>
+                      <tab:columns>
+                        <tab:Column>
+                          <m:Label text="Item"/>
+                          <tab:template>
+                            <m:Text text="{myParam>ITEM}" wrapping="false"/>
+                          </tab:template>
+                        </tab:Column>
+                        <tab:Column>
+                          <m:Label text="Código Trabajador"/>
+                          <tab:template>
+                            <m:Text text="{myParam>COD_TRABAJADOR}" wrapping="false"/>
+                          </tab:template>
+                        </tab:Column>
+                        <tab:Column>
+                          <m:Label text="Nombres"/>
+                          <tab:template>
+                            <m:Text text="{myParam>NOMBRE}" wrapping="false"/>
+                          </tab:template>
+                        </tab:Column>
+                        <tab:Column>
+                          <m:Label text="Nro. Horas"/>
+                          <tab:template>
+                            <m:Text text="{myParam>NRO_HORAS}" wrapping="false"/>
+                          </tab:template>
+                        </tab:Column>
+                        <tab:Column>
+                          <m:Label text="Proveedor"/>
+                          <tab:template>
+                            <m:Text text="{myParam>COD_PROVEEDOR}" wrapping="false"/>
+                          </tab:template>
+                        </tab:Column>
+                      </tab:columns>
+                    </tab:Table>
+                  </ux:ObjectPageSubSection>
+                </ux:ObjectPageSubSection>
+              </ux:ObjectPageSection>
+            </ux:sections>
+          </ux:ObjectPageLayout>
+          <!--<IconTabBar id="idIconTabBarSeparatorNoIcon2" expanded="true" class="sapUiResponsiveContentPadding">
+            <items>
+              <IconTabFilter text="Detalle" icon="sap-icon://group">
+                <content>
+                  <Panel expandable="true" headerText="Detalle" width="auto" class="sapUiResponsiveMargin">
+                    <content>
+                      <layout:Grid defaultSpan="L6 M6 S12" class="class_PaddingTop_10 class_fondo_blanco" containerQuery="true" width="100%">
+                        <layout:content >
+
+                          <m:VBox class="sapUiTinyMargin" renderType="Div" alignContent="Center" justifyContent="Center" height="auto">
+
+                            <Label id="lblDNI2" text="Numero Parte" design="Bold" labelFor="idDNI2"/>
+                            <Input id="idDNI2" value="-" type="Text" placeholder="" width="80%" required="false" class="sapUiSmallMarginBottom"/>
+                            <Label id="lblFechaDiag211" text="Fecha" design="Bold" labelFor="idFechaDiag2"/>
+                            <DatePicker id="idFechaDiag211" valueFormat="dd/MM/yyyy" displayFormat="dd/MM/yyyy" class="sapUiSmallMarginBottom" width="50%"
+                              placeholder="DD/MM/AAAA" required="true"/>
+                            <Label id="lblEdad2" text="Numero de Item" design="Bold" labelFor="idEdad"/>
+                            <Input id="idEdad2" value="" type="Number" placeholder="" width="80%" required="true" class="sapUiSmallMarginBottom"/>
+                            <Label id="lblSexo2" text="Campo" design="Bold" labelFor="idSexo"/>
+                            <ComboBox id="idSexo2" items="{path: 'myParam>/cbxSexo'}" class="sapUiSmallMarginBottom" placeholder="- Seleccione -" required="true"
+                              width="80%">
+                              <core:Item id="itemEtiqueta2" key="{myParam>SEXO}" text="{myParam>DES_SEXO}"/>
+                            </ComboBox>
+                            <Label id="lblEst2" text="N� Prog." design="Bold" labelFor="idEst"/>
+                            <ComboBox id="idEst2" items="{path: 'myParam>/cbxEstadocivil'}" class="sapUiSmallMarginBottom" placeholder="- Seleccione -" required="true"
+                              width="80%">
+                              <core:Item id="itemEst2" key="{myParam>EST_CIVIL}" text="{myParam>DES_EST_CIVIL}"/>
+                            </ComboBox>
+                          </m:VBox>
+
+                          <m:VBox class="sapUiTinyMargin" renderType="Div" alignContent="Center" justifyContent="Center" height="auto">
+                            <Label id="lblDepa2" text="Puesto Trabajo" design="Bold" labelFor="idDepa"/>
+                            <ComboBox id="idDepa2" items="{path: 'myParam>/listaDepartamentos'}" class="sapUiSmallMarginBottom" placeholder="- Seleccione -"
+                              required="true" width="80%">
+                              <core:Item id="itemDepa2" key="{myParam>DEPARTAMENTO}" text="{myParam>DES_DEPARTAMENTO}"/>
+                            </ComboBox>
+                            <Label id="lblApellidos2" text="Cant. Notificar" design="Bold" labelFor="idApellidos"/>
+                            <Input id="idApellidos2" value="" type="Text" placeholder="" width="80%" required="true" class="sapUiSmallMarginBottom"/>
+                            <Label id="lblProv2" text="Proveedor" design="Bold" labelFor="idProv"/>
+                            <ComboBox id="idProv2" items="{path: 'myParam>/cbxProvincia'}" class="sapUiSmallMarginBottom" placeholder="- Seleccione -" required="true"
+                              width="80%">
+                              <core:Item id="itemProv" key="{myParam>PROVINCIA}" text="{myParam>DES_PROVINCIA}"/>
+                            </ComboBox>
+                          </m:VBox>
+
+                        </layout:content>
+                      </layout:Grid>
+                    </content>
+                  </Panel>
+                  <Panel expandable="true" headerText="Datos Adicionales" width="auto" class="sapUiResponsiveMargin">
+                    <content>
+                      <layout:Grid defaultSpan="L6 M6 S12" class="class_PaddingTop_10 class_fondo_blanco" containerQuery="true" width="100%">
+                        <layout:content >
+
+                          <m:VBox class="sapUiTinyMargin" renderType="Div" alignContent="Center" justifyContent="Center" height="auto">
+                            <Label id="lblTipo2" text="Conformidad" design="Bold" labelFor="idTipo2"/>
+                            <ComboBox id="idTipo2" items="{path: 'myParam>/cbxTipoCa'}" class="sapUiSmallMarginBottom" placeholder="- Seleccione -" required="true"
+                              width="80%">
+                              <core:Item id="itemTipo2" key="{myParam>TIPO_CASO}" text="{myParam>DES_TIPO_CASO}"/>
+                            </ComboBox>
+                            <Label id="lblTipo233" text="Estado" design="Bold" labelFor="idTipo2"/>
+                            <ComboBox id="idTipo233" items="{path: 'myParam>/cbxTipoCa'}" class="sapUiSmallMarginBottom" placeholder="- Seleccione -" required="true"
+                              width="80%">
+                              <core:Item id="itemTipo244" key="{myParam>TIPO_CASO}" text="{myParam>DES_TIPO_CASO}"/>
+                            </ComboBox>
+                          </m:VBox>
+
+                          <m:VBox class="sapUiTinyMargin" renderType="Div" alignContent="Center" justifyContent="Center" height="auto">
+                            <Text text="Observaciones" class="sapUiTinyMarginTop"/>
+                            <TextArea id="textAreaWithoutBinding2" value="Escriba aqu�..." maxLength="40" width="80%" liveChange="handleLiveChange"
+                              valueLiveUpdate="true"/>
+                          </m:VBox>
+
+                        </layout:content>
+                      </layout:Grid>
+                    </content>
+                  </Panel>
+                  <Panel expandable="true" headerText="Adicionales Maquinaria" width="auto" class="sapUiResponsiveMargin">
+                    <content>
+                      <layout:Grid defaultSpan="L6 M6 S12" class="class_PaddingTop_10 class_fondo_blanco" containerQuery="true" width="100%">
+                        <layout:content >
+
+                          <m:VBox class="sapUiTinyMargin" renderType="Div" alignContent="Center" justifyContent="Center" height="auto">
+                            <Label id="lblMedicoProp3" text="Veh�culo" design="Bold" labelFor="idMedicoProp"/>
+                            <Input id="idMedicoProp3" value="{ path: 'oModel>/MANE_PROPUESTA/0/MEDICO_PROPUESTA'}" type="Text" placeholder="" width="80%"
+                              required="true" class="sapUiSmallMarginBottom"/>
+                            <Label id="lblApellidos6" text="Hr/Km Inicial" design="Bold" labelFor="idApellidos"/>
+                            <Input id="idApellidos6" value="" type="Text" placeholder="" width="80%" required="true" class="sapUiSmallMarginBottom"/>
+                            <Label id="lblApellidos4" text="Hr/Km Final" design="Bold" labelFor="idApellidos"/>
+                            <Input id="idApellidos4" value="" type="Text" placeholder="" width="80%" required="true" class="sapUiSmallMarginBottom"/>
+                            <Label id="lblApellidos5" text="Hr/Km Efectivo" design="Bold" labelFor="idApellidos"/>
+                            <Input id="idApellidos5" value="" type="Text" placeholder="" width="80%" required="true" class="sapUiSmallMarginBottom"/>
+                            <Label id="lblFechaProp" text="Hora Inicio" design="Bold" labelFor="idFechaProp"/>
+                            <DateTimePicker id="idFechaProp" value="{ path: 'oModel>/MANE_PROPUESTA/0/FECHA_PROPUESTA'}" valueFormat="HHmmss" displayFormat="HH:mm:ss"
+                              class="sapUiSmallMarginBottom" width="80%" placeholder="HH:mm:ss" required="true"/>
+                            <Label id="lblFechaProp33" text="Hora Fin" design="Bold" labelFor="idFechaProp"/>
+                            <DateTimePicker id="idFechaProp33" value="{ path: 'oModel>/MANE_PROPUESTA/0/FECHA_PROPUESTA'}" valueFormat="HHmmss" displayFormat="HH:mm:ss"
+                              class="sapUiSmallMarginBottom" width="80%" placeholder="HH:mm:ss" required="true"/>
+                          </m:VBox>
+
+                          <m:VBox class="sapUiTinyMargin" renderType="Div" alignContent="Center" justifyContent="Center" height="auto">
+                            <Label id="lbl1" text="Cant. Labor" design="Bold" labelFor="idApellidos"/>
+                            <Input id="idA1" value="" type="Text" placeholder="" width="80%" required="true" class="sapUiSmallMarginBottom"/>
+                            <Label id="lbl2" text="Cant. Neta" design="Bold" labelFor="idApellidos"/>
+                            <Input id="id2" value="" type="Text" placeholder="" width="80%" required="true" class="sapUiSmallMarginBottom"/>
+                            <Label id="lb3" text="Cant. Avance" design="Bold" labelFor="idApellidos"/>
+                            <Input id="idA3" value="" type="Text" placeholder="" width="80%" required="true" class="sapUiSmallMarginBottom"/>
+                            <Label id="lbl4" text="Horas Inciden." design="Bold" labelFor="idFechaProp"/>
+                            <DateTimePicker id="idFechaProp3356" value="{ path: 'oModel>/MANE_PROPUESTA/0/FECHA_PROPUESTA'}" valueFormat="HHmmss"
+                              displayFormat="HH:mm:ss" class="sapUiSmallMarginBottom" width="80%" placeholder="HH:mm:ss" required="true"/>
+                            <Label id="lbl6" text="Hr.Ini.Elevador" design="Bold" labelFor="idApellidos"/>
+                            <Input id="id6" value="" type="Text" placeholder="" width="80%" required="true" class="sapUiSmallMarginBottom"/>
+                            <Label id="lbl65" text="Hr.Fin.Elevador" design="Bold" labelFor="idApellidos"/>
+                            <Input id="id65" value="" type="Text" placeholder="" width="80%" required="true" class="sapUiSmallMarginBottom"/>
+                          </m:VBox>
+
+                        </layout:content>
+                      </layout:Grid>
+                    </content>
+                  </Panel>
+                </content>
+              </IconTabFilter>
+              <IconTabSeparator icon=""/>
+              <IconTabFilter text="Incidencia" icon="sap-icon://notes" count="">
+                <content>
+                  <tab:Table class="sapUiTinyMarginTop" width="98%" id="idTableReporte5" fixedColumnCount="3" rows="{oModel>/tblPlaguicidas}"
+                    selectionMode="None" visibleRowCount="11" paste="onPaste" ariaLabelledBy="title">
+                    <tab:toolbar>
+                      <OverflowToolbar>
+                        <core:Icon src="sap-icon://activity-items" alt="Cart" size="1.25rem"/>
+                        <Title text="Reporte ({oModel>/tblPlaguicidas/length})" titleStyle="H3"/>
+                        <ToolbarSpacer/>
+                        <Button class="button_blanco class_reset" type="Emphasized" icon="sap-icon://excel-attachment" press="onExport"/>
+                      </OverflowToolbar>
+                    </tab:toolbar>
+                    <tab:noData>
+                      <Link class="sapUiMediumMargin" text="Ning�n item encontrado."/>
+                    </tab:noData>
+                    <tab:columns>
+                      <tab:Column id="nro" hAlign="Center" width="7rem" sortProperty="Item" filterProperty="Item">
+                        <Text text="Nro"/>
+                        <tab:template>
+                          <Text text="{oModel>COD_LABOR}" wrapping="false"/>
+                        </tab:template>
+                      </tab:Column>
+                    </tab:columns>
+                    <tab:columns>
+                      <tab:Column id="codinc" hAlign="Center" width="13rem" sortProperty="Cod. Prog." filterProperty="Cod. Prog.">
+                        <Text text="C�digo Incidencia"/>
+                        <tab:template>
+                          <Text text="{oModel>DES_MODULO}" wrapping="false"/>
+                        </tab:template>
+                      </tab:Column>
+                    </tab:columns>
+                    <tab:columns>
+                      <tab:Column id="des" width="10rem" hAlign="Center" sortProperty="Nro Aplic." filterProperty="Nro Aplic.">
+                        <Text text="Descrip. Incid."/>
+                        <tab:template>
+                          <Text text="{oModel>AREA}" wrapping="false"/>
+                        </tab:template>
+                      </tab:Column>
+                    </tab:columns>
+                    <tab:columns>
+                      <tab:Column id="fechin" width="7rem" hAlign="Center" sortProperty="Elemento PEP" filterProperty="Elemento PEP">
+                        <Text text="Fecha de Inicio"/>
+                        <tab:template>
+                          <Text text="{oModel>DES_CAMPANA}" wrapping="false"/>
+                        </tab:template>
+                      </tab:Column>
+                    </tab:columns>
+                    <tab:columns>
+                      <tab:Column id="hor_in" width="4rem" hAlign="Center" sortProperty="Elemento PEP" filterProperty="Elemento PEP">
+                        <Text text="Horario Inicio"/>
+                        <tab:template>
+                          <Text text="{oModel>DES_CAMPANA}" wrapping="false"/>
+                        </tab:template>
+                      </tab:Column>
+                    </tab:columns>
+                    <tab:columns>
+                      <tab:Column id="fechfin" width="4rem" hAlign="Center" sortProperty="Elemento PEP" filterProperty="Elemento PEP">
+                        <Text text="Fecha de Fin"/>
+                        <tab:template>
+                          <Text text="{oModel>DES_CAMPANA}" wrapping="false"/>
+                        </tab:template>
+                      </tab:Column>
+                    </tab:columns>
+                    <tab:columns>
+                      <tab:Column id="horafin" width="4rem" hAlign="Center" sortProperty="Elemento PEP" filterProperty="Elemento PEP">
+                        <Text text="Hora Fin"/>
+                        <tab:template>
+                          <Text text="{oModel>DES_CAMPANA}" wrapping="false"/>
+                        </tab:template>
+                      </tab:Column>
+                    </tab:columns>
+                    <tab:columns>
+                      <tab:Column id="total" width="4rem" hAlign="Center" sortProperty="Elemento PEP" filterProperty="Elemento PEP">
+                        <Text text="Total Horas"/>
+                        <tab:template>
+                          <Text text="{oModel>DES_CAMPANA}" wrapping="false"/>
+                        </tab:template>
+                      </tab:Column>
+                    </tab:columns>
+                  </tab:Table>
+                </content>
+              </IconTabFilter>
+              <IconTabSeparator icon=""/>
+              <IconTabFilter text="Trabajador" icon="sap-icon://idea-wall" count="">
+                <content>
+                  <tab:Table class="sapUiTinyMarginTop" width="98%" id="idTableReporte" fixedColumnCount="3" rows="{oModel>/tblPlaguicidas}"
+                    selectionMode="None" visibleRowCount="11" paste="onPaste" ariaLabelledBy="title">
+                    <tab:toolbar>
+                      <OverflowToolbar>
+                        <core:Icon src="sap-icon://activity-items" alt="Cart" size="1.25rem"/>
+                        <Title text="Reporte ({oModel>/tblPlaguicidas/length})" titleStyle="H3"/>
+                        <ToolbarSpacer/>
+                        <Button class="button_blanco class_reset" type="Emphasized" icon="sap-icon://excel-attachment" press="onExport"/>
+                      </OverflowToolbar>
+                    </tab:toolbar>
+                    <tab:noData>
+                      <Link class="sapUiMediumMargin" text="Ning�n item encontrado."/>
+                    </tab:noData>
+                    <tab:columns>
+                      <tab:Column id="id_field1" hAlign="Center" width="7rem" sortProperty="Item" filterProperty="Item">
+                        <Text text="Item"/>
+                        <tab:template>
+                          <Text text="{oModel>COD_LABOR}" wrapping="false"/>
+                        </tab:template>
+                      </tab:Column>
+                    </tab:columns>
+                    <tab:columns>
+                      <tab:Column id="id_field1_" hAlign="Center" width="13rem" sortProperty="Cod. Prog." filterProperty="Cod. Prog.">
+                        <Text text="Cod. Trabajador"/>
+                        <tab:template>
+                          <Text text="{oModel>DES_MODULO}" wrapping="false"/>
+                        </tab:template>
+                      </tab:Column>
+                    </tab:columns>
+                    <tab:columns>
+                      <tab:Column id="id_field2" width="10rem" hAlign="Center" sortProperty="Nro Aplic." filterProperty="Nro Aplic.">
+                        <Text text="Nombre"/>
+                        <tab:template>
+                          <Text text="{oModel>AREA}" wrapping="false"/>
+                        </tab:template>
+                      </tab:Column>
+                    </tab:columns>
+                    <tab:columns>
+                      <tab:Column id="id_field3" width="7rem" hAlign="Center" sortProperty="Elemento PEP" filterProperty="Elemento PEP">
+                        <Text text="Nro. Horas"/>
+                        <tab:template>
+                          <Text text="{oModel>DES_CAMPANA}" wrapping="false"/>
+                        </tab:template>
+                      </tab:Column>
+                    </tab:columns>
+                  </tab:Table>
+                </content>
+              </IconTabFilter>
+              <IconTabSeparator icon=""/>
+              <IconTabFilter text="Riego" icon="sap-icon://e-care" count="">
+                <content></content>
+              </IconTabFilter>
+              <IconTabSeparator icon=""/>
+              <IconTabFilter text="Materiales" icon="sap-icon://picture" count="">
+                <content>
+                  <tab:Table class="sapUiTinyMarginTop" width="98%" id="idTableReporte2" fixedColumnCount="3" rows="{oModel>/tblPlaguicidas}"
+                    selectionMode="None" visibleRowCount="11" paste="onPaste" ariaLabelledBy="title">
+                    <tab:toolbar>
+                      <OverflowToolbar>
+                        <core:Icon src="sap-icon://activity-items" alt="Cart" size="1.25rem"/>
+                        <Title text="Reporte ({oModel>/tblPlaguicidas/length})" titleStyle="H3"/>
+                        <ToolbarSpacer/>
+                        <Button class="button_blanco class_reset" type="Emphasized" icon="sap-icon://excel-attachment" press="onExport"/>
+                      </OverflowToolbar>
+                    </tab:toolbar>
+                    <tab:noData>
+                      <Link class="sapUiMediumMargin" text="Ning�n item encontrado."/>
+                    </tab:noData>
+                    <tab:columns>
+                      <tab:Column id="id_field" hAlign="Center" width="7rem" sortProperty="Item" filterProperty="Item">
+                        <Text text="IND"/>
+                        <tab:template>
+                          <Text text="{oModel>COD_LABOR}" wrapping="false"/>
+                        </tab:template>
+                      </tab:Column>
+                    </tab:columns>
+                    <tab:columns>
+                      <tab:Column id="tab" hAlign="Center" width="13rem" sortProperty="Cod. Prog." filterProperty="Cod. Prog.">
+                        <Text text="Material"/>
+                        <tab:template>
+                          <Text text="{oModel>DES_MODULO}" wrapping="false"/>
+                        </tab:template>
+                      </tab:Column>
+                    </tab:columns>
+                    <tab:columns>
+                      <tab:Column id="tab2" width="10rem" hAlign="Center" sortProperty="Nro Aplic." filterProperty="Nro Aplic.">
+                        <Text text="Texto Breve Material"/>
+                        <tab:template>
+                          <Text text="{oModel>AREA}" wrapping="false"/>
+                        </tab:template>
+                      </tab:Column>
+                    </tab:columns>
+                    <tab:columns>
+                      <tab:Column id="tavb" width="7rem" hAlign="Center" sortProperty="Elemento PEP" filterProperty="Elemento PEP">
+                        <Text text="Cantidad"/>
+                        <tab:template>
+                          <Text text="{oModel>DES_CAMPANA}" wrapping="false"/>
+                        </tab:template>
+                      </tab:Column>
+                    </tab:columns>
+                    <tab:columns>
+                      <tab:Column id="tavb2" width="4rem" hAlign="Center" sortProperty="Elemento PEP" filterProperty="Elemento PEP">
+                        <Text text="UMB"/>
+                        <tab:template>
+                          <Text text="{oModel>DES_CAMPANA}" wrapping="false"/>
+                        </tab:template>
+                      </tab:Column>
+                    </tab:columns>
+                    <tab:columns>
+                      <tab:Column id="tavb3" width="5rem" hAlign="Center" sortProperty="Elemento PEP" filterProperty="Elemento PEP">
+                        <Text text="Reserva"/>
+                        <tab:template>
+                          <Text text="{oModel>DES_CAMPANA}" wrapping="false"/>
+                        </tab:template>
+                      </tab:Column>
+                    </tab:columns>
+                    <tab:columns>
+                      <tab:Column id="tavb4" width="4rem" hAlign="Center" sortProperty="Elemento PEP" filterProperty="Elemento PEP">
+                        <Text text="Pos"/>
+                        <tab:template>
+                          <Text text="{oModel>DES_CAMPANA}" wrapping="false"/>
+                        </tab:template>
+                      </tab:Column>
+                    </tab:columns>
+                    <tab:columns>
+                      <tab:Column id="tavb5" width="5rem" hAlign="Center" sortProperty="Elemento PEP" filterProperty="Elemento PEP">
+                        <Text text="Lote"/>
+                        <tab:template>
+                          <Text text="{oModel>DES_CAMPANA}" wrapping="false"/>
+                        </tab:template>
+                      </tab:Column>
+                    </tab:columns>
+                  </tab:Table>
+                </content>
+              </IconTabFilter>
+              <IconTabSeparator icon=""/>
+              <IconTabFilter text="Perso. Tercero" icon="sap-icon://family-care" count="">
+                <content>
+                  <tab:Table class="sapUiTinyMarginTop" width="98%" id="idTableReporte3" fixedColumnCount="3" rows="{oModel>/tblPlaguicidas}"
+                    selectionMode="None" visibleRowCount="11" paste="onPaste" ariaLabelledBy="title">
+                    <tab:toolbar>
+                      <OverflowToolbar>
+                        <core:Icon src="sap-icon://activity-items" alt="Cart" size="1.25rem"/>
+                        <Title text="Reporte ({oModel>/tblPlaguicidas/length})" titleStyle="H3"/>
+                        <ToolbarSpacer/>
+                        <Button class="button_blanco class_reset" type="Emphasized" icon="sap-icon://excel-attachment" press="onExport"/>
+                      </OverflowToolbar>
+                    </tab:toolbar>
+                    <tab:noData>
+                      <Link class="sapUiMediumMargin" text="Ning�n item encontrado."/>
+                    </tab:noData>
+                    <tab:columns>
+                      <tab:Column id="qwe" hAlign="Center" width="7rem" sortProperty="Item" filterProperty="Item">
+                        <Text text="Item"/>
+                        <tab:template>
+                          <Text text="{oModel>COD_LABOR}" wrapping="false"/>
+                        </tab:template>
+                      </tab:Column>
+                    </tab:columns>
+                    <tab:columns>
+                      <tab:Column id="qwe1" hAlign="Center" width="13rem" sortProperty="Cod. Prog." filterProperty="Cod. Prog.">
+                        <Text text="C�digo Trabajador"/>
+                        <tab:template>
+                          <Text text="{oModel>DES_MODULO}" wrapping="false"/>
+                        </tab:template>
+                      </tab:Column>
+                    </tab:columns>
+                    <tab:columns>
+                      <tab:Column id="qwe5" width="10rem" hAlign="Center" sortProperty="Nro Aplic." filterProperty="Nro Aplic.">
+                        <Text text="Nombre"/>
+                        <tab:template>
+                          <Text text="{oModel>AREA}" wrapping="false"/>
+                        </tab:template>
+                      </tab:Column>
+                    </tab:columns>
+                    <tab:columns>
+                      <tab:Column id="qwe57" width="7rem" hAlign="Center" sortProperty="Elemento PEP" filterProperty="Elemento PEP">
+                        <Text text="Nro. Horas"/>
+                        <tab:template>
+                          <Text text="{oModel>DES_CAMPANA}" wrapping="false"/>
+                        </tab:template>
+                      </tab:Column>
+                    </tab:columns>
+                    <tab:columns>
+                      <tab:Column id="proveedor" width="10rem" hAlign="Center" sortProperty="Elemento PEP" filterProperty="Elemento PEP">
+                        <Text text="Proveedor"/>
+                        <tab:template>
+                          <Text text="{oModel>DES_CAMPANA}" wrapping="false"/>
+                        </tab:template>
+                      </tab:Column>
+                    </tab:columns>
+                  </tab:Table>
+                </content>
+              </IconTabFilter>
+              <IconTabSeparator icon=""/>
+            </items>
+          </IconTabBar>-->
+          <footer>
+            <OverflowToolbar>
+              <Button type="Reject" icon="sap-icon://alert" press="onError"/>
+              <ToolbarSpacer/>
+              <Button type="Accept" text="Guardar" press="onGuardarMaterial2"/>
+              <Button type="Reject" text="Cancelar" press="onRetorno"/>
+            </OverflowToolbar>
+          </footer>
+        </Page>
+      </detailPages>
+    </SplitApp>
+  </App>
+</mvc:View>

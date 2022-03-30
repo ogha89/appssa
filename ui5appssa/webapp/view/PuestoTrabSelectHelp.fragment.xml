@@ -1,0 +1,101 @@
+<core:FragmentDefinition xmlns:tab="sap.ui.table" xmlns="sap.m" xmlns:m="sap.m" xmlns:layout="sap.ui.layout"
+  xmlns:core="sap.ui.core">
+  <Dialog id="DetallePueTrab" title="Seleccionar Puesto Trabajo">
+
+  <tab:Table id="idTablaPueTrab" selectionMode="Single" selectionBehavior="RowOnly" rowSelectionChange="onSelectionChangePueTrab" sort="sortDeliveryDate" rows="{ path: 'myParam>/tblHelpPueTrab'}" visibleRowCount="5"
+              showNoData="No se hallaron materialess." width="80rem" class="sapUiResponsiveMargin">
+              <tab:toolbar>
+                <Toolbar>
+                  <core:Icon src="sap-icon://activity-items" alt="Cart" size="1.25rem"/>
+                  <Title text="Detalle ({/tblHelpPueTrab/length})" titleStyle="H3"/>
+                </Toolbar>
+              </tab:toolbar>
+              <tab:noData>
+                <Link class="sapUiMediumMargin" text="No se hallaron los datos."/>
+              </tab:noData>
+              <tab:columns>
+                <tab:Column width="6rem" hAlign="Center">
+                  <Text text="Cod. Prog."/>
+                  <tab:template>
+                    <Label text="{myParam>ZNRO_PROG}"/>
+                  </tab:template>
+                </tab:Column>
+                <tab:Column width="6rem" hAlign="Center">
+                  <Text text="Pos. PCP"/>
+                  <tab:template>
+                    <Label text="{myParam>ZPOS}"/>
+                  </tab:template>
+                </tab:Column>
+                <tab:Column width="10rem" hAlign="Center">
+                  <Text text="Cod. Lab."/>
+                  <tab:template>
+                    <Label text="{myParam>ZCODLAB}"/>
+                  </tab:template>
+                </tab:Column>
+                <tab:Column width="5rem" hAlign="Center">
+                  <Text text="PstoTbjo"/>
+                  <tab:template>
+                    <Label text="{myParam>ZARBPL}"/>
+                  </tab:template>
+                </tab:Column>
+                <tab:Column width="5rem" hAlign="Center">
+                  <Text text="Cl."/>
+                  <tab:template>
+                    <Label text="{myParam>VERWE}"/>
+                  </tab:template>
+                </tab:Column>
+                <tab:Column width="5rem" hAlign="Center">
+                  <Text text="Denom.Breve"/>
+                  <tab:template>
+                    <Label text="{myParam>DESARBPL}"/>
+                  </tab:template>
+                </tab:Column>
+                <tab:Column width="5rem" hAlign="Center">
+                  <Text text="Ce."/>
+                  <tab:template>
+                    <Label text="{myParam>WERKS}"/>
+                  </tab:template>
+                </tab:Column>
+                <tab:Column width="5rem" hAlign="Center">
+                  <Text text="Ce.Coste"/>
+                  <tab:template>
+                    <Label text="{myParam>KOSTL}"/>
+                  </tab:template>
+                </tab:Column>
+                <tab:Column width="5rem" hAlign="Center">
+                  <Text text="ClAct"/>
+                  <tab:template>
+                    <Label text="{myParam>LSTAR}"/>
+                  </tab:template>
+                </tab:Column>
+                <tab:Column width="5rem" hAlign="Center">
+                  <Text text="UA"/>
+                  <tab:template>
+                    <Label text="{myParam>LEINH}"/>
+                  </tab:template>
+                </tab:Column>
+                <tab:Column width="5rem" hAlign="Center">
+                  <Text text="Cantidad"/>
+                  <tab:template>
+                    <Label text="{myParam>CANT}"/>
+                  </tab:template>
+                </tab:Column>
+                <tab:Column width="5rem" hAlign="Center">
+                  <Text text="Un."/>
+                  <tab:template>
+                    <Label text="{myParam>ZUN_NOT}"/>
+                  </tab:template>
+                </tab:Column>
+                <tab:Column width="5rem" hAlign="Center">
+                  <Text text="Ind. Lib."/>
+                  <tab:template>
+                    <Label text="{myParam>ZLIB}"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>
+            </tab:Table>
+    <endButton>
+      <Button text="Cerrar"  press="onClosePueTrab"/>
+    </endButton>
+  </Dialog>
+</core:FragmentDefinition>

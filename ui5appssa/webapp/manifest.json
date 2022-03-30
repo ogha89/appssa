@@ -1,0 +1,175 @@
+{
+    "_version": "1.32.0",
+    "sap.app": {
+      "id": "nsa.ui5appssa",
+      "type": "application",
+      "i18n": "i18n/i18n.properties",
+      "applicationVersion": {
+        "version": "0.0.1"
+      },
+      "title": "{{appTitle}}",
+      "description": "{{appDescription}}",
+      "dataSources": {
+        "mainService": {
+          "uri": "/sap/opu/odata/",
+          "type": "OData",
+          "settings": {
+            "annotations": [],
+            "localUri": "localService/metadata.xml",
+            "odataVersion": "4.0"
+          }
+        }
+      }
+    },
+    "sap.ui": {
+      "technology": "UI5",
+      "icons": {
+        "icon": "",
+        "favIcon": "",
+        "phone": "",
+        "phone@2": "",
+        "tablet": "",
+        "tablet@2": ""
+      },
+      "deviceTypes": {
+        "desktop": true,
+        "tablet": true,
+        "phone": true
+      }
+    },
+    "sap.ui5": {
+      "flexEnabled": true,
+      "dependencies": {
+        "minUI5Version": "1.96.0",
+        "libs": {
+          "sap.ui.core": {} 
+        }
+      },
+      "contentDensities": {
+        "compact": true,
+        "cozy": true
+      },
+      "models": {
+        "i18n": {
+          "type": "sap.ui.model.resource.ResourceModel",
+          "settings": {
+            "bundleName": "nszagri.ui5zsmartagri.i18n.i18n"
+          }
+        },
+        "": {
+          "dataSource": "mainService",
+          "preload": true,
+          "settings": {
+            "synchronizationMode": "None",
+            "operationMode": "Server",
+            "autoExpandSelect": true,
+            "earlyRequests": true,
+            "groupId": "$direct"
+          }
+        }
+      },
+      "resources": {
+        "css": [
+          {
+            "uri": "css/style.css"
+          }
+        ],
+        "js": [
+            {
+            "uri": "JS/xlsx.full.min.js"
+            }
+          ]
+      },
+      "routing": {
+        "config": {
+          "routerClass": "sap.m.routing.Router",
+          "viewType": "XML",
+          "async": true,
+          "viewPath": "nsa.ui5appssa.view",
+          "controlAggregation": "pages",
+          "controlId": "app",
+          "clearControlAggregation": false 
+        },
+        "routes": [
+            {
+                "name": "RoutevMain",
+                "pattern": "RoutevMain",
+                "target": [
+                    "TargetvMain"
+                ]
+                },            
+          {
+            "name": "vMain",
+            "pattern": "vMain",
+            "target": [
+              "vMain"
+            ]
+          },
+          {
+            "name": "vista_reporte",
+            "pattern": "vista_reporte",
+            "target": [
+              "vista_reporte"
+            ]
+          },          
+          {
+              "name": "vista_plaguicidas",
+              "pattern": "vista_plaguicidas",
+              "target": [
+                "vista_plaguicidas"
+              ]
+            },
+            {
+                "name": "vista_programacion",
+                "pattern": "vista_programacion",
+                "target": [
+                  "vista_programacion"
+                ]
+              },
+              {
+                "name": "vista_sanidad",
+                "pattern": "vista_sanidad",
+                "target": [
+                  "vista_sanidad"
+                ]
+              }
+        ],
+        "targets": {
+            "TargetvMain": {
+                "viewType": "XML",
+                "transition": "slide",
+                "clearControlAggregation": false,
+                "viewId": "vMain",
+                "viewName": "vMain"
+              },
+          "vista_plaguicidas": {
+              "viewType": "XML",
+              "viewName": "vista_plaguicidas"
+          },
+          "vista_programacion": {
+              "viewType": "XML",
+              "viewName": "vista_programacion"
+          },
+          "vista_reporte": {
+            "viewType": "XML",
+            "viewName": "vista_reporte"
+        },
+          "vista_sanidad": {
+            "viewType": "XML",
+            "viewName": "vista_sanidad"
+        },
+          "vMain": {
+            "viewType": "XML",
+            "viewName": "vMain"
+        }
+        }
+      },
+      "rootView": {
+        "viewName": "nsa.ui5appssa.view.vMain",
+        "type": "XML",
+        "async": true,
+        "id": "vMain"
+      }
+    }
+  }
+  

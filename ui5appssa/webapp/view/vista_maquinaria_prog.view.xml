@@ -1,0 +1,115 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:m="sap.m" xmlns:tab="sap.ui.table"
+	controllerName="nsa.ui5appssa.controller.vista_maquinaria_prog" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<SplitApp id="SplitAppDemo" class="SplitApp_estilo1" initialMaster="master1" initialDetail="detail1">
+		<masterPages>
+			<m:Page id="master1" title="" class="sapUiStdPage Columna_izq list_items_transparent" showFooter="true">
+				<m:customHeader>
+					<m:Bar class="class_IconBlanco">
+						<m:contentLeft>
+							<m:Button icon="sap-icon://nav-back" press="btnBack"/>
+						</m:contentLeft>
+						<m:contentMiddle>
+							<m:Title class="clTitle" text="Maquinaria" titleStyle="H5"/>
+						</m:contentMiddle>
+						<m:contentRight>
+							<m:Button icon="sap-icon://filter" press="btnFiltro"/>
+						</m:contentRight>
+					</m:Bar>
+				</m:customHeader>
+				<subHeader>
+					<Toolbar>
+						<SearchField liveChange="handleSearch" placeholder="Equipo" width="100%"/>
+					</Toolbar>
+				</subHeader>
+				<List items="{oModel>/tblprogmaquinaria}">
+					<items>
+						<ObjectListItem class="sapUiTinyMarginBottom" intro="ID : {oModel>ID_EQUIPO}" title="Equipo : {oModel>EQUIPO}"
+							icon="sap-icon://custonfont/truck" app:key="{oModel>ID_EQUIPO}" type="Active" press="onListItemPress">
+							<firstStatus>
+								<ObjectStatus text="{oModel>texto_lista}" state="{oModel>estado_lista}"/>
+							</firstStatus>
+							<ObjectAttribute text="Centro: {oModel>CENTRO}"/>
+							<ObjectAttribute text="Puesto: {oModel>PUESTO}"/>
+						</ObjectListItem>
+					</items>
+				</List>
+			</m:Page>
+		</masterPages>
+		<detailPages>
+			<Page id="detail1" title="Vista maquinaria" class="Background_blanco Labor_Agregar SplitApp_detail_estilo1">
+				<ObjectHeader title="Equipo.: {oModel>/VMaq_Detalle/EQUIPO}" icon="sap-icon://clinical-tast-tracker"
+					intro="ID: {path: 'oModel>/VMaq_Detalle/ID_EQUIPO'}" backgroundDesign="Solid" responsive="true"
+					class="sapUiResponsivePadding--header estilo_header_1">
+					<ObjectAttribute text="Etapa: {oModel>/VMaq_Detalle/DES_ETAPA}"/>
+					<ObjectAttribute text="Centro: {oModel>/VMaq_Detalle/CENTRO}"/>
+					<ObjectAttribute text="Puesto: {oModel>/VMaq_Detalle/PUESTO}"/>
+					<statuses>
+						<ObjectStatus title="Estado" text="{oModel>/VMaq_Detalle/texto_lista}" state="{oModel>/VMaq_Detalle/estado_lista}"/>
+					</statuses>
+				</ObjectHeader>
+					<IconTabBar expandable="false" id="idIconTabBar" select="handleIconTabBarSelect"
+						class="sapUiResponsivePadding--header sapUiResponsivePadding--content">
+						<items>
+							<IconTabFilter icon="sap-icon://custonfont/register" iconColor="Positive" count="{/ProductCollectionStats/Counts/Weight/Ok}" text="Detalle"
+								key="Ok">
+								<content>
+									<VBox width="100%" class="class_fondo_blanco">
+										<tab:Table id="idTablaMaterial" selectionMode="None" sort="sortDeliveryDate" rows="{ path: 'oModel>/tblregprogmaq'}"
+											visibleRowCount="5" showNoData="No se hallaron ." width="100%" class="class_TextBlanco">
+											<tab:extension>
+												<m:OverflowToolbar>
+													<core:Icon src="sap-icon://activity-items" alt="Cart" size="1.25rem"/>
+													<Title text="Registros prog. maquinaria ({oModel>/tblregprogmaq/length})" titleStyle="H3"/>
+													<m:ToolbarSpacer/>
+												</m:OverflowToolbar>
+											</tab:extension>
+											<tab:noData>
+												<Link class="sapUiMediumMargin" text="No se hallaron los datos."/>
+											</tab:noData>
+											<tab:columns>
+												<tab:Column width="40%" hAlign="Center">
+													<Text text="Nro. prog."/>
+													<tab:template>
+														<Label text="{oModel>NRO_PROG}"/>
+													</tab:template>
+												</tab:Column>
+												<tab:Column width="40%" hAlign="Center">
+													<Text text="Puesto"/>
+													<tab:template>
+														<Label text="{oModel>PUESTO}"/>
+													</tab:template>
+												</tab:Column>	
+												<tab:Column width="40%" hAlign="Center">
+													<Text text="Fecha inicio"/>
+													<tab:template>
+														<Label text="{path: 'oModel>FECHA_INICIO', formatter: 'smartagri.Proyecto_SmartAgri.controller.funciones.fnConvertirFechaSubToStr'}"/>
+														<!--<Label text="{oModel>FECHA_INICIO}"/>-->
+													</tab:template>
+												</tab:Column>
+												<tab:Column width="40%" hAlign="Center">
+													<Text text="Fecha fin"/>
+													<tab:template>
+														<Label text="{path: 'oModel>FECHA_FIN', formatter: 'smartagri.Proyecto_SmartAgri.controller.funciones.fnConvertirFechaSubToStr'}"/>
+														<!--<Label text="{oModel>FECHA_FIN}"/>-->
+													</tab:template>
+												</tab:Column>
+												<tab:Column width="40%" hAlign="Center">
+													<Text text="Cantidad"/>
+													<tab:template>
+														<!--<Label text="{path: 'oModel>FECHA_FIN', formatter: 'smartagri.Proyecto_SmartAgri.controller.funciones.fnConvertirFecha'}"/>-->
+														<Label text="{oModel>CANTIDAD}"/>
+													</tab:template>
+												</tab:Column>
+												
+											</tab:columns>
+										</tab:Table>
+									</VBox>
+								</content>
+							</IconTabFilter>
+						</items>
+					</IconTabBar>
+			</Page>
+		</detailPages>
+	</SplitApp>
+</mvc:View>

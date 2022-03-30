@@ -1,0 +1,178 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:m="sap.m" xmlns:ux="sap.uxap"
+	xmlns:layout="sap.ui.layout" controllerName="nsa.ui5appssa.controller.vista_control" xmlns:tab="sap.ui.table"
+	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" xmlns:html="http://www.w3.org/1999/xhtml">
+	<App>
+		<m:SplitApp id="SplitAppDemo" class="SplitApp_estilo1" initialDetail="detail1" initialMaster="master1" afterMasterOpen="showEvent"
+			afterMasterNavigate="showEvent" mode="ShowHideMode">
+			<m:masterPages>
+				<m:Page id="master1" title="" class="sapUiStdPage Columna_izq" showFooter="true">
+					<m:customHeader>
+						<m:Bar class="class_IconBlanco">
+							<m:contentLeft>
+								<m:HBox>
+									<m:Button text="" press="btnBack" icon="sap-icon://nav-back"/>
+									<!--<m:Button text="" press="btnBackMenu" icon="sap-icon://home"/>-->
+								</m:HBox>
+							</m:contentLeft>
+							<m:contentMiddle>
+								<m:Title class="clTitle" text="Lista de labores" titleStyle="H5"/>
+							</m:contentMiddle>
+						</m:Bar>
+					</m:customHeader>
+					<subHeader>
+						<Toolbar>
+							<SearchField liveChange="handleSearch" width="100%" placeholder="N� Programaci�n"/>
+						</Toolbar>
+					</subHeader>
+					<m:List id="idlistDespachoP" items="{oModel>/tblproglabor}" headerText="">
+						<m:items>
+							<m:ObjectListItem id='idObjectListItem' intro="Nro. Prog.: {oModel>NRO_PROG}" title="{oModel>DESCRIPCION_LABOR}" app:key="{oModel>NRO_PROG}"
+								app:to="Pag_LaborCampo" type="Navigation" press=".onPressSeleccionarItemLabor" icon="sap-icon://accelerated" number="" numberUnit="">
+								<m:firstStatus>
+									<m:ObjectStatus
+										text="{ path: 'myParam>BUDAT', type: 'sap.ui.model.type.Date', formatOptions: {source: {pattern: 'yyyyMMdd'},pattern: 'dd/MM/yyyy'}}"/>
+								</m:firstStatus>
+								<m:attributes>
+									<m:ObjectAttribute text="Cultivo: {oModel>DESCRIPCION_CULTIVO}"/>
+									<m:ObjectAttribute text="Variedad: {oModel>DESCRIPCION_VARIEDAD}"/>
+								</m:attributes>
+							</m:ObjectListItem>
+						</m:items>
+					</m:List>
+				</m:Page>
+				<!--<m:Page id="master2" title="" class="sapUiStdPage" showNavButton="true">-->
+				<!--	<m:customHeader>-->
+				<!--		<m:Bar class="class_IconBlanco">-->
+				<!--			<m:contentLeft>-->
+				<!--				<m:HBox>-->
+				<!--					<m:Button text="" press="onPressMasterBack" icon="sap-icon://nav-back"/>-->
+				<!--<m:Button text="" press="btnBackMenu" icon="sap-icon://home"/>-->
+				<!--				</m:HBox>-->
+				<!--			</m:contentLeft>-->
+				<!--			<m:contentMiddle>-->
+				<!--				<m:Title class="clTitle" text="Lista de maquinaria" titleStyle="H5"/>-->
+				<!--			</m:contentMiddle>-->
+				<!--		</m:Bar>-->
+				<!--	</m:customHeader>-->
+				<!--	<m:List items="{oModel>/tblprogmaq}" itemPress=".onListItemPress">-->
+				<!--		<m:items>-->
+				<!--			<m:StandardListItem press="btnSeleccionarItemLabor" icon="sap-icon://custonfont/truck" title="Puesto de trabajo: {oModel>PUESTO}"-->
+				<!--				description="Implemento: {oModel>DESCRIP_EQUIPO}" app:key="{oModel>NRO_PROG}" app:to="Pag_LaborCampo" type="Active"/>-->
+				<!--		</m:items>-->
+				<!--	</m:List>-->
+				<!--</m:Page>-->
+			</m:masterPages>
+			<m:detailPages>
+				<m:Page id="Pag_LaborCampo" title="Control programaci�n" showNavButton="{device>/isPhone}"
+					class="Background_blanco Labor_Agregar SplitApp_detail_estilo1" navButtonPress="onPressInicion">
+					<ObjectHeader title="Nro. prog.: {oModel>/VProg_Detalle/NRO_PROG}" icon="sap-icon://clinical-tast-tracker"
+						intro="Campa�a: {path: 'oModel>/VProg_Detalle/DES_CAMPANA'}" backgroundDesign="Solid" responsive="true"
+						class="sapUiResponsivePadding--header estilo_header_1" fullScreenOptimized="true">
+						<ObjectAttribute text="Etapa: {oModel>/VProg_Detalle/DES_ETAPA}"/>
+						<ObjectAttribute text="Cultivo/Variedad: {oModel>/VProg_Detalle/DES_CULTIVO} / {oModel>/VProg_Detalle/DES_VARIEDAD}"/>
+						<ObjectAttribute text="M�dulo: {oModel>/VProg_Detalle/DES_MODULO}"/>
+						<ObjectAttribute text="Turno: {oModel>/VProg_Detalle/DES_TURNO}"/>
+						<ObjectAttribute text="Fecha inicio: {oModel>/VProg_Detalle/FEC_INI}"/>
+						<ObjectAttribute text="Fecha fin: {oModel>/VProg_Detalle/FEC_FIN}"/>
+						<!--<ObjectAttribute text="{oModel>/VProg_Detalle/DES_TURNO}"/>-->
+						<ObjectAttribute text="Avance: {oModel>/VProg_Detalle/AVANCE}"/>
+					</ObjectHeader>
+					<IconTabBar expandable="false" id="idIconTabBar" select="handleIconTabBarSelect"
+						class="sapUiResponsivePadding--header sapUiResponsivePadding--content">
+						<items>
+							<IconTabFilter icon="sap-icon://custonfont/register" iconColor="Positive" count="{/ProductCollectionStats/Counts/Weight/Ok}" text="Registro"
+								key="Ok">
+								<content>
+									<!--<m:VBox id="VBox_2" width="100%" class="class_fondo_blanco">-->
+									<!--<VBox id="VBox_2" width="100%" class="class_fondo_blanco">-->
+									<VBox width="100%" class="class_fondo_blanco">
+										<VBox width="100%" class="class_BG_Header" alignItems="Start">
+											<Text text="A�adir control de labor" class="classletra"></Text>
+										</VBox>
+										<layout:Grid defaultSpan="L4 M4 S12" class="" containerQuery="true" width="100%">
+											<layout:content >
+												<m:VBox class="sapUiTinyMargin" renderType="Div" alignContent="Center" justifyContent="Center" height="auto">
+													<m:Label id="lb_inicio" text="Fecha inicio:" design="Bold" labelFor="li_inicio"/>
+													<m:DatePicker id="id_fechaini" valueFormat="dd/MM/yyyy" displayFormat="dd/MM/yyyy" width="100%"></m:DatePicker>
+													<m:Label id="lb_fin" text="Fecha fin:" design="Bold" labelFor="li_fin"/>
+													<m:DatePicker id="id_fechafin" valueFormat="dd/MM/yyyy" displayFormat="dd/MM/yyyy" width="100%"></m:DatePicker>
+												</m:VBox>
+												<m:VBox class="sapUiTinyMargin" renderType="Div" alignContent="Center" justifyContent="Center" height="auto">
+													<m:Label text="Hora inicio:" design="Bold"/>
+													<!--<TimePicker id="TP3" valueFormat="hh:mm a" displayFormat="hh:mm a" width="100%" change="handleChange" placeholder="Seleccione"/>-->
+													<TimePicker id="TP3" valueFormat="HH:mm:ss" width="100%" displayFormat="HH:mm:ss" change="handleChange" placeholder="Seleccione" support2400="true"
+														/>
+													<m:Label text="Hora fin:" design="Bold"/>
+													<TimePicker id="TP4" valueFormat="HH:mm:ss" width="100%" displayFormat="HH:mm:ss" change="handleChange" placeholder="Seleccione"/>
+												</m:VBox>
+												<m:VBox class="sapUiTinyMargin" renderType="Div" alignContent="Center" justifyContent="Center" height="auto">
+													<m:Label text="Descripci�n:" design="Bold"/>
+													<Input id="id_descripcion" width="100%"/>
+													<m:Label text="Avance" design="Bold"/>
+													<Input id="id_avance" width="100%"/>
+												</m:VBox>
+											</layout:content>
+										</layout:Grid>
+										<HBox width="100%" class="class_PaddingTop_10 class_PaddingBottom_10 class_border_top" justifyContent="End" alignItems="Center">
+											<Button text="Guardar" press="onpressSave" class="classletra sapUiSmallMarginEnd class_btn_estilo1" type="Emphasized"></Button>
+											<Button text="Cancelar" type="Emphasized" class=" sapUiSmallMarginEnd classletra class_btn_estilo1"></Button>
+										</HBox>
+									</VBox>
+								</content>
+							</IconTabFilter>
+							<IconTabFilter icon="sap-icon://activity-items" iconColor="Positive" count="{/tblDetalle2/length}"
+								text="Detalle" key="Heavy">
+								<content>
+									<tab:Table id="idTabla2" selectionMode="None" sort="sortDeliveryDate" rows="{ path: 'oModel>/tblDetalle2'}" visibleRowCount="5"
+										showNoData="No se hallaron datos." width="100%" class="class_TextBlanco">
+										<tab:noData>
+											<Link class="sapUiMediumMargin" text="No se hallaron los datos."/>
+										</tab:noData>
+										<tab:columns>
+											<tab:Column width="40%" hAlign="Center">
+												<Text text="Fecha inicio"/>
+												<tab:template>
+													<!--<Label text="{oModel>FECHA_INICIO}"/>-->
+													<Label text="{path: 'oModel>FECHA_INICIO', formatter: 'smartagri.Proyecto_SmartAgri.controller.funciones.fnConvertirFechaSubToStr'}"/>
+												</tab:template>
+											</tab:Column>
+											<tab:Column width="40%" hAlign="Center">
+												<Text text="Fecha fin"/>
+												<tab:template>
+													<!--<Label text="{oModel>FECHA_FIN}"/>-->
+													<Label text="{path: 'oModel>FECHA_FIN', formatter: 'smartagri.Proyecto_SmartAgri.controller.funciones.fnConvertirFechaSubToStr'}"/>
+												</tab:template>
+											</tab:Column>
+											<tab:Column width="40%" hAlign="Center">
+												<Text text="Hora inicio"/>
+												<tab:template>
+													<Label text="{oModel>HORA_INICIO}"/>
+												</tab:template>
+											</tab:Column>
+											<tab:Column width="40%" hAlign="Center">
+												<Text text="Hora fin"/>
+												<tab:template>
+													<Label text="{oModel>HORA_FIN}"/>
+												</tab:template>
+											</tab:Column>
+											<tab:Column width="40%" hAlign="Center">
+												<Text text="Acciones"/>
+												<tab:template>
+													<HBox>
+														<Button icon="sap-icon://edit" type="Accept" press="pressEditar($event)"/>
+														<Button icon="sap-icon://delete" type="Reject" press="pressEliminar($event)"/>
+													</HBox>
+												</tab:template>
+											</tab:Column>
+										</tab:columns>
+									</tab:Table>
+								</content>
+							</IconTabFilter>
+						</items>
+					</IconTabBar>
+				</m:Page>
+			</m:detailPages>
+		</m:SplitApp>
+	</App>
+</mvc:View>

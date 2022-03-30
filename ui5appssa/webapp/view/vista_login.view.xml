@@ -1,0 +1,76 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:m="sap.m" xmlns:layout="sap.ui.layout"
+	controllerName="nsa.ui5appssa.controller.vista_login" xmlns:html="http://www.w3.org/1999/xhtml">
+	<Image id="image_bg" src="./img/background_11.png"/>
+	<Image id="bg-imagen-sap" src="./img/SAP.png"/>
+	<App >
+		<pages>
+			<Page id="page" showHeader="false" showFooter="false">
+				<content>
+					<layout:VerticalLayout width="100%" id="id_VerticalP">
+						<layout:Grid defaultSpan="L6 M6 S12" defaultIndent="L0 M0 S0" class="sapUiSmallMarginTop">
+							<layout:content>
+								<VBox >
+									<layout:Grid defaultSpan="L7 M11 S12" defaultIndent="L2 M1 S0">
+										<layout:content>
+											<VBox width="100%">
+												<m:VBox id="VBox_1" class="sapUiSmallMarginTop">
+													<m:Title text="" titleStyle="H1"/>
+													<!--<Image src="./imagenes/logo.png" width="70%"/>-->
+													<layout:VerticalLayout width="100%">
+														<layout:Grid defaultSpan="L12 M12 S12">
+															<layout:content>
+																<VBox alignItems="Center" width="100%">
+																	<Title id="T_Smartagri" text="INICIAR SESI�N"></Title>
+																</VBox>
+																<m:VBox alignContent="Center" width="100%">
+																	<Text class="sapUiSmallMarginTop" text="Usuario"></Text>
+																	<Input class="sapUiSmallMarginTop sapUiSmallMarginBottom" id="id_Usuario" width="100%"/>
+																	<Text class="sapUiSmallMarginTop" text="Contrase�a"></Text>
+																	<Input class="sapUiSmallMarginTop " id="id_Password" width="100%"/>
+																	<!--<VBox id="VBox_Link" class="sapUiSmallMarginTop sapUiSmallMarginBottom">-->
+																	<!--	<Breadcrumbs separatorStyle="Slash">-->
+																	<!--		<Link text="Reg�strate" press="handleLinkPress"/>-->
+																	<!--		<Link text="Olvid� mi clave web" press="handleLinkPress"/>-->
+																	<!--		<Link text="Ayuda" press="handleLinkPress"/>-->
+																	<!--	</Breadcrumbs>-->
+																	<!--</VBox>-->
+																</m:VBox>
+																<VBox alignItems="End" width="100%">
+																	<CheckBox class="sapUiSmallMarginBottom" text="Recordar Contrase�a" selected="false"/>
+																</VBox>
+																<VBox width="100%">
+																	<Button class="" id="id_btnIngresar" text="Ingresar" width="100%" press="btnIngresar"></Button>
+																</VBox>
+																<!--<VBox id="VBox_Link">-->
+																<!--	<Breadcrumbs separatorStyle="Slash">-->
+																<!--		<Link text="Reg�strate" press="handleLinkPress"/>-->
+																<!--		<Link text="Olvid� mi clave web" press="handleLinkPress"/>-->
+																<!--		<Link text="Ayuda" press="handleLinkPress"/>-->
+																<!--	</Breadcrumbs>-->
+																<!--</VBox>-->
+															</layout:content>
+														</layout:Grid>
+													</layout:VerticalLayout>
+												</m:VBox>
+											</VBox>
+										</layout:content>
+									</layout:Grid>
+								</VBox>
+								<m:VBox id="VBox_3" alignContent="Center" justifyContent="Center" alignItems="Center" width="100%" class="sapUiLargeMarginTop">
+									<VBox id="image_smartgri" width="100%" alignContent="Center" justifyContent="Center" alignItems="Center">
+										<Image backgroundPosition="Center" src="./img/unnamed.png" width="70%"/>
+									</VBox>
+									<Title wrapping="true" text="Gesti�n agr�cola integral a su alcance"/>
+									<VBox width="70%">
+										<Text textAlign="Center"
+											text="Es el sistema basado en tecnolog�a de punta �SAP HANA Cloud Platform�, que permite gestionar un gran volumen de informaci�n en tiempo real para la planificaci�n y control de las actividades agr�colas, nativamente integrado con el ERP SAP."/>
+									</VBox>
+								</m:VBox>
+							</layout:content>
+						</layout:Grid>
+					</layout:VerticalLayout>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

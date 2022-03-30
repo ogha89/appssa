@@ -1,0 +1,610 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:m="sap.m" xmlns:l="sap.ui.layout"
+  xmlns:tab="sap.ui.table" xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+  controllerName="nsa.ui5appssa.controller.vista_reporte" xmlns:html="http://www.w3.org/1999/xhtml">
+  <Image id="image_bg" src="./img/background_11.png"/>
+  <Page title="Title">
+    <m:customHeader>
+      <m:Bar class="class_CabeceraEstilo">
+        <m:contentLeft>
+          <m:Button class="classiconoblanco" icon="sap-icon://nav-back" press="btnRegresar"/>
+        </m:contentLeft>
+        <m:contentMiddle>
+          <m:Title class="clTitle" text="Reporte de costos campo" titleStyle="H5"/>
+        </m:contentMiddle>
+        <m:contentRight>
+          <!-- <m:Button icon="sap-icon://refresh" press="btnBuscarItem777"/> -->
+          <m:Button icon="sap-icon://filter" press="pressDailogFiltro"/>
+        </m:contentRight>
+      </m:Bar>
+    </m:customHeader>
+    <content>
+      <l:Grid defaultSpan="L12 M12 S12">
+        <l:content>
+          <VBox>
+            <tab:Table class="sapUiTinyMarginTop" width="98%" id="idTableReporte" rows="{ path: 'myParam>/tblPlagRep'}" selectionMode="None"
+              visibleRowCount="14" paste="onPaste" ariaLabelledBy="title">
+              <tab:toolbar>
+                <OverflowToolbar>
+                  <!--<core:Icon src="sap-icon://activity-items" alt="Cart" size="1.25rem"/>
+                  <Title id="idLengthTabla1" text="Facturas ({myParam>/tblPlagRep/length})" titleStyle="H3"/>-->
+                  <!--<Input id="idBuscarNumParte" width="40%" value="" placeholder="N�mero de Parte" type="Text" liveChange="liveChangeNumParte"></Input>-->
+                  <!-- <m:SearchField id="idBuscarNumParte" liveChange="liveChangeNumParte" width="40%" placeholder="Número de Parte"/> -->
+                  <ToolbarSpacer/>
+                  <ToolbarSpacer/>
+                  <!--<Button class="button_blanco class_reset" type="Emphasized" text="Descargar" icon="sap-icon://excel-attachment" press="onExport"/>-->
+                  <m:Button class="button_blanco class_reset" type="Emphasized" icon="sap-icon://refresh" text="Refrescar" press="pressRefrescarTabla"/>
+                  <MenuButton type="Emphasized" icon="sap-icon://excel-attachment">
+                    <menu>
+                      <Menu itemSelected="onMenuAction">
+                        <items>
+                          <MenuItem text="Exportar" press="onPressExcel"/>
+                        </items>
+                      </Menu>
+                    </menu>
+                  </MenuButton>
+                </OverflowToolbar>
+              </tab:toolbar>
+              <tab:noData>
+                <Link class="sapUiMediumMargin" text="Ningún item encontrado."/>
+              </tab:noData>
+              <tab:columns>
+                <tab:Column hAlign="Center" width="9rem" sortProperty="ADMIN" filterProperty="ADMIN">
+                  <Text text="Administración"/>
+                  <tab:template>
+                    <Text text="{myParam>ADMIN}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>
+              <tab:columns>
+                <tab:Column hAlign="Center" width="9rem" sortProperty="ARBID" filterProperty="ARBID">
+                  <Text text="ID Puesto de trabajo"/>
+                  <tab:template>
+                    <Text text="{myParam>ARBID}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>
+              <tab:columns>
+                <tab:Column hAlign="Center" width="9rem" sortProperty="ARBPL" filterProperty="ARBPL">
+                  <Text text="Puesto de trabajo"/>
+                  <tab:template>
+                    <Text text="{myParam>ARBPL}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>
+              <tab:columns>
+                <tab:Column hAlign="Center" width="5rem" sortProperty="AUART" filterProperty="AUART">
+                  <Text text="Clase de orden"/>
+                  <tab:template>
+                    <Text text="{myParam>AUART}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>
+              <tab:columns>
+                <tab:Column hAlign="Center" width="7rem" sortProperty="AUFNR" filterProperty="AUFNR">
+                  <Text text="Nº de orden"/>
+                  <tab:template>
+                    <Text text="{myParam>AUFNR}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>
+              <tab:columns>
+                <tab:Column width="5rem" hAlign="Center" sortProperty="AVANCE" filterProperty="AVANCE">
+                  <Text text="Avance"/>
+                  <tab:template>
+                    <Text text="{myParam>AVANCE}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>
+              <tab:columns>
+                <tab:Column width="15rem" hAlign="Center" sortProperty="AWORG" filterProperty="AWORG">
+                  <Text text="Unidades organizativas"/>
+                  <tab:template>
+                    <Text text="{myParam>AWORG}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>
+              <tab:columns>
+                <tab:Column width="6rem" hAlign="Center" sortProperty="AWTYP" filterProperty="AWTYP">
+                  <Text text="Oper. de referencia"/>
+                  <tab:template>
+                    <Text text="{myParam>AWTYP}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>
+              <tab:columns>
+                <tab:Column width="12rem" hAlign="Center" sortProperty="BELNR" filterProperty="BELNR">
+                  <Text text="Nº documento"/>
+                  <tab:template>
+                    <Text text="{myParam>BELNR}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>
+              <tab:columns>
+                <tab:Column width="5rem" hAlign="Center" sortProperty="BUDAT" filterProperty="BUDAT">
+                  <Text text="Fec. contabilización"/>
+                  <tab:template>
+                    <Text text="{myParam>BUDAT}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>
+              <tab:columns>
+                <tab:Column width="11rem" hAlign="Center" sortProperty="BUZEI" filterProperty="BUZEI">
+                  <Text text="Apunte contable"/>
+                  <tab:template>
+                    <Text text="{myParam>BUZEI}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>
+              <tab:columns>
+                <tab:Column width="7rem" hAlign="Center" sortProperty="CAMPANA" filterProperty="CAMPANA">
+                  <Text text="Campaña"/>
+                  <tab:template>
+                    <Text text="{myParam>CAMPANA}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>
+              <tab:columns>
+                <tab:Column width="6rem" hAlign="Center" sortProperty="CAMPO" filterProperty="CAMPO">
+                  <Text text="Campo"/>
+                  <tab:template>
+                    <Text text="{myParam>CAMPO}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>
+              <tab:columns>
+                <tab:Column width="11rem" hAlign="Center" sortProperty="CODPLAGA" filterProperty="CODPLAGA">
+                  <Text text="Objetivo"/>
+                  <tab:template>
+                    <Text text="{myParam>CODPLAGA}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>
+              <tab:columns>
+                <tab:Column width="7rem" hAlign="Center" sortProperty="CULTIVO" filterProperty="CULTIVO">
+                  <Text text="Cultivo"/>
+                  <tab:template>
+                    <Text text="{myParam>CULTIVO}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>
+
+              <tab:columns>
+                <tab:Column width="5rem" hAlign="Center" sortProperty="DESCRIP" filterProperty="DESCRIP">
+                  <Text text="Desc.Objetivo"/>
+                  <tab:template>
+                    <Text text="{myParam>DESCRIP}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>
+              <tab:columns>
+                <tab:Column width="11rem" hAlign="Center" sortProperty="DESC_LAB" filterProperty="DESC_LAB">
+                  <Text text="Desc. Labor"/>
+                  <tab:template>
+                    <Text text="{myParam>DESC_LAB}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>
+              <tab:columns>
+                <tab:Column width="10rem" hAlign="Center" sortProperty="EBELN" filterProperty="EBELN">
+                  <Text text="Doc.Compra"/>
+                  <tab:template>
+                    <Text text="{myParam>EBELN}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>
+              <tab:columns>
+                <tab:Column width="7rem" hAlign="Center" sortProperty="EQKTX" filterProperty="EQKTX">
+                  <Text text="Desc. equipo"/>
+                  <tab:template>
+                    <Text text="{myParam>EQKTX}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>
+              <tab:columns>
+                <tab:Column width="9rem" hAlign="Center" sortProperty="ETAPA" filterProperty="ETAPA">
+                  <Text text="Etapa"/>
+                  <tab:template>
+                    <Text text="{myParam>ETAPA}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>
+              <tab:columns>
+                <tab:Column width="5rem" hAlign="Center" sortProperty="FFINCAM" filterProperty="FFINCAM">
+                  <Text text="Fe.Ini.agoste"/>
+                  <tab:template>
+                    <Text text="{myParam>FFINCAM}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>
+              <tab:columns>
+                <tab:Column width="8rem" hAlign="Center" sortProperty="FINICAM" filterProperty="FINICAM">
+                  <Text text="Fe.Nacimien"/>
+                  <tab:template>
+                    <Text text="{myParam>FINICAM}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>
+              <tab:columns>
+                <tab:Column width="7rem" hAlign="Center" sortProperty="FINICOS" filterProperty="FINICOS">
+                  <Text text="Fe. Inicio Cosecha"/>
+                  <tab:template>
+                    <Text text="{myParam>FINICOS}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>
+              <tab:columns>
+                <tab:Column width="8rem" hAlign="Center" sortProperty="GJAHR" filterProperty="GJAHR">
+                  <Text text="Ejercicio"/>
+                  <tab:template>
+                    <Text text="{myParam>GJAHR}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>       
+              <tab:columns>
+                <tab:Column width="8rem" hAlign="Center" sortProperty="HECTA" filterProperty="HECTA">
+                  <Text text="Hectáreas"/>
+                  <tab:template>
+                    <Text text="{myParam>HECTA}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>   
+              <tab:columns>
+                <tab:Column width="8rem" hAlign="Center" sortProperty="HORA_TOT" filterProperty="HORA_TOT">
+                  <Text text="Horas Totales"/>
+                  <tab:template>
+                    <Text text="{myParam>HORA_TOT}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>        
+              <tab:columns>
+                <tab:Column width="8rem" hAlign="Center" sortProperty="KOSTL" filterProperty="KOSTL">
+                  <Text text="Centro coste"/>
+                  <tab:template>
+                    <Text text="{myParam>KOSTL}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>    
+              <tab:columns>
+                <tab:Column width="8rem" hAlign="Center" sortProperty="KSTAR" filterProperty="KSTAR">
+                  <Text text="Clase coste"/>
+                  <tab:template>
+                    <Text text="{myParam>KSTAR}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>     
+              <tab:columns>
+                <tab:Column width="8rem" hAlign="Center" sortProperty="KTEXT1" filterProperty="KTEXT1">
+                  <Text text="Denom.breve"/>
+                  <tab:template>
+                    <Text text="{myParam>KTEXT1}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>                                                                                        
+              <tab:columns>
+                <tab:Column width="8rem" hAlign="Center" sortProperty="KTEXT_CECO" filterProperty="KTEXT_CECO">
+                  <Text text="Desc. Centro coste"/>
+                  <tab:template>
+                    <Text text="{myParam>KTEXT_CECO}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>                                                                                        
+              <tab:columns>
+                <tab:Column width="8rem" hAlign="Center" sortProperty="KTEXT_KSTAR" filterProperty="KTEXT_KSTAR">
+                  <Text text="Desc. clase coste"/>
+                  <tab:template>
+                    <Text text="{myParam>KTEXT_KSTAR}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>                                                                                        
+              <tab:columns>
+                <tab:Column width="8rem" hAlign="Center" sortProperty="LABOR" filterProperty="LABOR">
+                  <Text text="Cód. labor"/>
+                  <tab:template>
+                    <Text text="{myParam>LABOR}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>                                                                                        
+              <tab:columns>
+                <tab:Column width="8rem" hAlign="Center" sortProperty="MAKTX" filterProperty="MAKTX">
+                  <Text text="Desc. Material"/>
+                  <tab:template>
+                    <Text text="{myParam>MAKTX}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>                                                                                        
+              <tab:columns>
+                <tab:Column width="8rem" hAlign="Center" sortProperty="MATNR" filterProperty="MATNR">
+                  <Text text="Material"/>
+                  <tab:template>
+                    <Text text="{myParam>MATNR}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>                                                                                        
+              <tab:columns>
+                <tab:Column width="8rem" hAlign="Center" sortProperty="MBGBTR" filterProperty="MBGBTR">
+                  <Text text="Cant. total registrada"/>
+                  <tab:template>
+                    <Text text="{myParam>MBGBTR}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>                                                                                        
+              <tab:columns>
+                <tab:Column width="8rem" hAlign="Center" sortProperty="MEINB" filterProperty="MEINB">
+                  <Text text="UDM"/>
+                  <tab:template>
+                    <Text text="{myParam>MEINB}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>                                                                                        
+              <tab:columns>
+                <tab:Column width="8rem" hAlign="Center" sortProperty="MEINS2" filterProperty="MEINS2">
+                  <Text text="Und"/>
+                  <tab:template>
+                    <Text text="{myParam>MEINS2}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>                                                                                        
+              <tab:columns>
+                <tab:Column width="8rem" hAlign="Center" sortProperty="NOMBRE" filterProperty="NOMBRE">
+                  <Text text="Nomb. operario"/>
+                  <tab:template>
+                    <Text text="{myParam>NOMBRE}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>                                                                                        
+              <tab:columns>
+                <tab:Column width="8rem" hAlign="Center" sortProperty="OBJNR" filterProperty="OBJNR">
+                  <Text text="Nº objeto"/>
+                  <tab:template>
+                    <Text text="{myParam>OBJNR}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>                                                                                        
+              <tab:columns>
+                <tab:Column width="8rem" hAlign="Center" sortProperty="OWAER" filterProperty="OWAER">
+                  <Text text="Moneda"/>
+                  <tab:template>
+                    <Text text="{myParam>OWAER}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>                                                                                        
+              <tab:columns>
+                <tab:Column width="8rem" hAlign="Center" sortProperty="PABRJ" filterProperty="PABRJ">
+                  <Text text="Ejercicio"/>
+                  <tab:template>
+                    <Text text="{myParam>PABRJ}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>                                                                                        
+              <tab:columns>
+                <tab:Column width="8rem" hAlign="Center" sortProperty="PABRP" filterProperty="PABRP">
+                  <Text text="Semana"/>
+                  <tab:template>
+                    <Text text="{myParam>PABRP}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>                                                                                        
+              <tab:columns>
+                <tab:Column width="8rem" hAlign="Center" sortProperty="PAROB" filterProperty="PAROB">
+                  <Text text="Obj. interlocutor"/>
+                  <tab:template>
+                    <Text text="{myParam>PAROB}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>                                                                                        
+              <tab:columns>
+                <tab:Column width="8rem" hAlign="Center" sortProperty="PERIO" filterProperty="PERIO">
+                  <Text text="Período"/>
+                  <tab:template>
+                    <Text text="{myParam>PERIO}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>                                                                                        
+              <tab:columns>
+                <tab:Column width="8rem" hAlign="Center" sortProperty="POSID" filterProperty="POSID">
+                  <Text text="PEP"/>
+                  <tab:template>
+                    <Text text="{myParam>POSID}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>                                                                                        
+              <tab:columns>
+                <tab:Column width="8rem" hAlign="Center" sortProperty="POST1" filterProperty="POST1">
+                  <Text text="Desc. PEP"/>
+                  <tab:template>
+                    <Text text="{myParam>POST1}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>                                                                                        
+              <tab:columns>
+                <tab:Column width="8rem" hAlign="Center" sortProperty="PRART" filterProperty="PRART">
+                  <Text text="Clase proyecto"/>
+                  <tab:template>
+                    <Text text="{myParam>PRART}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>                                                                                       
+                                                                                     
+              <tab:columns>
+                <tab:Column width="8rem" hAlign="Center" sortProperty="QUIEBRE" filterProperty="QUIEBRE">
+                  <Text text="Quiebre Campo"/>
+                  <tab:template>
+                    <Text text="{myParam>QUIEBRE}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>                                                                                        
+              <tab:columns>
+                <tab:Column width="8rem" hAlign="Center" sortProperty="REFBN" filterProperty="REFBN">
+                  <Text text="Doc. referencia"/>
+                  <tab:template>
+                    <Text text="{myParam>REFBN}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>                                                                                        
+              <tab:columns>
+                <tab:Column width="8rem" hAlign="Center" sortProperty="RSNUM" filterProperty="RSNUM">
+                  <Text text="Reserva"/>
+                  <tab:template>
+                    <Text text="{myParam>RSNUM}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>                                                                                        
+              <tab:columns>
+                <tab:Column width="8rem" hAlign="Center" sortProperty="STFLG" filterProperty="STFLG">
+                  <Text text="Doc. de anulación"/>
+                  <tab:template>
+                    <Text text="{myParam>STFLG}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>                                                                                        
+              <tab:columns>
+                <tab:Column width="8rem" hAlign="Center" sortProperty="STOKZ" filterProperty="STOKZ">
+                  <Text text="Doc. anulado"/>
+                  <tab:template>
+                    <Text text="{myParam>STOKZ}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>                                                                                        
+              <tab:columns>
+                <tab:Column width="8rem" hAlign="Center" sortProperty="TAR_CO" filterProperty="TAR_CO">
+                  <Text text="TarifMdaCO"/>
+                  <tab:template>
+                    <Text text="{myParam>TAR_CO}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>                                                                                        
+              <tab:columns>
+                <tab:Column width="8rem" hAlign="Center" sortProperty="TAR_OB" filterProperty="TAR_OB">
+                  <Text text="TarifMdaOB"/>
+                  <tab:template>
+                    <Text text="{myParam>TAR_OB}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>                                                                                        
+              <tab:columns>
+                <tab:Column width="8rem" hAlign="Center" sortProperty="TIPCAMPO" filterProperty="TIPCAMPO">
+                  <Text text="Tp.Campo"/>
+                  <tab:template>
+                    <Text text="{myParam>TIPCAMPO}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>                                                                                        
+              <tab:columns>
+                <tab:Column width="8rem" hAlign="Center" sortProperty="TPO_EFEC" filterProperty="TPO_EFEC">
+                  <Text text="Tmpo Efec."/>
+                  <tab:template>
+                    <Text text="{myParam>TPO_EFEC}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>                                                                                        
+              <tab:columns>
+                <tab:Column width="8rem" hAlign="Center" sortProperty="TPO_MRTO" filterProperty="TPO_MRTO">
+                  <Text text="Tmpo Mrto"/>
+                  <tab:template>
+                    <Text text="{myParam>TPO_MRTO}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>                                                                                        
+              <tab:columns>
+                <tab:Column width="8rem" hAlign="Center" sortProperty="TXT" filterProperty="TXT">
+                  <Text text="Texto breve"/>
+                  <tab:template>
+                    <Text text="{myParam>TXT}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>                                                                                        
+              <tab:columns>
+                <tab:Column width="8rem" hAlign="Center" sortProperty="USPOB" filterProperty="USPOB">
+                  <Text text="Obj. origen"/>
+                  <tab:template>
+                    <Text text="{myParam>USPOB}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>                                                                                        
+              <tab:columns>
+                <tab:Column width="8rem" hAlign="Center" sortProperty="USR00" filterProperty="USR00">
+                  <Text text="Equipo"/>
+                  <tab:template>
+                    <Text text="{myParam>USR00}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>                                                                                        
+              <tab:columns>
+                <tab:Column width="8rem" hAlign="Center" sortProperty="USR01" filterProperty="USR01">
+                  <Text text="Operario"/>
+                  <tab:template>
+                    <Text text="{myParam>USR01}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>                                                                                        
+              <tab:columns>
+                <tab:Column width="8rem" hAlign="Center" sortProperty="USR04" filterProperty="USR04">
+                  <Text text="Hectáreas"/>
+                  <tab:template>
+                    <Text text="{myParam>USR04}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>                                                                                        
+              <tab:columns>
+                <tab:Column width="8rem" hAlign="Center" sortProperty="VORNR" filterProperty="VORNR">
+                  <Text text="Nº operación"/>
+                  <tab:template>
+                    <Text text="{myParam>VORNR}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>                                                                                        
+              <tab:columns>
+                <tab:Column width="8rem" hAlign="Center" sortProperty="VRGNG" filterProperty="VRGNG">
+                  <Text text="Operación CO"/>
+                  <tab:template>
+                    <Text text="{myParam>VRGNG}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>                                                                                        
+              <tab:columns>
+                <tab:Column width="8rem" hAlign="Center" sortProperty="WKGBTR" filterProperty="WKGBTR">
+                  <Text text="Valor moneda sociedad CO"/>
+                  <tab:template>
+                    <Text text="{myParam>WKGBTR}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>                                                                                        
+              <tab:columns>
+                <tab:Column width="8rem" hAlign="Center" sortProperty="WOGBTR" filterProperty="WOGBTR">
+                  <Text text="Valor moneda objeto"/>
+                  <tab:template>
+                    <Text text="{myParam>WOGBTR}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>                                                                                        
+              <tab:columns>
+                <tab:Column width="8rem" hAlign="Center" sortProperty="WRTTP" filterProperty="WRTTP">
+                  <Text text="Tipo valor"/>
+                  <tab:template>
+                    <Text text="{myParam>WRTTP}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>                                                                                        
+              <tab:columns>
+                <tab:Column width="8rem" hAlign="Center" sortProperty="ZEILE" filterProperty="ZEILE">
+                  <Text text="Apunte contable doc. Ref."/>
+                  <tab:template>
+                    <Text text="{myParam>ZEILE}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>                                                                                        
+              <tab:columns>
+                <tab:Column width="8rem" hAlign="Center" sortProperty="ZONA" filterProperty="ZONA">
+                  <Text text="Zona"/>
+                  <tab:template>
+                    <Text text="{myParam>ZONA}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>                                                                 
+            </tab:Table>
+          </VBox>
+        </l:content>
+      </l:Grid>
+    </content>
+  </Page>
+</mvc:View>

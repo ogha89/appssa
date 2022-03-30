@@ -1,0 +1,27 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:layout="sap.ui.layout" xmlns:f="sap.ui.layout.form"
+  xmlns:vbm="sap.ui.vbm" height="100%" displayBlock="true">
+  <Dialog id="Detalleanadir" title="Sanidad (Plagas)">
+    <layout:FixFlex class="fixFlexVertical">
+      <layout:fixContent>
+        <vbm:AnalyticMap id="vbi" initialPosition="-98;36;0" initialZoom="5" regionClick="onRegionClick2" regionContextMenu="onRegionContextMenu"
+          regions="{myParam>/Regions}">
+          <vbm:regions>
+            <vbm:Region code="{myParam>code}" color="{myParam>color}" tooltip="{myParam>county}"/>
+          </vbm:regions>
+          <vbm:legend>
+            <vbm:Legend id="legend" caption="Plagas" items="{myParam>/Legend}">
+              <vbm:LegendItem text="{myParam>text}" color="{myParam>color}"/>
+            </vbm:Legend>
+          </vbm:legend>
+        </vbm:AnalyticMap>
+      </layout:fixContent>
+      <layout:flexContent></layout:flexContent>
+    </layout:FixFlex>
+    <!--<beginButton>
+      <Button text="Guardar" type="Success" press=".onGuardardatos"/>
+    </beginButton>-->
+    <endButton>
+      <Button text="Cerrar" type="Reject" press=".onCloseDialog"/>
+    </endButton>
+  </Dialog>
+</core:FragmentDefinition>

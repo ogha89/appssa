@@ -1,0 +1,106 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:m="sap.m" xmlns:ux="sap.uxap"
+	xmlns:layout="sap.ui.layout" controllerName="nsa.ui5appssa.controller.vista_nueva_labor"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<App>
+		<pages>
+			<Page title="Title">
+				<customHeader>
+					<Bar id="idBar">
+						<contentLeft>
+							<Button icon="sap-icon://nav-back" press="btnvistamenu"></Button>
+						</contentLeft>
+						<contentMiddle>
+							<m:Title text="Vista Registro de Nueva labor" titleStyle="H5"/>
+						</contentMiddle>
+						<contentRight></contentRight>
+					</Bar>
+				</customHeader>
+				<ux:ObjectPageLayout id="ObjectPageLayout3" alwaysShowContentHeader="true">
+					<ux:headerTitle>
+						<ux:ObjectPageHeader id="headerForTest3" headerDesign="Light" objectTitle="Nuevo labor" objectSubtitle="" objectImageShape="Circle"
+							objectImageURI=""></ux:ObjectPageHeader>
+					</ux:headerTitle>
+					<ux:sections>
+						<ux:ObjectPageSection id="idItemLoteRecepcion" showTitle="false" titleUppercase="true">
+							<ux:subSections>
+								<ux:ObjectPageSubSection>
+									<m:VBox>
+										<layout:VerticalLayout width="100%">
+											<layout:Grid defaultSpan="L6 M6 S12" containerQuery="true">
+												<layout:content >
+													<m:VBox class="sapUiTinyMargin" renderType="Div" alignContent="Center" justifyContent="Center" height="auto">
+														<m:Label id="lb_prog" text="Nro. Programaci�n:" design="Bold" labelFor="li_prog"/>
+														<m:Input id="li_prog" required="true" width="100%" type="Text" class="sapUiSmallMarginEnd"/>
+														<m:Label id="lb_modulo" text="M�dulo:" design="Bold" labelFor="li_modulo"/>
+														<m:ComboBox id="id_modulo" items="{}" required="true" placeholder="- Seleccione -" width="100%" class="sapUiSmallMarginEnd">
+															<items>
+																<core:Item id="itemModulo" key="{COD_MODULO}" text="{DESCRIP_MODULO}"/>
+															</items>
+														</m:ComboBox>
+														<m:Label id="lb_cultivo" text="Cultivo:" design="Bold" labelFor="li_cultivo"/>
+														<m:ComboBox id="id_cultivo" items="{}" change="fnvariedad" placeholder="- Seleccione -" required="true" width="100%" class="sapUiSmallMarginEnd">
+															<items>
+																<core:Item id="itemCultivo" key="{CULTIVO}" text="{DESCRIPCION}"/>
+															</items>
+														</m:ComboBox>
+														<m:Label id="lb_variedad" text="Variedad:" design="Bold" labelFor="li_variedad"/>
+														<m:ComboBox id="id_variedad" required="true" items="{}" placeholder="- Seleccione -" width="100%" class="sapUiSmallMarginEnd">
+															<items>
+																<core:Item id="itemVariedad" key="{COD_VARIEDAD}" text="{DESCRIP_VAR}"/>
+															</items>
+														</m:ComboBox>
+														<m:Label id="lb_etapa" text="Etapa:" design="Bold" labelFor="li_etapa"/>
+														<m:ComboBox id="id_etapa" items="{}" required="true" placeholder="- Seleccione -" width="100%" class="sapUiSmallMarginEnd">
+															<items>
+																<core:Item id="itemEtapa" key="{COD_ETAPA}" text="{NOMB_ETAPA}"/>
+															</items>
+														</m:ComboBox>
+														<m:Label id="lb_labor" text="Tipo Labor:" design="Bold" labelFor="li_labor"/>
+														<m:ComboBox id="id_labor" items="{}" required="true" width="100%" placeholder="- Seleccione -" class="sapUiSmallMarginEnd">
+															<items>
+																<core:Item id="itemLabor" key="{COD_LABOR}" text="{DESCRIP_LABOR}"/>
+															</items>
+														</m:ComboBox>
+													</m:VBox>
+													<m:VBox class="sapUiTinyMargin" renderType="Div" alignContent="Center" justifyContent="Center" height="auto">
+														<m:Label id="lb_inicio" text="Fecha inicio:" design="Bold" labelFor="li_inicio"/>
+														<m:DatePicker id="id_fechaini"  valueFormat="dd/MM/yyyy" displayFormat="dd/MM/yyyy"></m:DatePicker>
+														<m:Label id="lb_fin" text="Fecha fin:" design="Bold" labelFor="li_fin"/>
+														<m:DatePicker id="id_fechafin" valueFormat="dd/MM/yyyy" displayFormat="dd/MM/yyyy"></m:DatePicker>
+														<m:Label id="lb_centro" text="Centro:" design="Bold" labelFor="li_centro"/>
+														<m:Input id="li_centro" required="true" width="100%" type="Text" class="sapUiSmallMarginEnd"/>
+														<!--<m:ComboBox id="li_centro" items="{}" required="true" width="100%" class="sapUiSmallMarginEnd">-->
+														<!--	<items>-->
+														<!--		<core:Item id="itemEtapa" key="{COD_ETAPA}" text="{NOMB_ETAPA}"/>-->
+														<!--	</items>-->
+														<!--</m:ComboBox>-->
+														<m:Label id="lb_turno" text="Turno:" design="Bold" labelFor="li_turno"/>
+														<m:ComboBox id="id_turno" items="{}" required="true" placeholder="- Seleccione -" width="100%" class="sapUiSmallMarginEnd">
+															<items>
+																<core:Item id="itemTurno" key="{COD_TURNO}" text="{DESCRIP_TURNO}"/>
+															</items>
+														</m:ComboBox>
+													</m:VBox>
+												</layout:content>
+											</layout:Grid>
+										</layout:VerticalLayout>
+									</m:VBox>
+								</ux:ObjectPageSubSection>
+							</ux:subSections>
+						</ux:ObjectPageSection>
+					</ux:sections>
+				</ux:ObjectPageLayout>
+				<m:footer>
+					<m:Bar>
+						<m:contentLeft>
+							<m:Button icon="sap-icon://undo" text="Cancelar" type="Emphasized" press="btncancelar"/>
+						</m:contentLeft>
+						<m:contentRight>
+							<m:Button text="Guardar" id="idConfirmarGR" press="fnAgregarNuevaLabor" icon="sap-icon://accept" type="Emphasized"/>
+						</m:contentRight>
+					</m:Bar>
+				</m:footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

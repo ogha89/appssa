@@ -1,0 +1,337 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:m="sap.m" xmlns:ux="sap.uxap" xmlns:tab="sap.ui.table"
+	xmlns:layout="sap.ui.layout" controllerName="nsa.ui5appssa.controller.vista_prog_riego" xmlns:u="sap.ui.unified"
+	xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:custom="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+	<SplitApp id="Splitadministrar" initialMaster="idnuevalabor" initialDetail="detail2" class="SplitApp_estilo1">
+		<masterPages>
+			<m:Page id="master1" title="Programaci�n de labores" class="sapUiStdPage Columna_izq " showFooter="true">
+				<m:customHeader>
+					<m:Bar class="class_IconBlanco">
+						<m:contentLeft>
+							<m:Button icon="sap-icon://nav-back" press="btnBackMenu"/>
+						</m:contentLeft>
+						<m:contentMiddle>
+							<m:Title class="clTitle" text="Lista programaciones" titleStyle="H5"/>
+						</m:contentMiddle>
+						<m:contentRight></m:contentRight>
+					</m:Bar>
+				</m:customHeader>
+				<subHeader>
+					<Toolbar>
+						<SearchField liveChange="handleSearch" placeholder="N� programaci�n" width="100%"/>
+					</Toolbar>
+				</subHeader>
+				<m:Panel id="panel1" width="100%">
+					<List items="{oModel>/tblprog}" mode="Delete" delete="handleDelete">
+						<items>
+							<ObjectListItem class="sapUiTinyMarginBottom" intro="Labor: {oModel>estado_lista}" title="Nro. Pro. : {oModel>NRO_PROG}"
+								icon="{oModel>icono}" app:key="{oModel>NRO_PROG}" app:to="detailDetail" type="Active" press="onListItemPress">
+								<ObjectAttribute text="Zona: {oModel>ZONA}"/>
+								<ObjectAttribute text="Fundo: {oModel>FUNDO}"/>
+								<ObjectAttribute text="M�dulod: {oModel>MODULO}"/>
+							</ObjectListItem>
+						</items>
+					</List>
+				</m:Panel>
+			</m:Page>
+		</masterPages>
+		<detailPages>
+			<Page id="detailDetail"   title="Vista programaci�n" class="sapUiStdPage Background_blanco Labor_Agregar SplitApp_detail_estilo1">
+				<m:customHeader>
+					<m:Bar class="class_IconBlanco">
+						<m:contentLeft>
+						</m:contentLeft>
+						<m:contentMiddle>
+							<m:Title class="clTitle" text="Vista programaci�n" titleStyle="H5"/>
+						</m:contentMiddle>
+						<m:contentRight>
+							<m:Button text="" press="onPressAdd" class="classbtntablatoolbar" type="Emphasized" icon="sap-icon://sys-add"/>
+						</m:contentRight>
+					</m:Bar>
+				</m:customHeader>
+				<VBox class="class_PaddingTop_10 class_fondo_blanco" >
+					<layout:Grid defaultSpan="L4 M6 S12" class="class_PaddingTop_10 class_fondo_blanco" containerQuery="true" width="100%">
+						<layout:content >
+							<m:VBox class="sapUiTinyMargin" renderType="Div" alignContent="Center" justifyContent="Center" height="auto">
+								<m:HBox>
+									<m:Label class="class_label" text="Nro. Programaci�n: " design="Bold" labelFor="li_prog1"/>
+									<m:Text text="{oModel>/VProg_Detalle/NRO_PROG}" width="100%" class="class_text sapUiSmallMarginEnd"/>
+								</m:HBox>
+								<m:HBox>
+									<m:Label class="class_label" text="Zona: " design="Bold" labelFor="li_prog1"/>
+									<m:Text text="{oModel>/VProg_Detalle/ZONA}" width="100%" class="class_text sapUiSmallMarginEnd"/>
+								</m:HBox>
+								<m:HBox>
+									<m:Label class="class_label"  text="Fundo: " design="Bold" labelFor="li_prog1"/>
+									<m:Text text="{oModel>/VProg_Detalle/FUNDO}" width="100%" class="class_text sapUiSmallMarginEnd"/>
+								</m:HBox>
+							
+							</m:VBox>
+							<m:VBox class="sapUiTinyMargin" renderType="Div" alignContent="Center" justifyContent="Center" height="auto">
+								<m:HBox> 
+									<m:Label class="class_label" text="M�dulo: " design="Bold" labelFor="li_semana1"/>
+									<m:Text text="{oModel>/VProg_Detalle/MODULO}" class="class_text"></m:Text>
+								</m:HBox>
+								<m:HBox>
+									<m:Label class="class_label" text="Cultivo: " design="Bold" labelFor="li_semana1"/>
+									<m:Text text="{oModel>/VProg_Detalle/CULTIVO}" class="class_text"></m:Text>
+								</m:HBox>
+								<m:HBox>
+									<m:Label class="class_label" text="Semana: " design="Bold" labelFor="li_semana1"/>
+									<m:Text text="{oModel>/VProg_Detalle/SEMANA}" class="class_text"></m:Text>
+								</m:HBox>
+							</m:VBox>
+							<m:VBox class="sapUiTinyMargin" renderType="Div" alignContent="Center" justifyContent="Center" height="auto">
+								<m:HBox>
+									<m:Label class="class_label" text="Labor: " design="Bold" labelFor="li_semana1"/>
+									<m:Text text="{oModel>/VProg_Detalle/COD_LABOR}" class="class_text"></m:Text>
+								</m:HBox>
+								<m:HBox>
+									<m:Label class="class_label" text="C�digo de estaci�n: " design="Bold" labelFor="li_semana1"/>
+									<m:Text text="{oModel>/VProg_Detalle/ESTACION}" class="class_text"></m:Text>
+								</m:HBox>
+							</m:VBox>
+						</layout:content>
+					</layout:Grid>
+				</VBox>
+			<tab:Table id="idTablaMaterial" selectionMode="None" sort="sortDeliveryDate" rows="{ path: 'oModel>/tblDetalle'}"
+				visibleRowCount="5" showNoData="No se hallaron programaciones." width="100%" class="class_TextBlanco">
+				<tab:toolbar>
+					<Toolbar>
+						<core:Icon src="sap-icon://activity-items" alt="Cart" size="1.25rem"/>
+						<Title text="{oModel>/tblProgTitle} ({oModel>/tblDetalle/length})" titleStyle="H3"/>
+						<ToolbarSpacer/>
+						<Button id="btnriego" text="Programaci�n diaria" class="classbtntablatoolbar" type="Emphasized" icon="sap-icon://date-time" press="onpressprogdiaria"/>
+					</Toolbar>
+				</tab:toolbar>
+				<tab:noData>
+					<Link class="sapUiMediumMargin" text="No se hallaron los datos."/>
+				</tab:noData>
+		
+				<tab:columns>
+							<tab:Column id="id_field_C1" hAlign="Center" width="5rem">
+								<Text id="id_field_T1" text=""/>
+								<tab:template>
+									<Label text="{oModel>COLUMNA_0}" wrapping="false"/>
+								</tab:template>
+							</tab:Column>
+						</tab:columns>
+						<tab:columns>
+							<tab:Column id="id_field_C2" width="4rem" hAlign="Center">
+								<Text id="id_field_T2" text=""/>
+								<tab:template>
+									<Label text="{oModel>COLUMNA_1}" wrapping="false"/>
+								</tab:template>
+							</tab:Column>
+						</tab:columns>
+						<tab:columns>
+							<tab:Column id="id_field_C3" width="5rem" hAlign="Center">
+								<Text id="id_field_T3" text=""/>
+								<tab:template>
+									<Label text="{oModel>COLUMNA_2}" wrapping="false"/>
+								</tab:template>
+							</tab:Column>
+						</tab:columns>
+						<tab:columns>
+							<tab:Column id="id_field_C4" width="5rem" hAlign="Center">
+								<Text id="id_field_T4" text=""/>
+								<tab:template>
+									<Label text="{oModel>COLUMNA_3}" wrapping="false"/>
+								</tab:template>
+							</tab:Column>
+						</tab:columns>
+						<tab:columns>
+							<tab:Column id="id_field_C5" width="5rem" hAlign="Center">
+								<Text id="id_field_T5" text=""/>
+								<tab:template>
+									<Label text="{oModel>COLUMNA_4}" wrapping="false"/>
+								</tab:template>
+							</tab:Column>
+						</tab:columns>
+						<tab:columns>
+							<tab:Column id="id_field_C6" width="5rem" hAlign="Center">
+								<Text id="id_field_T6" text=""/>
+								<tab:template>
+									<Label text="{oModel>COLUMNA_5}" wrapping="false"/>
+								</tab:template>
+							</tab:Column>
+						</tab:columns>
+						<tab:columns>
+							<tab:Column id="id_field_C7" width="5rem" hAlign="Center">
+								<Text id="id_field_T7" text=""/>
+								<tab:template>
+									<Label text="{oModel>COLUMNA_6}" wrapping="false"/>
+								</tab:template>
+							</tab:Column>
+						</tab:columns>
+						<tab:columns>
+							<tab:Column id="id_field_C8" width="5rem" hAlign="Center">
+								<Text id="id_field_T8" text=""/>
+								<tab:template>
+									<Label text="{oModel>COLUMNA_7}" wrapping="false"/>
+								</tab:template>
+							</tab:Column>
+						</tab:columns>
+						<tab:columns>
+							<tab:Column id="id_field_C9" width="5rem" hAlign="Center">
+								<Text id="id_field_T9" text=""/>
+								<tab:template>
+									<Label text="{oModel>COLUMNA_8}" wrapping="false"/>
+								</tab:template>
+							</tab:Column>
+						</tab:columns>
+						<tab:columns>
+							<tab:Column id="id_field_C10" width="5rem" hAlign="Center">
+								<Text id="id_field_T10" text=""/>
+								<tab:template>
+									<Label text="{oModel>COLUMNA_9}" wrapping="false"/>
+								</tab:template>
+							</tab:Column>
+						</tab:columns>
+						<tab:columns>
+							<tab:Column id="id_field_C11" width="5rem" hAlign="Center">
+								<Text id="id_field_T11" text=""/>
+								<tab:template>
+									<Label text="{oModel>COLUMNA_10}" wrapping="false"/>
+								</tab:template>
+							</tab:Column>
+						</tab:columns>
+						<tab:columns>
+							<tab:Column id="id_field_C12" width="5rem" hAlign="Center">
+								<Text id="id_field_T12" text=""/>
+								<tab:template>
+									<Label text="{oModel>COLUMNA_11}" wrapping="false"/>
+								</tab:template>
+							</tab:Column>
+						</tab:columns>
+						<tab:columns>
+							<tab:Column id="id_field_C13" width="5rem" hAlign="Center">
+								<Text id="id_field_T13" text=""/>
+								<tab:template>
+									<Label text="{oModel>COLUMNA_12}" wrapping="false"/>
+								</tab:template>
+							</tab:Column>
+						</tab:columns>
+						<tab:columns>
+							<tab:Column id="id_field_C14" width="5rem" hAlign="Center">
+								<Text id="id_field_T14" text=""/>
+								<tab:template>
+									<Label text="{oModel>COLUMNA_13}" wrapping="false"/>
+								</tab:template>
+							</tab:Column>
+						</tab:columns>
+						<tab:columns>
+							<tab:Column id="id_field_C15" width="5rem" hAlign="Center">
+								<Text id="id_field_T15" text=""/>
+								<tab:template>
+									<Label text="{oModel>COLUMNA_14}" wrapping="false"/>
+								</tab:template>
+							</tab:Column>
+						</tab:columns>
+			</tab:Table>
+			<m:footer>
+					<m:Bar>
+						<m:contentLeft>
+						</m:contentLeft>
+						<m:contentRight>
+							<m:Button text="Guardar" id="idConfirmarGR" press="onpressagregarprog" icon="sap-icon://accept" type="Emphasized"/>
+							<m:Button icon="sap-icon://decline" text="Cancelar" type="Emphasized" press="btncancelar"/>
+						</m:contentRight>
+					</m:Bar>
+				</m:footer>		
+			</Page>
+			<Page id="detail2" class="Background_blanco Labor_Agregar SplitApp_detail_estilo1" title="Registro programaci�n">
+				<Panel expandable="false" headerText="Par�metros de selecci�n" width="auto" class="class_PaddingTop_10 class_fondo_blanco">
+					<layout:Grid defaultSpan="L6 M6 S12" class="class_PaddingTop_10 class_fondo_blanco" containerQuery="true" width="100%">
+						<layout:content >
+							<m:VBox class="sapUiTinyMargin" renderType="Div" alignContent="Center" justifyContent="Center" height="auto">
+								<layout:Grid defaultSpan="L4 M4 S12" defaultIndent="L1 M1 S0" containerQuery="true" width="100%">
+									<layout:content></layout:content>
+								</layout:Grid>
+								<m:Label id="lb_prog" text="Nro. Programaci�n:" design="Bold" labelFor="li_prog"/>
+								<m:Input  id="li_prog" required="true" width="100%" type="Text" class="input_height sapUiSmallMarginEnd"/>
+								<m:Label id="lb_zona" text="Zona:" design="Bold" labelFor="li_modulo"/>
+								<m:ComboBox id="id_zona" items="{oModel>/DM_ZONA}" required="true" placeholder="- Seleccione -" width="100%" class="input_height sapUiSmallMarginEnd">
+									<items>
+										<core:Item id="itemZona" key="{oModel>ZONA}" text="{oModel>ZONA} - {oModel>DESCRIPCION}"/>
+									</items>
+								</m:ComboBox>
+								<m:Label id="lb_fundo" text="Fundo:" design="Bold" labelFor="li_fundo"/>
+								<m:ComboBox id="id_fundo" items="{oModel>/DM_FUNDO}" change="fnfundo" placeholder="- Seleccione -" required="true" width="100%"
+									class="input_height sapUiSmallMarginEnd">
+									<items>
+										<core:Item id="itemfundo" key="{oModel>FUNDO}" text="{oModel>FUNDO} - {oModel>DESCRIPCION}"/>
+									</items>
+								</m:ComboBox>
+							</m:VBox>
+							<m:VBox class="sapUiTinyMargin" renderType="Div" alignContent="Center" justifyContent="Center" height="auto">
+								<m:Label id="lb_modulo" text="M�dulo:" design="Bold" labelFor="li_modulo"/>
+								<m:ComboBox id="id_modulo" items="{oModel>/DM_MODULO}" required="true" placeholder="- Seleccione -" width="100%" class="input_height sapUiSmallMarginEnd">
+									<items>
+										<core:Item id="itemModulo" key="{oModel>MODULO}" text="{oModel>DESCRIPCION}"/>
+									</items>
+								</m:ComboBox>
+								<m:Label id="lb_cultivo" text="Cultivo:" design="Bold" labelFor="li_cultivo"/>
+								<m:ComboBox id="id_cultivo" items="{oModel>/DM_CULTIVO}" change="fncultivo" placeholder="- Seleccione -" required="true" width="100%"
+									class="input_height sapUiSmallMarginEnd">
+									<items>
+										<core:Item id="itemCultivo" key="{oModel>CULTIVO}" text="{oModel>DESCRIPCION}"/>
+									</items>
+								</m:ComboBox>
+								<m:Label id="lb_semana" text="Semana:" design="Bold" labelFor="li_semana"/>
+								<m:Input id="li_semana" class="input_height"></m:Input>
+							</m:VBox>
+						</layout:content>
+					</layout:Grid>
+				</Panel>
+				<Panel width="auto" headerText="Carga de programaci�n de riego" class="class_fondo_blanco">
+					<layout:Grid defaultSpan="L6 M6 S12" class="class_PaddingTop_10 class_fondo_blanco" containerQuery="true" width="100%">
+						<layout:content>
+							<m:VBox class="sapUiTinyMargin" renderType="Div" alignContent="Center" justifyContent="Center" height="auto">
+								<Label text="Labor:" design="Bold"/>
+								<ComboBox id="id_labor" items="{oModel>/DM_LABOR}" change="fncultivo" placeholder="- Seleccione -" required="true" width="100%"
+									class="input_height sapUiSmallMarginEnd">
+									<items>
+										<core:Item id="itemlabor" key="{oModel>LABOR}" text="{oModel>DESCRIPCION}"/>
+									</items>
+								</ComboBox>
+							</m:VBox>
+							<m:VBox class="sapUiTinyMargin" renderType="Div" alignContent="Center" justifyContent="Center" height="auto">
+								<Label text="C�digo de estaci�n:" design="Bold"/>
+								<m:Input id="li_estacion" class="input_height"></m:Input>
+							</m:VBox>
+							<m:VBox class="sapUiTinyMargin" width="100%" renderType="Div" alignContent="Center" justifyContent="Center" height="auto">
+								<Label text="Ruta de archivo:" design="Bold"/>
+								<u:FileUploader change="change" class="input_height" id="idtxt" width="100%" name="myFileUpload1" buttonText="Buscar" icon="sap-icon://laptop" style="Emphasized" fileType="txt"
+									placeholder="Archivos"></u:FileUploader>
+							</m:VBox>
+						</layout:content>
+					</layout:Grid>
+				</Panel>
+				<Panel expandable="false" headerText="Carga de archivo" width="auto" class="class_fondo_blanco">
+					<layout:Grid defaultSpan="L6 M6 S12" class="class_PaddingTop_10 class_fondo_blanco" containerQuery="true" width="100%">
+						<layout:content>
+							<m:VBox renderType="Div" alignContent="Center" justifyContent="Center" height="auto">
+								<RadioButtonGroup id="rbg4" >
+									<RadioButton id="RB4-1" text="Progr. riego" />
+									<RadioButton id="RB4-2" text="Progr. fertilizaci�n" />
+								</RadioButtonGroup>
+								
+							</m:VBox>
+							<m:VBox renderType="Div" alignContent="Center" justifyContent="Center" height="auto">
+								<RadioButtonGroup id="rbg5" >
+									<RadioButton id="RB4-3" text="Carga de archivo" />
+									<RadioButton id="RB4-4" text="Modificaci�n" />
+								</RadioButtonGroup>
+							</m:VBox>
+						</layout:content>
+					</layout:Grid>
+				</Panel>
+				<HBox width="100%" class="class_fondo_blanco class_border_top" justifyContent="End"
+					alignItems="Center">
+					<Button text="Ejecutar" class="classletra sapUiSmallMarginEnd" press="onpressGuardarRiego" type="Emphasized"></Button>
+				</HBox>
+			</Page>
+		</detailPages>
+	</SplitApp>
+</mvc:View>

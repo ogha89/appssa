@@ -1,0 +1,96 @@
+<mvc:View
+    controllerName="nsa.ui5appssa.controller.vMain" 
+xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns:m="sap.m"
+  xmlns="sap.m" xmlns:ux="sap.uxap" xmlns:layout="sap.ui.layout">
+
+        <m:App id="app">
+            <m:pages>
+                <m:Page id="page0" showHeader="false">       
+                <ux:ObjectPageLayout id="ObjectPageLayout" class="MenuPrin miPagina miVistaMenuCabecera miVistaMenuFondo">
+                    <ux:headerTitle>
+                    <ux:ObjectPageHeader id="headerForTest">
+                        <ux:navigationBar>
+                        <m:Bar>
+                            <m:contentLeft>
+                            <m:Button class="sagBtnMenu" icon="sap-icon://home" text="" press=""/>
+                            <!--<m:Image src="./img/sap_50x26.png"/>-->
+                            <m:Image src="./img/unnamed.png" height="25px"/>
+                            </m:contentLeft>
+                            <m:contentMiddle>
+                            <m:Title class="sagBtnMenu" text="Menú Principal"></m:Title>
+                            </m:contentMiddle>
+                            <m:contentRight>
+                            <m:Toolbar height="auto">
+                                <m:Button id="idSetuser" class="sagBtnMenu" icon="sap-icon://account" text="P00001" press="pressSeleccionarCentro"/>
+                                <m:Button id="idSetConfig1" class="sagBtnMenu" icon="sap-icon://log" press="logUserOut"></m:Button>
+                            </m:Toolbar>
+                            </m:contentRight>
+                        </m:Bar>
+                        </ux:navigationBar>
+                    </ux:ObjectPageHeader>
+                    </ux:headerTitle>
+                    <ux:headerContent>
+                    <!--<VBox width="100%" height="230px">
+                        <VBox class="sapUiResponsiveMargin sapUiSmallMarginTop" alignItems="Center" alignContent="Center" justifyContent="Center" height="230px">
+                        <GenericTile backgroundImage="test-resources/sap/m/demokit/sample/GenericTileAsFeedTile/images/NewsImage2.png" frameType="TwoByOne"
+                            press="press">
+                            <TileContent footer="{oModel>/FechaActualES}">
+                            <NewsContent class="sagBtnMenu" contentText="Gesti�n agr�cola integral a su alcance" subheader="Conozca m�s sobre SMARTAGRI"/>
+                            </TileContent>
+                        </GenericTile>
+                        </VBox>
+                    </VBox>-->
+                    </ux:headerContent>
+                    <ux:sections>
+                    <ux:ObjectPageSection id="idpartediario" class="ObjectPageLayout231" title="REPORTES" showTitle="true" titleUppercase="true">
+                        <ux:subSections>
+                        <ux:ObjectPageSubSection id="subsecpartediario"  class="ObjectPageLayout231">
+                            <layout:HorizontalLayout allowWrapping="true"  class="ObjectPageLayout231">
+                           <m:GenericTile visible="true" class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="DashBoard" press="pressSanidad3">
+                                <m:TileContent>                           
+                                    <m:ImageContent src="sap-icon://bbyd-dashboard"/>
+                                </m:TileContent>
+                            </m:GenericTile>                                    
+                            <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Parte Diario" press="btnControlporgramacion">
+                                <m:tileContent>
+                                <m:TileContent>
+                                    <m:content>
+                                    <m:ImageContent src="sap-icon://activity-2"/>
+                                    </m:content>
+                                </m:TileContent>
+                                </m:tileContent>
+                            </GenericTile>
+                            </layout:HorizontalLayout>
+                        </ux:ObjectPageSubSection>
+                        </ux:subSections>
+                    </ux:ObjectPageSection>
+                 
+                    <ux:ObjectPageSection id="idprogramacion"  title="PLANIFICACION Y CONTROL"  showTitle="true" titleUppercase="true">
+                        <ux:subSections>
+                        <ux:ObjectPageSubSection id="subsecprogramacion">
+                            <layout:HorizontalLayout allowWrapping="true">
+                            <m:GenericTile visible="true" class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="Reporte de costos" press="pressSanidadR">
+                                <m:TileContent>                           
+                                    <m:ImageContent src="sap-icon://bbyd-dashboard"/>
+                                </m:TileContent>
+                            </m:GenericTile>                           
+                            <m:GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Registro de Parte Diario" press="btnRegistrarProgramacion">
+                                <m:tileContent>
+                                <m:TileContent >
+                                    <m:content>
+                                    <m:ImageContent src="sap-icon://activity-2"/>
+                                    </m:content>
+                                </m:TileContent>
+                                </m:tileContent>
+                            </m:GenericTile>
+                            </layout:HorizontalLayout>
+                        </ux:ObjectPageSubSection>
+                        </ux:subSections>
+                    </ux:ObjectPageSection>
+                    </ux:sections>
+                </ux:ObjectPageLayout>                
+                </m:Page>
+            </m:pages>
+        </m:App>
+  
+</mvc:View>

@@ -1,0 +1,247 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:m="sap.m" xmlns:l="sap.ui.layout"
+  xmlns:tab="sap.ui.table" xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+  controllerName="nsa.ui5appssa.controller.vista_plaguicidas" xmlns:html="http://www.w3.org/1999/xhtml">
+  <Image id="image_bg" src="./img/background_11.png"/>
+  <Page title="Title">
+    <m:customHeader>
+      <m:Bar class="class_CabeceraEstilo">
+        <m:contentLeft>
+          <m:Button class="classiconoblanco" icon="sap-icon://nav-back" press="btnRegresar"/>
+        </m:contentLeft>
+        <m:contentMiddle>
+          <m:Title class="clTitle" text="Reporte de Número de Partes" titleStyle="H5"/>
+        </m:contentMiddle>
+        <m:contentRight>
+          <!--<m:Button icon="sap-icon://filter" press="fnPopup"/>-->
+          <m:Button icon="sap-icon://filter" press="pressDailogFiltro"/>
+        </m:contentRight>
+      </m:Bar>
+    </m:customHeader>
+    <content>
+      <l:Grid defaultSpan="L12 M12 S12">
+        <l:content>
+          <VBox>
+            <tab:Table class="sapUiTinyMarginTop" width="98%" id="idTableReporte" rows="{ path: 'myParam>/tblPlaguicidas'}" selectionMode="None"
+              visibleRowCount="14" paste="onPaste" ariaLabelledBy="title">
+              <tab:toolbar>
+                <OverflowToolbar>
+                  <!--<core:Icon src="sap-icon://activity-items" alt="Cart" size="1.25rem"/>
+                  <Title id="idLengthTabla1" text="Facturas ({myParam>/tblPlaguicidas/length})" titleStyle="H3"/>-->
+                  <!--<Input id="idBuscarNumParte" width="40%" value="" placeholder="N�mero de Parte" type="Text" liveChange="liveChangeNumParte"></Input>-->
+                  <m:SearchField id="idBuscarNumParte" liveChange="liveChangeNumParte" width="40%" placeholder="Número de Parte"/>
+                  <ToolbarSpacer/>
+                  <!--<Button class="button_blanco class_reset" type="Emphasized" text="Descargar" icon="sap-icon://excel-attachment" press="onExport"/>-->
+                  <m:Button class="button_blanco class_reset" type="Emphasized" icon="sap-icon://refresh" text="Refrescar" press="pressRefrescarTabla"/>
+                  <MenuButton type="Emphasized" icon="sap-icon://excel-attachment">
+                    <menu>
+                      <Menu itemSelected="onMenuAction">
+                        <items>
+                          <MenuItem text="Exportar" press="onPressExcel"/>
+                        </items>
+                      </Menu>
+                    </menu>
+                  </MenuButton>
+                </OverflowToolbar>
+              </tab:toolbar>
+              <tab:noData>
+                <Link class="sapUiMediumMargin" text="Ningún item encontrado."/>
+              </tab:noData>
+              <tab:columns>
+                <tab:Column hAlign="Center" width="9rem" sortProperty="ZFECHA" filterProperty="ZFECHA">
+                  <Text text="Fecha"/>
+                  <tab:template>
+                    <Text text="{myParam>ZFECHA}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>
+              <tab:columns>
+                <tab:Column hAlign="Center" width="9rem" sortProperty="ZPROYECTO" filterProperty="ZPROYECTO">
+                  <Text text="Proyecto"/>
+                  <tab:template>
+                    <Text text="{myParam>ZPROYECTO}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>
+              <tab:columns>
+                <tab:Column hAlign="Center" width="9rem" sortProperty="ZNUM_PARTE" filterProperty="ZNUM_PARTE">
+                  <Text text="Nro. de Parte"/>
+                  <tab:template>
+                    <Text text="{myParam>ZNUM_PARTE}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>
+              <tab:columns>
+                <tab:Column hAlign="Center" width="5rem" sortProperty="ITEM" filterProperty="ZITEM">
+                  <Text text="Item"/>
+                  <tab:template>
+                    <Text text="{myParam>ZITEM}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>
+              <tab:columns>
+                <tab:Column hAlign="Center" width="7rem" sortProperty="ZCOD_PROGRAMACION" filterProperty="ZCOD_PROGRAMACION">
+                  <Text text="Cod. Prog."/>
+                  <tab:template>
+                    <Text text="{myParam>ZCOD_PROGRAMACION}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>
+              <tab:columns>
+                <tab:Column width="5rem" hAlign="Center" sortProperty="ZNUM_APLICACION" filterProperty="ZNUM_APLICACION">
+                  <Text text="Nro Aplic."/>
+                  <tab:template>
+                    <Text text="{myParam>ZNUM_APLICACION}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>
+              <tab:columns>
+                <tab:Column width="15rem" hAlign="Center" sortProperty="ZELE_PEP" filterProperty="ZELE_PEP">
+                  <Text text="Elemento PEP"/>
+                  <tab:template>
+                    <Text text="{myParam>ZELE_PEP}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>
+              <tab:columns>
+                <tab:Column width="6rem" hAlign="Center" sortProperty="ZADMIN" filterProperty="ZADMIN">
+                  <Text text="Admin."/>
+                  <tab:template>
+                    <Text text="{myParam>ZADMIN}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>
+              <tab:columns>
+                <tab:Column width="12rem" hAlign="Center" sortProperty="ZDESC_ADMIN" filterProperty="ZDESC_ADMIN">
+                  <Text text="Descripción"/>
+                  <tab:template>
+                    <Text text="{myParam>ZDESC_ADMIN}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>
+              <tab:columns>
+                <tab:Column width="5rem" hAlign="Center" sortProperty="ZZONA" filterProperty="ZZONA">
+                  <Text text="Zona"/>
+                  <tab:template>
+                    <Text text="{myParam>ZZONA}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>
+              <tab:columns>
+                <tab:Column width="11rem" hAlign="Center" sortProperty="ZDESC_ZONA" filterProperty="ZDESC_ZONA">
+                  <Text text="Descripción"/>
+                  <tab:template>
+                    <Text text="{myParam>ZDESC_ZONA}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>
+              <tab:columns>
+                <tab:Column width="7rem" hAlign="Center" sortProperty="ZCAMPO" filterProperty="ZCAMPO">
+                  <Text text="Campo"/>
+                  <tab:template>
+                    <Text text="{myParam>ZCAMPO}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>
+              <tab:columns>
+                <tab:Column width="6rem" hAlign="Center" sortProperty="ZQUIEBRE_CAMPO" filterProperty="ZQUIEBRE_CAMPO">
+                  <Text text="Quiebre"/>
+                  <tab:template>
+                    <Text text="{myParam>ZQUIEBRE_CAMPO}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>
+              <tab:columns>
+                <tab:Column width="11rem" hAlign="Center" sortProperty="ZDESCRIPCION3" filterProperty="ZDESCRIPCION3">
+                  <Text text="Descripción"/>
+                  <tab:template>
+                    <Text text="{myParam>ZDESCRIPCION3}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>
+              <tab:columns>
+                <tab:Column width="7rem" hAlign="Center" sortProperty="ZCOD_LABOR" filterProperty="ZCOD_LABOR">
+                  <Text text="Cod. Labor"/>
+                  <tab:template>
+                    <Text text="{myParam>ZCOD_LABOR}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>
+              <tab:columns>
+                <tab:Column width="11rem" hAlign="Center" sortProperty="ZDESC_LABOR" filterProperty="ZDESC_LABOR">
+                  <Text text="Descripción"/>
+                  <tab:template>
+                    <Text text="{myParam>ZDESC_LABOR}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>
+              <tab:columns>
+                <tab:Column width="5rem" hAlign="Center" sortProperty="ZCULTIVO" filterProperty="ZCULTIVO">
+                  <Text text="Cultivo"/>
+                  <tab:template>
+                    <Text text="{myParam>ZCULTIVO}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>
+              <tab:columns>
+                <tab:Column width="11rem" hAlign="Center" sortProperty="ZDESC_CULT" filterProperty="ZDESC_CULT">
+                  <Text text="Descripción"/>
+                  <tab:template>
+                    <Text text="{myParam>ZDESC_CULT}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>
+              <tab:columns>
+                <tab:Column width="10rem" hAlign="Center" sortProperty="ZFEC_INICIO" filterProperty="ZFEC_INICIO">
+                  <Text text="Fec. Inicio"/>
+                  <tab:template>
+                    <Text text="{myParam>ZFEC_INICIO}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>
+              <tab:columns>
+                <tab:Column width="7rem" hAlign="Center" sortProperty="ZORDEN_CO" filterProperty="ZORDEN_CO">
+                  <Text text="Orden CO"/>
+                  <tab:template>
+                    <Text text="{myParam>ZORDEN_CO}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>
+              <tab:columns>
+                <tab:Column width="9rem" hAlign="Center" sortProperty="ZCOD_ETAPA" filterProperty="ZCOD_ETAPA">
+                  <Text text="Código Etapa"/>
+                  <tab:template>
+                    <Text text="{myParam>ZCOD_ETAPA}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>
+              <tab:columns>
+                <tab:Column width="5rem" hAlign="Center" sortProperty="ZCAMPANA" filterProperty="ZCAMPANA">
+                  <Text text="Campaña"/>
+                  <tab:template>
+                    <Text text="{myParam>ZCAMPANA}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>
+              <tab:columns>
+                <tab:Column width="8rem" hAlign="Center" sortProperty="ZUSUARIO" filterProperty="ZUSUARIO">
+                  <Text text="Usuario"/>
+                  <tab:template>
+                    <Text text="{myParam>ZUSUARIO}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>
+              <tab:columns>
+                <tab:Column width="7rem" hAlign="Center" sortProperty="ESTADO" filterProperty="ESTADO">
+                  <Text text="Estado"/>
+                  <tab:template>
+                    <Text text="{myParam>ESTADO}" wrapping="false"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>
+            </tab:Table>
+          </VBox>
+        </l:content>
+      </l:Grid>
+    </content>
+  </Page>
+</mvc:View>

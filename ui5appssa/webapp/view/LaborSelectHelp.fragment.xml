@@ -1,0 +1,121 @@
+<core:FragmentDefinition xmlns:tab="sap.ui.table" xmlns="sap.m" xmlns:m="sap.m" xmlns:layout="sap.ui.layout"
+  xmlns:core="sap.ui.core">
+  <Dialog id="DetalleLabor" title="Seleccionar Labor">
+
+  <tab:Table id="idTablaLabor" selectionMode="Single" selectionBehavior="RowOnly" rowSelectionChange="onSelectionChangeLabor" sort="sortDeliveryDate" rows="{ path: 'myParam>/tblHelpLabor'}" visibleRowCount="5"
+              showNoData="No se hallaron materialess." width="90rem" class="sapUiResponsiveMargin">
+              <tab:toolbar>
+                <Toolbar>
+                  <core:Icon src="sap-icon://activity-items" alt="Cart" size="1.25rem"/>
+                  <Title text="Detalle ({/tblHelpLabor/length})" titleStyle="H3"/>
+                </Toolbar>
+              </tab:toolbar>
+              <tab:noData>
+                <Link class="sapUiMediumMargin" text="No se hallaron los datos."/>
+              </tab:noData>
+              <tab:columns>
+                <tab:Column width="6rem" hAlign="Center">
+                  <Text text="Cod. Prog."/>
+                  <tab:template>
+                    <Label text="{myParam>ZNRO_PROG}"/>
+                  </tab:template>
+                </tab:Column>
+                <tab:Column width="6rem" hAlign="Center">
+                  <Text text="Cod. Lab."/>
+                  <tab:template>
+                    <Label text="{myParam>ZCODLAB}"/>
+                  </tab:template>
+                </tab:Column>
+                <tab:Column width="10rem" hAlign="Center">
+                  <Text text="Descripción"/>
+                  <tab:template>
+                    <Label text="{myParam>LABDESCR}"/>
+                  </tab:template>
+                </tab:Column>
+                <tab:Column width="5rem" hAlign="Center">
+                  <Text text="Campo"/>
+                  <tab:template>
+                    <Label text="{myParam>ZCAMPO}"/>
+                  </tab:template>
+                </tab:Column>
+                <tab:Column width="5rem" hAlign="Center">
+                  <Text text="Quiebre"/>
+                  <tab:template>
+                    <Label text="{myParam>ZQUIEBRE}"/>
+                  </tab:template>
+                </tab:Column>
+                <tab:Column width="5rem" hAlign="Center">
+                  <Text text="Nro. Apl."/>
+                  <tab:template>
+                    <Label text="{myParam>ZNRO_APL}"/>
+                  </tab:template>
+                </tab:Column>
+                <tab:Column width="5rem" hAlign="Center">
+                  <Text text="Av. Esperado"/>
+                  <tab:template>
+                    <Label text="{myParam>ZAVANCE}"/>
+                  </tab:template>
+                </tab:Column>
+                <tab:Column width="5rem" hAlign="Center">
+                  <Text text="Av. Notificado"/>
+                  <tab:template>
+                    <Label text="{myParam>AVANCE_NOT}"/>
+                  </tab:template>
+                </tab:Column>
+                <tab:Column width="5rem" hAlign="Center">
+                  <Text text="Av. Pendiente"/>
+                  <tab:template>
+                    <Label text="{myParam>AVANCE_TOT}"/>
+                  </tab:template>
+                </tab:Column>
+                <tab:Column width="5rem" hAlign="Center">
+                  <Text text="Fecha Inic."/>
+                  <tab:template>
+                    <Label text="{myParam>ZGSTRI}"/>
+                  </tab:template>
+                </tab:Column>
+                <tab:Column width="5rem" hAlign="Center">
+                  <Text text="Fecha Fin"/>
+                  <tab:template>
+                    <Label text="{myParam>ZGLTRI}"/>
+                  </tab:template>
+                </tab:Column>
+                <tab:Column width="5rem" hAlign="Center">
+                  <Text text="Campaña"/>
+                  <tab:template>
+                    <Label text="{myParam>ZCAMPANA}"/>
+                  </tab:template>
+                </tab:Column>
+                <tab:Column width="5rem" hAlign="Center">
+                  <Text text="Elemento PEP"/>
+                  <tab:template>
+                    <Label text="{myParam>ZNRO_APL}"/>
+                  </tab:template>
+                </tab:Column>
+                <tab:Column width="5rem" hAlign="Center">
+                  <Text text="Nro. Gen."/>
+                  <tab:template>
+                    <Label text="{myParam>NRO_GEN}"/>
+                  </tab:template>
+                </tab:Column>
+                <tab:Column width="5rem" hAlign="Center">
+                  <Text text="Nro. Op."/>
+                  <tab:template>
+                    <Label text="{myParam>NRO_OPER}"/>
+                  </tab:template>
+                </tab:Column>
+                <tab:Column width="5rem" hAlign="Center">
+                  <Text text="Estado"/>
+                  <tab:template>
+                    <Label text="{myParam>ZESTADO}"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>
+            </tab:Table>
+
+
+    <endButton>
+      <Button text="Cerrar"  press="onCloseLabor"/>
+    </endButton>
+  </Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,47 @@
+<core:FragmentDefinition xmlns:tab="sap.ui.table" xmlns="sap.m" xmlns:m="sap.m" xmlns:layout="sap.ui.layout"
+  xmlns:core="sap.ui.core">
+  <Dialog id="DetalleVehiculo" title="Seleccionar Vehículo">
+
+  <tab:Table id="idTablaVehiculo" selectionMode="Single" selectionBehavior="RowOnly" rowSelectionChange="onSelectionChangeVehiculo" sort="sortDeliveryDate" rows="{ path: 'myParam>/tblHelpVehiculo'}" visibleRowCount="5"
+              showNoData="No se hallaron Vehículos." width="41rem" class="sapUiResponsiveMargin">
+              <tab:toolbar>
+                <Toolbar>
+                  <core:Icon src="sap-icon://activity-items" alt="Cart" size="1.25rem"/>
+                  <Title text="Detalle ({/tblHelpVehiculo/length})" titleStyle="H3"/>
+                </Toolbar>
+              </tab:toolbar>
+              <tab:noData>
+                <Link class="sapUiMediumMargin" text="No se hallaron los datos."/>
+              </tab:noData>
+              <tab:columns>
+                <tab:Column width="6rem" hAlign="Center">
+                  <Text text="Cod. Modelo"/>
+                  <tab:template>
+                    <Label text="{myParam>CODMODE}"/>
+                  </tab:template>
+                </tab:Column>
+                <tab:Column width="6rem" hAlign="Center">
+                  <Text text="Nro. Veh."/>
+                  <tab:template>
+                    <Label text="{myParam>NROVE}"/>
+                  </tab:template>
+                </tab:Column>
+                <tab:Column width="20rem" hAlign="Center">
+                  <Text text="Descripción"/>
+                  <tab:template>
+                    <Label text="{myParam>VEHDESCR}"/>
+                  </tab:template>
+                </tab:Column>
+                <tab:Column width="5rem" hAlign="Center">
+                  <Text text="Placa del Vehículo"/>
+                  <tab:template>
+                    <Label text="{myParam>PLACA}"/>
+                  </tab:template>
+                </tab:Column>
+              </tab:columns>
+            </tab:Table>
+    <endButton>
+      <Button text="Cerrar"  press="onCloseVehiculo"/>
+    </endButton>
+  </Dialog>
+</core:FragmentDefinition>

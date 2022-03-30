@@ -1,0 +1,319 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:m="sap.m" xmlns:l="sap.ui.layout"
+	xmlns:tab="sap.ui.table" controllerName="nsa.ui5appssa.controller.vista_Rep_Riego_Fertirriego"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Image id="image_bg" src="./img/background_11.png"/>
+	<Page title="Title">
+		<m:customHeader>
+			<m:Bar class="class_CabeceraEstilo">
+				<m:contentLeft>
+					<m:Button class="classiconoblanco" icon="sap-icon://nav-back" press="btnRegresar"/>
+				</m:contentLeft>
+				<m:contentMiddle>
+					<m:Title class="clTitle" text="Reporte de Riego Fertirriego" titleStyle="H5"/>
+				</m:contentMiddle>
+				<m:contentRight>
+					<m:Button icon="sap-icon://filter" press="pressDailogFiltro"/>
+				</m:contentRight>
+			</m:Bar>
+		</m:customHeader>
+		<content>
+			<l:Grid defaultSpan="L12 M12 S12">
+				<l:content>
+					<VBox>
+						<tab:Table class="sapUiTinyMarginTop" width="98%" id="idTableReporte" rows="{ path: 'myParam>/tblRiegoFertirriego'}" selectionMode="None"
+							visibleRowCount="14" paste="onPaste" ariaLabelledBy="title">
+							<tab:toolbar>
+								<OverflowToolbar>
+									<ToolbarSpacer/>
+									<m:Button class="button_blanco class_reset" type="Emphasized" icon="sap-icon://refresh" text="Refrescar" press="pressRefrescarTabla"/>
+									<MenuButton type="Emphasized" icon="sap-icon://excel-attachment">
+										<menu>
+											<Menu itemSelected="onMenuAction">
+												<items>
+													<MenuItem text="Exportar" press="onPressExcel"/>
+												</items>
+											</Menu>
+										</menu>
+									</MenuButton>
+								</OverflowToolbar>
+							</tab:toolbar>
+							<tab:noData>
+								<Link class="sapUiMediumMargin" text="Ning�n item encontrado."/>
+							</tab:noData>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="SOCIEDAD" filterProperty="SOCIEDAD"><Text text="Sociedad"/>
+									<tab:template><Text text="{myParam>SOCIEDAD}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="EJERCICIO" filterProperty="EJERCICIO"><Text text="Ejercicio"/>
+									<tab:template><Text text="{myParam>EJERCICIO}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="PERIODO" filterProperty="PERIODO"><Text text="Per�odo"/>
+									<tab:template><Text text="{myParam>PERIODO}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="SEMANA" filterProperty="SEMANA"><Text text="Semana"/>
+									<tab:template><Text text="{myParam>SEMANA}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="FEC_CONTABILIZACION" filterProperty="FEC_CONTABILIZACION"><Text text="Fe.contabilizaci�n"/>
+									<tab:template><Text text="{myParam>FEC_CONTABILIZACION}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="15rem" sortProperty="ELEMENTO_PEP" filterProperty="ELEMENTO_PEP"><Text text="Elemento PEP"/>
+									<tab:template><Text text="{myParam>ELEMENTO_PEP}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="FUNDO" filterProperty="FUNDO"><Text text="Fundo"/>
+									<tab:template><Text text="{myParam>FUNDO}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="MODULO" filterProperty="MODULO"><Text text="M�dulo"/>
+									<tab:template><Text text="{myParam>MODULO}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="HA_MOD" filterProperty="HA_MOD"><Text text="HA.Mod"/>
+									<tab:template><Text text="{myParam>HA_MOD}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="TURNO" filterProperty="TURNO"><Text text="Turno"/>
+									<tab:template><Text text="{myParam>TURNO}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="HA_TURNO" filterProperty="HA_TURNO"><Text text="HA.Turno"/>
+									<tab:template><Text text="{myParam>HA_TURNO}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="VARIEDAD_CULTIVO" filterProperty="VARIEDAD_CULTIVO"><Text text="Variedad de cultivo"/>
+									<tab:template><Text text="{myParam>VARIEDAD_CULTIVO}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="CLASE_COSTE" filterProperty="CLASE_COSTE"><Text text="Clase de coste"/>
+									<tab:template><Text text="{myParam>CLASE_COSTE}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="14rem" sortProperty="DENOMINACION" filterProperty="DENOMINACION"><Text text="Denominaci�n"/>
+									<tab:template><Text text="{myParam>DENOMINACION}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="MATERIAL" filterProperty="MATERIAL"><Text text="Material"/>
+									<tab:template><Text text="{myParam>MATERIAL}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="14rem" sortProperty="TEXT_BREVE_MATERIAL" filterProperty="TEXT_BREVE_MATERIAL"><Text text="Texto breve material"/>
+									<tab:template><Text text="{myParam>TEXT_BREVE_MATERIAL}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="UND_CANT_CONTAB" filterProperty="UND_CANT_CONTAB"><Text text="Ud. cantidad contab."/>
+									<tab:template><Text text="{myParam>UND_CANT_CONTAB}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="CANT_TOTAL_REG" filterProperty="CANT_TOTAL_REG"><Text text="Cantidad total reg."/>
+									<tab:template><Text text="{myParam>CANT_TOTAL_REG}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="VAL_MON_CO" filterProperty="VAL_MON_CO"><Text text="Val/Mon.so.CO"/>
+									<tab:template><Text text="{myParam>VAL_MON_CO}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="VALOR_MONEDA" filterProperty="VALOR_MONEDA"><Text text="Valor/Moneda objeto"/>
+									<tab:template><Text text="{myParam>VALOR_MONEDA}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="TEXT_CAB_DOCUMENTO" filterProperty="TEXT_CAB_DOCUMENTO"><Text text="Texto cab.documento"/>
+									<tab:template><Text text="{myParam>TEXT_CAB_DOCUMENTO}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="USUARIO" filterProperty="USUARIO"><Text text="Usuario"/>
+									<tab:template><Text text="{myParam>USUARIO}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="IMPUTACION_AUX" filterProperty="IMPUTACION_AUX"><Text text="Imputaci�n aux._1"/>
+									<tab:template><Text text="{myParam>IMPUTACION_AUX}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="NUM_DOCUMENTO_REFER" filterProperty="NUM_DOCUMENTO_REFER"><Text text="N� docum.refer."/>
+									<tab:template><Text text="{myParam>NUM_DOCUMENTO_REFER}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="ORDEN" filterProperty="ORDEN"><Text text="Orden"/>
+									<tab:template><Text text="{myParam>ORDEN}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="COD_LABOR" filterProperty="COD_LABOR"><Text text="C�digo de labor"/>
+									<tab:template><Text text="{myParam>COD_LABOR}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="14rem" sortProperty="DESCRIPCION" filterProperty="DESCRIPCION"><Text text="Descripci�n"/>
+									<tab:template><Text text="{myParam>DESCRIPCION}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="NUM_DOCUMENTO" filterProperty="NUM_DOCUMENTO"><Text text="N�mero de documento"/>
+									<tab:template><Text text="{myParam>NUM_DOCUMENTO}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="M3_HA_MOD" filterProperty="M3_HA_MOD"><Text text="M3/Ha-Mod"/>
+									<tab:template><Text text="{myParam>M3_HA_MOD}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="M3_HA_TUR" filterProperty="M3_HA_TUR"><Text text="M3/Ha-Tur"/>
+									<tab:template><Text text="{myParam>M3_HA_TUR}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="N_MOD" filterProperty="N_MOD"><Text text="N-Mod"/>
+									<tab:template><Text text="{myParam>N_MOD}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="N_TUR" filterProperty="N_TUR"><Text text="N-Tur"/>
+									<tab:template><Text text="{myParam>N_TUR}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="P205_MOD" filterProperty="P205_MOD"><Text text="P2O5-Mod"/>
+									<tab:template><Text text="{myParam>P205_MOD}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="P205_TUR" filterProperty="P205_TUR"><Text text="P2O5-Tur"/>
+									<tab:template><Text text="{myParam>P205_TUR}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="K2O_MOD" filterProperty="K2O_MOD"><Text text="K2O-Mod"/>
+									<tab:template><Text text="{myParam>K2O_MOD}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="K2O_TUR" filterProperty="K2O_TUR"><Text text="K2O-Tur"/>
+									<tab:template><Text text="{myParam>K2O_TUR}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="B_MOD" filterProperty="B_MOD"><Text text="B-Mod"/>
+									<tab:template><Text text="{myParam>B_MOD}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="B_TUR" filterProperty="B_TUR"><Text text="B-Tur"/>
+									<tab:template><Text text="{myParam>B_TUR}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="ZN_MOD" filterProperty="ZN_MOD"><Text text="ZN-Mod"/>
+									<tab:template><Text text="{myParam>ZN_MOD}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="ZN_TUR" filterProperty="ZN_TUR"><Text text="ZN-Tur"/>
+									<tab:template><Text text="{myParam>ZN_TUR}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="CAO_MOD" filterProperty="CAO_MOD"><Text text="CAO-Mod"/>
+									<tab:template><Text text="{myParam>CAO_MOD}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="CAO_TUR" filterProperty="CAO_TUR"><Text text="CAO-Tur"/>
+									<tab:template><Text text="{myParam>CAO_TUR}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="MN_MOD" filterProperty="MN_MOD"><Text text="MN-Mod"/>
+									<tab:template><Text text="{myParam>MN_MOD}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="MN_TUR" filterProperty="MN_TUR"><Text text="MN-Tur"/>
+									<tab:template><Text text="{myParam>MN_TUR}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="FE_MOD" filterProperty="FE_MOD"><Text text="FE-Mod"/>
+									<tab:template><Text text="{myParam>FE_MOD}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="FE_TUR" filterProperty="FE_TUR"><Text text="FE-Tur"/>
+									<tab:template><Text text="{myParam>FE_TUR}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="MGO_MOD" filterProperty="MGO_MOD"><Text text="MGO-Mod"/>
+									<tab:template><Text text="{myParam>MGO_MOD}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="MGO_TUR" filterProperty="MGO_TUR"><Text text="MGO-Tur"/>
+									<tab:template><Text text="{myParam>MGO_TUR}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="S_MOD" filterProperty="S_MOD"><Text text="S-Mod"/>
+									<tab:template><Text text="{myParam>S_MOD}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="S_TUR" filterProperty="S_TUR"><Text text="S-Tur"/>
+									<tab:template><Text text="{myParam>S_TUR}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="MO_MOD" filterProperty="MO_MOD"><Text text="MO-Mod"/>
+									<tab:template><Text text="{myParam>MO_MOD}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="MO_TUR" filterProperty="MO_TUR"><Text text="MO-Tur"/>
+									<tab:template><Text text="{myParam>MO_TUR}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="CU_MOD" filterProperty="CU_MOD"><Text text="CU-Mod"/>
+									<tab:template><Text text="{myParam>CU_MOD}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="CU_TUR" filterProperty="CU_TUR"><Text text="CU-Tur"/>
+									<tab:template><Text text="{myParam>CU_TUR}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+						</tab:Table>
+					</VBox>
+				</l:content>
+			</l:Grid>
+		</content>
+	</Page>
+</mvc:View>

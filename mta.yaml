@@ -1,0 +1,88 @@
+_schema-version: "3.2"
+ID: appssa
+version: 0.0.1
+modules:
+- name: appssa-approuter
+  type: approuter.nodejs
+  path: appssa-approuter
+  requires:
+  - name: appssa_html_repo_runtime
+  - name: uaa_appssa
+  - name: appssa-connectivity
+  - name: appssa-dest-srv
+    group: destinations
+    properties:
+      forwardAuthToken: false
+      name: ui5
+      url: https://ui5.sap.com
+  parameters:
+    disk-quota: 256M
+    memory: 256M
+- name: appssa_ui_deployer
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: appssa_html_repo_host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - nsaui5appssa.zip
+      name: nsaui5appssa
+      target-path: resources/
+- name: nsaui5appssa
+  type: html5
+  path: ui5appssa
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+resources:
+- name: appssa_html_repo_runtime
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-plan: app-runtime
+- name: uaa_appssa
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: appssa-xsuaa-service
+    service-plan: application
+- name: appssa_html_repo_host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-plan: app-host
+- name: appssa-dest-srv
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: false
+      init_data:
+        instance:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          existing_destinations_policy: update
+      version: 1.0.0
+    service: destination
+    service-name: appssa-dest-srv
+    service-plan: lite
+- name: appssa-connectivity
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: Connectivity
+    service-name: appssa-connectivity-service
+    service-plan: lite
+parameters:
+  deploy_mode: html5-repo

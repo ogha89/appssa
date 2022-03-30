@@ -1,0 +1,209 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:m="sap.m" xmlns:l="sap.ui.layout"
+	xmlns:tab="sap.ui.table" controllerName="nsa.ui5appssa.controller.vista_Rep_Sanidad"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Image id="image_bg" src="./img/background_11.png"/>
+	<Page title="Title">
+		<m:customHeader>
+			<m:Bar class="class_CabeceraEstilo">
+				<m:contentLeft>
+					<m:Button class="classiconoblanco" icon="sap-icon://nav-back" press="btnRegresar"/>
+				</m:contentLeft>
+				<m:contentMiddle>
+					<m:Title class="clTitle" text="Reporte de Sanidad" titleStyle="H5"/>
+				</m:contentMiddle>
+				<m:contentRight>
+					<m:Button icon="sap-icon://filter" press="pressDailogFiltro"/>
+				</m:contentRight>
+			</m:Bar>
+		</m:customHeader>
+		<content>
+			<l:Grid defaultSpan="L12 M12 S12">
+				<l:content>
+					<VBox>
+						<tab:Table class="sapUiTinyMarginTop" width="98%" id="idTableReporte" rows="{ path: 'myParam>/tblSanidad'}" selectionMode="None"
+							visibleRowCount="14" paste="onPaste" ariaLabelledBy="title">
+							<tab:toolbar>
+								<OverflowToolbar>
+									<ToolbarSpacer/>
+									<m:Button class="button_blanco class_reset" type="Emphasized" icon="sap-icon://refresh" text="Refrescar" press="pressRefrescarTabla"/>
+									<MenuButton type="Emphasized" icon="sap-icon://excel-attachment">
+										<menu>
+											<Menu itemSelected="onMenuAction">
+												<items>
+													<MenuItem text="Exportar" press="onPressExcel"/>
+												</items>
+											</Menu>
+										</menu>
+									</MenuButton>
+								</OverflowToolbar>
+							</tab:toolbar>
+							<tab:noData>
+								<Link class="sapUiMediumMargin" text="Ning�n item encontrado."/>
+							</tab:noData>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="SOCIEDAD" filterProperty="SOCIEDAD"><Text text="Sociedad"/>
+									<tab:template><Text text="{myParam>SOCIEDAD}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="15rem" sortProperty="DES_SOCIEDAD" filterProperty="DES_SOCIEDAD"><Text text="Desc. Sociedad"/>
+									<tab:template><Text text="{myParam>DES_SOCIEDAD}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="FUNDO" filterProperty="FUNDO"><Text text="Fundo"/>
+									<tab:template><Text text="{myParam>FUNDO}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="DESCRIPCION" filterProperty="DESCRIPCION"><Text text="Descripci�n"/>
+									<tab:template><Text text="{myParam>DESCRIPCION}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="LABOR" filterProperty="LABOR"><Text text="Labor"/>
+									<tab:template><Text text="{myParam>LABOR}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="MODULO" filterProperty="MODULO"><Text text="M�dulo"/>
+									<tab:template><Text text="{myParam>MODULO}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="AREA_MODULO" filterProperty="AREA_MODULO"><Text text="�rea(ha)/M�dulo"/>
+									<tab:template><Text text="{myParam>AREA_MODULO}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="LP" filterProperty="LP"><Text text="LP"/>
+									<tab:template><Text text="{myParam>LP}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="CAMPANA" filterProperty="CAMPANA"><Text text="Campa�a"/>
+									<tab:template><Text text="{myParam>CAMPANA}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="FEC_INI_CAMP" filterProperty="FEC_INI_CAMP"><Text text="Fe. Ini. Campa�a"/>
+									<tab:template><Text text="{myParam>FEC_INI_CAMP}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="FEC_FIN_CAMP" filterProperty="FEC_FIN_CAMP"><Text text="Fe. Fin Campa�a"/>
+									<tab:template><Text text="{myParam>FEC_FIN_CAMP}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="CULTIVO" filterProperty="CULTIVO"><Text text="Cultivo"/>
+									<tab:template><Text text="{myParam>CULTIVO}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="VARIEDAD" filterProperty="VARIEDAD"><Text text="Variedad"/>
+									<tab:template><Text text="{myParam>VARIEDAD}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="NUM_RESERVA" filterProperty="NUM_RESERVA"><Text text="Nro Reserva"/>
+									<tab:template><Text text="{myParam>NUM_RESERVA}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="DOC_MATERIAL" filterProperty="DOC_MATERIAL"><Text text="Doc. Material"/>
+									<tab:template><Text text="{myParam>DOC_MATERIAL}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="LOTE_EJECUTADO" filterProperty="LOTE_EJECUTADO"><Text text="Lote Ejecutado"/>
+									<tab:template><Text text="{myParam>LOTE_EJECUTADO}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="AREA_LOTE_EJEC" filterProperty="AREA_LOTE_EJEC"><Text text="�rea(ha) lote ejec."/>
+									<tab:template><Text text="{myParam>AREA_LOTE_EJEC}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="AREA_TOTAL_EJEC_MOD" filterProperty="AREA_TOTAL_EJEC_MOD"><Text text="�rea (ha)Total ejec/m�d"/>
+									<tab:template><Text text="{myParam>AREA_TOTAL_EJEC_MOD}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="FEC_APLICACION" filterProperty="FEC_APLICACION"><Text text="Fecha de Aplicaci�n"/>
+									<tab:template><Text text="{myParam>FEC_APLICACION}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="FEC_ACEP_COSECHA" filterProperty="FEC_ACEP_COSECHA"><Text text="Fecha Aceptable de Cosecha"/>
+									<tab:template><Text text="{myParam>FEC_ACEP_COSECHA}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="MATERIAL" filterProperty="MATERIAL"><Text text="Material"/>
+									<tab:template><Text text="{myParam>MATERIAL}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="TEXT_BREVE_MATERIAL" filterProperty="TEXT_BREVE_MATERIAL"><Text text="Texto breve de Material"/>
+									<tab:template><Text text="{myParam>TEXT_BREVE_MATERIAL}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="UM" filterProperty="UM"><Text text="UM"/>
+									<tab:template><Text text="{myParam>UM}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="CANT_TOTAL" filterProperty="CANT_TOTAL"><Text text="Cant. Total"/>
+									<tab:template><Text text="{myParam>CANT_TOTAL}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="CATN_LOTE" filterProperty="CATN_LOTE"><Text text="Cant. Lote"/>
+									<tab:template><Text text="{myParam>CATN_LOTE}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="UAC_DIAS" filterProperty="UAC_DIAS"><Text text="U.A.C (d�as)"/>
+									<tab:template><Text text="{myParam>UAC_DIAS}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="COD_PLAGA" filterProperty="COD_PLAGA"><Text text="C�d. Plaga"/>
+									<tab:template><Text text="{myParam>COD_PLAGA}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="DESC_PLAGA" filterProperty="DESC_PLAGA"><Text text="Desc. Plaga"/>
+									<tab:template><Text text="{myParam>DESC_PLAGA}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="IA_AGENTE_BIOLO" filterProperty="IA_AGENTE_BIOLO"><Text text="I.A./Agente Biol�gico"/>
+									<tab:template><Text text="{myParam>IA_AGENTE_BIOLO}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="NUM_APLICACION" filterProperty="NUM_APLICACION"><Text text="Nro. Aplicaci�n"/>
+									<tab:template><Text text="{myParam>NUM_APLICACION}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="TIPO_CALCULO" filterProperty="TIPO_CALCULO"><Text text="Tipo C�lculo"/>
+									<tab:template><Text text="{myParam>TIPO_CALCULO}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+							<tab:columns>
+								<tab:Column hAlign="Center" width="9rem" sortProperty="DOSIS" filterProperty="DOSIS"><Text text="Dosis"/>
+									<tab:template><Text text="{myParam>DOSIS}" wrapping="false"/></tab:template>
+								</tab:Column>
+							</tab:columns>
+						</tab:Table>
+					</VBox>
+				</l:content>
+			</l:Grid>
+		</content>
+	</Page>
+</mvc:View>

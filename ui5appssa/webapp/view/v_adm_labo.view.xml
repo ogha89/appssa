@@ -1,0 +1,96 @@
+<mvc:View controllerName="nsa.ui5appssa.controller.v_adm_labo" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:mvc="sap.ui.core.mvc" xmlns:f="sap.ui.layout.form" displayBlock="true" xmlns="sap.m">
+	<App id="app">
+		<pages>
+			<Page showFooter="false" showHeader="false">
+				<content>
+					<SplitApp>
+						<detailPages>
+							<Page title="{i18n>nameTitelD}" class="sapUiStdPage">
+								<content>
+									<ObjectHeader id="oh" title="Labor : {modelo>CodLabor}-{modelo>LabDescr}" responsive="true" icon="sap-icon://pushpin-on"
+										numberState="Success" backgroundDesign="Translucent" fullScreenOptimized="true">
+										<attributes>
+											<ObjectAttribute id="atrib1" title="{i18n>nameColumnCul}" text="{modelo>Culcod}"/>
+											<ObjectAttribute id="atrib5" title="{i18n>nameColumnEta}" text="{modelo>Etapa}"/>
+											<ObjectAttribute id="atrib3" title="{i18n>nameColumnRUC}" text="{modelo>Ruc}"/>
+											<ObjectAttribute id="atrib7" title="Unidad" text="{modelo>Unidad}"/>
+											<ObjectAttribute id="atrib8" title="C�digo de labor" text="{modelo>CodLabor}"/>
+											<ObjectAttribute id="atrib6" title="{i18n>nameColumnRat}" text="{modelo>Ratio}"/>
+										</attributes>
+										<headerContainer>
+											<IconTabBar id="itb1" upperCase="true">
+												<items>
+													<IconTabFilter icon="sap-icon://hint" text="Detalle" key="Ok">
+														<content>
+															<f:SimpleForm id="SimpleFormDisplay354wide">
+																<f:content>
+																	<Label text="Nombre cultivo"/>
+																	<Text text="{path: 'modelo>Culcod',formatter: '.cultivoDetalle'}"/>
+																	<Label text="Nombre etapa"/>
+																	<Text text="{path: 'modelo>Etapa',formatter: '.etapaDetalle'}"/>
+																	<Label text="Detalle unidad"/>
+																	<Text text="{path: 'modelo>Unidad',formatter: '.unidadesDetalle'}"/>
+																</f:content>
+															</f:SimpleForm>
+														</content>
+													</IconTabFilter>
+													<IconTabFilter id="iconTexto" icon="sap-icon://accelerated" key="Ok" visible="false">
+														<content>
+															<f:SimpleForm id="simpleForm2">
+																<f:content></f:content>
+															</f:SimpleForm>
+														</content>
+													</IconTabFilter>
+												</items>
+											</IconTabBar>
+										</headerContainer>
+									</ObjectHeader>
+								</content>
+								<footer>
+									<OverflowToolbar>
+										<ToolbarSpacer/>
+										<OverflowToolbarButton press="onEditPress" text="Edit" icon="sap-icon://edit"/>
+										<OverflowToolbarButton press="onRemovPress" text="Delete" icon="sap-icon://delete"/>
+									</OverflowToolbar>
+								</footer>
+							</Page>
+						</detailPages>
+						<masterPages>
+							<Page title="{i18n>nameTitel}" navButtonPress="NavHome" showNavButton="true">
+								<subHeader>
+									<Toolbar>
+										<SearchField width="100%" placeholder="Buscar cod. de labor ..."/>
+									</Toolbar>
+								</subHeader>
+								<content>
+									<List id="idProductsTable2" items="{modelo>/ZTpsLaboress}">
+										<ObjectListItem title="{modelo>LabDescr}" type="Active" numberState="Success" number="{modelo>CodLabor}" busyIndicatorDelay="2000"
+											press="onListItemPress">
+											<firstStatus>
+												<ObjectStatus text="{i18n>nameColumnEta}: {modelo>Etapa}" state="None"/>
+											</firstStatus>
+											<secondStatus>
+												<ObjectStatus text="{i18n>nameColumnRat}: {modelo>Ratio}" state="None"/>
+											</secondStatus>
+											<attributes>
+												<ObjectAttribute text="{i18n>nameColumnCul}: {modelo>Culcod}"/>
+												<ObjectAttribute text="Unidad: {modelo>Unidad}"/>
+											</attributes>
+										</ObjectListItem>
+									</List>
+								</content>
+								<footer>
+									<OverflowToolbar>
+										<ToolbarSpacer/>
+										<OverflowToolbarButton press="onPressAgregar" text="Add" icon="sap-icon://add"/>
+									</OverflowToolbar>
+								</footer>
+							</Page>
+						</masterPages>
+					</SplitApp>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>
